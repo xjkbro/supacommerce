@@ -21,7 +21,7 @@ export default async function Home() {
 
     return (
         <div>
-            <Navbar user={user} />
+            {/* <Navbar user={user} /> */}
             <Hero />
             {/* <div className="flex flex-col mx-auto lg:flex-row p-4 w-2/3">
                 <div className="grid flex-grow h-fit card bg-base-300 rounded-box place-items-center">

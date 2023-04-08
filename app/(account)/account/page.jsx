@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSupabase } from "@/components/providers/supabase-provider";
@@ -9,6 +9,8 @@ import NavBar from "@/components/Navbar";
 
 export default function Account() {
     const { supabase } = useSupabase();
+    const router = useRouter();
+    const [user, setUser] = useState();
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -16,6 +18,16 @@ export default function Account() {
         },
         onSubmit,
     });
+    useEffect(() => {
+        async function getUser() {
+            const { user: data, error } = await supabase.auth.getUser();
+            // return data;
+            if (data) setUser(data);
+            // else router.replace("/");
+        }
+        getUser();
+        // console.log(getUser());
+    }, [user, setUser]);
 
     async function onSubmit(values) {
         const {
@@ -35,19 +47,20 @@ export default function Account() {
     }
     return (
         <>
-            <NavBar />
             <div className="flex flex-wrap min-h-screen justify-start bg-base-200 py-10 p-2">
                 <div className="container mx-auto">
                     <div className="prose mb-8">
                         <h1>User Account</h1>
                     </div>
                     <div className="flex flex-col w-full lg:flex-row ">
-                        <div className="prose grid w-full h-fit lg:w-1/2 flex-grow card rounded-box place-">
-                            <h2>User Details</h2>
-                            <p>
+                        <div className="mt-8 grid w-full h-fit lg:w-1/2 flex-grow card rounded-box place-">
+                            <h2 className="text-xl font-semibold">
+                                User Details
+                            </h2>
+                            <small>
                                 This information will be displayed publicly so
                                 be careful what you share.
-                            </p>
+                            </small>
                         </div>
                         {/* <div className="divider divider-horizontal"></div> */}
                         <div className="grid w-full lg:w-1/2   flex-grow card bg-white rounded-box">
@@ -125,7 +138,7 @@ export default function Account() {
                                     </div>
                                 </div>
                                 <div className="w-full flex justify-center my-2">
-                                    <button className="btn btn-primary">
+                                    <button className="btn btn-primary btn-wide">
                                         Save
                                     </button>
                                 </div>

@@ -15,7 +15,7 @@ export async function GET(request) {
     const to = searchParams.get("to");
     const { data } = await supabase
         .from("products")
-        .select("id,title, slug, price")
+        .select("id,title,slug,image, price")
         .range(from, to);
     return NextResponse.json(data);
 }

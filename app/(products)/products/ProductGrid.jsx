@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const fetcher = (url) =>
     fetch(url, { method: "GET" }).then((res) => res.json());
@@ -22,17 +23,6 @@ export default function ProductGrid({ page }) {
     );
     const [checked, setChecked] = useState([]);
     const handleCheck = (e) => {
-        // console.log(id);
-        // let arr = [...checked];
-        // // // console.log(arr);
-        // console.log(arr);
-        // if (arr.indexOf(e.target.value)) {
-        //     arr.splice(arr.indexOf(e.target.value), 1);
-        //     setChecked([...arr]);
-        // } else {
-        //     setChecked([...arr, e.target.value]);
-        // }
-
         let newArray = [...checked];
         newArray.push(e.target.value);
 
@@ -47,19 +37,25 @@ export default function ProductGrid({ page }) {
     return (
         <div>
             <div>Count: {products.length}</div>
-            {/* <div className="flex flex-col gap-1">
-                {" "}
-                {products?.map((item) => (
-                    <Link
-                        className="w-full"
-                        key={item.slug}
-                        href={"https://icpdas-usa.com/" + item.slug}
-                    >
-                        {item.title}
-                    </Link>
-                ))}
-            </div> */}
 
+            <div className="btn-group flex justify-center my-4">
+                <button
+                    className="btn"
+                    onClick={() =>
+                        router.push(`/products?page=${parseInt(page) - 1}`)
+                    }
+                >
+                    Prev
+                </button>
+                <button
+                    className="btn"
+                    onClick={() =>
+                        router.push(`/products?page=${parseInt(page) + 1}`)
+                    }
+                >
+                    Next
+                </button>
+            </div>
             <div className="overflow-x-auto mx-auto w-2/3">
                 <table className="table table-zebra w-full">
                     <thead>
@@ -84,13 +80,20 @@ export default function ProductGrid({ page }) {
                                     />
                                     <label htmlFor={item.id}></label>
                                 </th>
-                                <td>
+                                <td className="flex gap-2">
+                                    <div className="mask mask-squircle w-8 h-8">
+                                        <Image
+                                            width={50}
+                                            height={50}
+                                            className="object-cover"
+                                            alt="cat"
+                                            src={item.image}
+                                            // src="https://images.unsplash.com/photo-1659460542526-35b3257e1152?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2200&q=80"
+                                        />
+                                    </div>
                                     <Link
                                         className="w-full link link-primary"
-                                        href={
-                                            "https://icpdas-usa.com/" +
-                                            item.slug
-                                        }
+                                        href={"/products/" + item.slug}
                                     >
                                         {item.title.substr(0, 10)}
                                     </Link>
@@ -125,8 +128,9 @@ export default function ProductGrid({ page }) {
                 </table>
             </div>
 
-            <div>
+            <div className="btn-group flex justify-center my-4">
                 <button
+                    className="btn"
                     onClick={() =>
                         router.push(`/products?page=${parseInt(page) - 1}`)
                     }
@@ -134,6 +138,7 @@ export default function ProductGrid({ page }) {
                     Prev
                 </button>
                 <button
+                    className="btn"
                     onClick={() =>
                         router.push(`/products?page=${parseInt(page) + 1}`)
                     }

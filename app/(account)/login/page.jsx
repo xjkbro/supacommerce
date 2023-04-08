@@ -12,6 +12,7 @@ export default function Login() {
     const router = useRouter();
     const { supabase } = useSupabase();
     const [show, setShow] = useState(false);
+    const [userState, setUserState] = useState(null);
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -28,8 +29,12 @@ export default function Login() {
             email: values.email,
             password: values.password,
         });
-
-        if (user) router.replace("/");
+        if (user) {
+            setUserState(user);
+            router.refresh();
+            router.replace("/");
+        }
+        // if (user) router.replace("/");
 
         // setEmail(user.email);
 

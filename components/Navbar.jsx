@@ -4,15 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "./UI Components/Button";
 import LongLogo from "./UI Components/LongLogo";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function NavBar({ user }) {
     const { supabase } = useSupabase();
+    const path = usePathname();
+    const router = useRouter();
 
     const handleSignOut = async () => {
         const { error } = await supabase.auth.signOut();
+        router.refresh();
         console.log(error);
     };
-    // console.log(user);
+    // console.log(path);
+    if (path == "/login" || path == "/register") return <></>;
     return (
         <>
             <div className="hidden md:navbar bg-base-100 z-10 ">
@@ -21,9 +26,32 @@ export default function NavBar({ user }) {
                     <Link href="/">
                         <LongLogo className="w-48 h-12" />
                     </Link>
-                    <ul className="menu menu-horizontal">
+                    <ul className="menu menu-horizontal z-20">
                         <li>
-                            <a>Products</a>
+                            <Link href="/products">Products</Link>
+                            <ul className="menu bg-base-100 w-56 p-2 z-10">
+                                <li className="menu-title">
+                                    <span>Category</span>
+                                </li>
+                                <li>
+                                    <a>Item 1</a>
+                                </li>
+                                <li>
+                                    <a>Item 2</a>
+                                </li>
+                                <li className="menu-title">
+                                    <span>Category</span>
+                                </li>
+                                <li>
+                                    <a>Item 1</a>
+                                </li>
+                                <li>
+                                    <a>Item 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <Link href="/category">Categories</Link>
                             <ul className="menu bg-base-100 w-56 p-2 z-10">
                                 <li className="menu-title">
                                     <span>Category</span>
@@ -158,6 +186,11 @@ export default function NavBar({ user }) {
                                 tabIndex={0}
                                 className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
                             >
+                                <li>
+                                    <Link className="disabled" href="/account">
+                                        Hello {user.user_metadata.first_name}!
+                                    </Link>
+                                </li>
                                 <li>
                                     <Link href="/account">Account</Link>
                                 </li>
