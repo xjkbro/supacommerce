@@ -11,6 +11,7 @@ import remarkGfm from "remark-gfm";
 import AddToCart from "../AddToCart";
 import ImageLayout from "./ImageLayout";
 import BuyNow from "../BuyNow";
+import "./styles.css";
 
 export const revalidate = "0";
 
@@ -122,41 +123,84 @@ export default async function SingleProduct({ params }) {
                         </div>
                     </div>
                 </div> */}
-                <div className="flex  flex-col lg:flex-row justify-between gap-4">
+                <div className="flex  flex-col lg:flex-row md:items-center justify-between gap-4">
                     <ImageLayout product={product} />
 
-                    <div className="w-full md:w-1/2 m-2">
-                        <div>
-                            {belongsTo.map(({ category_id: c }) => (
-                                <Link
-                                    key={c.id}
-                                    className="badge"
-                                    href={"/category/" + c.id}
-                                >
-                                    New Product
-                                </Link>
-                            ))}
-                        </div>
-                        <h1 className="text-5xl font-bold">{product.title}</h1>
-                        <span className="text-4xl font-bold">
-                            ${product.price}
-                        </span>
-                        <p className="py-6">{product.short_description}</p>
-                        <div className="flex gap-2 flex-wrap w-full">
-                            {/* <Link href="/" className="btn btn-secondary">
+                    <div className="w-full md:w-1/2">
+                        <div className="mb-2">
+                            <div>
+                                {belongsTo.map(({ category_id: c }) => (
+                                    <Link
+                                        key={c.id}
+                                        className="badge"
+                                        href={"/category/" + c.id}
+                                    >
+                                        New Product
+                                    </Link>
+                                ))}
+                            </div>
+                            <h1 className="text-5xl font-bold">
+                                {product.title}
+                            </h1>
+                            <span className="text-4xl font-bold">
+                                ${product.price}
+                            </span>
+                            <p className="py-6">{product.short_description}</p>
+                            <div className="flex gap-2 flex-wrap w-full">
+                                {/* <Link href="/" className="btn btn-secondary">
                                 Buy Now
                             </Link> */}
-                            <BuyNow product={product} />
-                            {/* <Link href="/" className="btn btn-primary">
+                                <BuyNow product={product} />
+                                {/* <Link href="/" className="btn btn-primary">
                                 Add To Cart
                             </Link> */}
-                            <AddToCart product={product} />
-                            <Link
-                                href="/"
-                                className="btn btn-outline btn-accent"
-                            >
-                                Add To Quote
-                            </Link>
+                                <AddToCart product={product} />
+                                <Link
+                                    href="/"
+                                    className="btn btn-outline btn-accent"
+                                >
+                                    Add To Quote
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div className="my-2">
+                            <h3 className="text-xl font-bold my-4">
+                                Product Documentation & References
+                            </h3>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                                {[1, 2, 3, 4, 5].map((item) => (
+                                    <Link
+                                        href="/"
+                                        key={item}
+                                        target="__blank"
+                                        className="flex gap-2 items-center bg-[#f4f4f4] p-2 rounded-md"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="w-8 h-8"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+                                            />
+                                        </svg>
+                                        <div className="flex flex-col gap-1">
+                                            <span className="font-bold text-sm ">
+                                                User Manual
+                                            </span>
+                                            <span className="font- text-sm text-neutral">
+                                                4 downloads
+                                            </span>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -171,6 +215,7 @@ export default async function SingleProduct({ params }) {
                 <hr />
                 <h2>Specifications</h2>
                 <div
+                    id="specifications"
                     dangerouslySetInnerHTML={{ __html: product.specifications }}
                 />
                 {/* <ReactMarkdown className="prose"></ReactMarkdown> */}

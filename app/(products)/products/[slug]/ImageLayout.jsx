@@ -24,7 +24,7 @@ export default function ImageLayout({ product }) {
                     className="border border-base-200 w-full h-96 md:w-96 md:h-96 object-contain flex justify-center items-center rounded-xl hover:cursor-zoom-in "
                 >
                     <Image
-                        className="w-32 h-32 md:w-64 md:h-64 object-contain"
+                        className="w-64 h-64 md:w-64 md:h-64 object-contain"
                         width={500}
                         height={500}
                         alt="cat"

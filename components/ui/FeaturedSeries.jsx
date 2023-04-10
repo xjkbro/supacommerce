@@ -96,14 +96,16 @@ export default async function FeaturedSeries({ series }) {
                             key={item.id}
                             className="carousel-item relative h-fit w-64 border border-base-200 flex justify-center"
                         >
-                            <div className=" flex flex-col mt-12 items-center">
-                                <Image
-                                    src={item.image}
-                                    width={300}
-                                    height={300}
-                                    alt="prod"
-                                    className="w-56 h-56 object-contain"
-                                />
+                            <div className=" flex flex-col mt-4 items-center">
+                                <Link href={"/products/" + item.slug}>
+                                    <Image
+                                        src={item.image}
+                                        width={300}
+                                        height={300}
+                                        alt="prod"
+                                        className="w-56 h-56 my-4 object-contain"
+                                    />
+                                </Link>
                                 <div className="w-56 my-4">
                                     <Link
                                         href={"/products/" + item.slug}

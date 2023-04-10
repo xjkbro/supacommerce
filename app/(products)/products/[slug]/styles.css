@@ -1,0 +1,14 @@
+table tr .style1 {
+    color: white;
+    padding-left: 1rem;
+}
+table tr td:first-child {
+    padding-left: 1rem;
+}
+table tr td:last-child {
+    background-color: white !important;
+    color: black;
+}
+table tr td:only-child {
+    background: hsl(var(--p)) !important;
+}
