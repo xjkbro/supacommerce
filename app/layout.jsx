@@ -25,7 +25,7 @@ export default async function RootLayout({ children }) {
     } = await supabase.auth.getUser();
 
     return (
-        <html lang="en" data-theme="lofi">
+        <html lang="en" data-theme="icp">
             <body>
                 <SupabaseProvider>
                     <StripeProvider>

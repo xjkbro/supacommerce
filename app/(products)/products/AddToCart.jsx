@@ -27,7 +27,7 @@ export default function AddToCart({ product }) {
                         setToast(false);
                     }, 2000);
                 }}
-                className="btn btn-secondary"
+                className="btn btn-accent text-white"
             >
                 Add to Cart
             </button>

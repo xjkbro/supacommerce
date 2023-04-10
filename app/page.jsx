@@ -1,5 +1,5 @@
 import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
+import Hero from "@/components/ui/Hero";
 import Navbar from "@/components/Navbar";
 import Button from "@/components/ui/Button";
 import CallToAction from "@/components/ui/CallToAction";

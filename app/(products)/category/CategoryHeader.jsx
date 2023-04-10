@@ -31,12 +31,14 @@ export default function CategoryHeader({ category = null }) {
                         assumenda excepturi exercitationem quasi. In deleniti
                         eaque aut repudiandae et a id nisi.
                     </p>
-                    <Link
-                        className="btn btn-primary"
-                        href={`/category/${category?.parent ?? ""}`}
-                    >
-                        Go back
-                    </Link>
+                    {category != null && (
+                        <Link
+                            className="btn btn-accent text-white"
+                            href={`/category/${category?.parent ?? ""}`}
+                        >
+                            Go back
+                        </Link>
+                    )}
                 </div>
             </div>
         </div>

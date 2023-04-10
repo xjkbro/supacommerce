@@ -77,23 +77,17 @@ export default function NavBar({ user }) {
                         <li>
                             <Link href="/products">Products</Link>
                             <ul className="menu bg-base-100 w-56 p-2 z-10">
-                                <li className="menu-title">
-                                    <span>Category</span>
+                                <li>
+                                    <a>All Products</a>
                                 </li>
                                 <li>
-                                    <a>Item 1</a>
+                                    <a>New Products</a>
                                 </li>
                                 <li>
-                                    <a>Item 2</a>
-                                </li>
-                                <li className="menu-title">
-                                    <span>Category</span>
+                                    <a>On Sale</a>
                                 </li>
                                 <li>
-                                    <a>Item 1</a>
-                                </li>
-                                <li>
-                                    <a>Item 2</a>
+                                    <a>Phased Out Items</a>
                                 </li>
                             </ul>
                         </li>
@@ -103,25 +97,35 @@ export default function NavBar({ user }) {
                         </li>
 
                         <li>
-                            <Link href="/article">Posts</Link>
+                            <Link href="/">Resources</Link>
                             <ul className="menu bg-base-100 w-56 p-2 z-10">
                                 <li className="menu-title">
-                                    <span>Category</span>
+                                    <span>Written</span>
                                 </li>
                                 <li>
-                                    <a>Item 1</a>
+                                    <Link href="/article">Articles</Link>
                                 </li>
                                 <li>
-                                    <a>Item 2</a>
+                                    <Link href="/article">
+                                        Application Stories
+                                    </Link>
                                 </li>
                                 <li className="menu-title">
-                                    <span>Category</span>
+                                    <span>Videos</span>
                                 </li>
                                 <li>
-                                    <a>Item 1</a>
+                                    <Link href="/article">Webinars</Link>
                                 </li>
                                 <li>
-                                    <a>Item 2</a>
+                                    <Link href="/article">Training Videos</Link>
+                                </li>
+                                <li className="menu-title">
+                                    <span>Other</span>
+                                </li>
+                                <li>
+                                    <Link href="/article">
+                                        Product Downloads
+                                    </Link>
                                 </li>
                             </ul>
                         </li>

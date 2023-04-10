@@ -80,7 +80,7 @@ export default function Footer({ user }) {
                 </Link>
             </div>
             <div className="md:block hidden">
-                <div className="footer grid-rows-2 p-10 bg-neutral text-neutral-content">
+                <div className="footer grid-rows-2 p-10 bg-secondary text-neutral-content">
                     <div>
                         <Link href="/">
                             {/* <LongLogo className="w-48 h-12" /> */}

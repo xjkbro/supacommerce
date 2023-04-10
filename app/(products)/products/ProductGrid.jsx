@@ -35,23 +35,27 @@ export default function ProductGrid({ products }) {
     return (
         <div className=" w-3/4 mx-auto mt-12">
             <div className="flex justify-between my-4">
-                <div className="btn-group flex justify-center">
-                    <button
-                        className="btn"
-                        onClick={() => (page > 0 ? setPage(page - 1) : null)}
-                    >
-                        Prev
-                    </button>
-                    <button
-                        className="btn"
-                        onClick={() =>
-                            page < products.length / perPage - 1
-                                ? setPage(page + 1)
-                                : null
-                        }
-                    >
-                        Next
-                    </button>
+                <div className=" flex items-center">
+                    <div className="btn-group flex justify-center">
+                        <button
+                            className="btn btn-primary"
+                            onClick={() =>
+                                page > 0 ? setPage(page - 1) : null
+                            }
+                        >
+                            Prev
+                        </button>
+                        <button
+                            className="btn btn-primary"
+                            onClick={() =>
+                                page < products.length / perPage - 1
+                                    ? setPage(page + 1)
+                                    : null
+                            }
+                        >
+                            Next
+                        </button>
+                    </div>
                     <div className="flex items-center ml-4">
                         Showing {perPage * page} to {perPage * (page + 1)}
                     </div>

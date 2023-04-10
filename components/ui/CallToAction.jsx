@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CallToAction() {
     return (
-        <div className="hero min-h-fit bg-base-200 py-8">
+        <div className="hero min-h-fit bg-primary text-white py-8">
             <div className="hero-content flex-col lg:flex-row-reverse gap-12">
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Join Our Newsletter</h1>
@@ -15,9 +15,6 @@ export default function CallToAction() {
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <div className="card-body flex-row gap-2">
                         <div className="form-control">
-                            {/* <label className="label">
-                                <span className="label-text">Email</span>
-                            </label> */}
                             <input
                                 type="text"
                                 placeholder="E-mail"
@@ -25,7 +22,9 @@ export default function CallToAction() {
                             />
                         </div>
                         <div className="form-control mt-0">
-                            <button className="btn btn-primary">Sign Up</button>
+                            <button className="btn btn-accent text-white">
+                                Sign Up
+                            </button>
                         </div>
                     </div>
                 </div>

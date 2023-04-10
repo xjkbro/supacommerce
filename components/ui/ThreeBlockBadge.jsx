@@ -10,7 +10,7 @@ export default function ThreeBlockBadge() {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className=" min-w-[3rem] w-16 h-16"
+                    className=" min-w-[3rem] w-16 h-16 text-accent"
                 >
                     <path
                         strokeLinecap="round"
@@ -32,7 +32,7 @@ export default function ThreeBlockBadge() {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className=" min-w-[3rem] w-16 h-16"
+                    className=" min-w-[3rem] w-16 h-16 text-accent"
                 >
                     <path
                         strokeLinecap="round"
@@ -53,7 +53,7 @@ export default function ThreeBlockBadge() {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className=" min-w-[3rem] w-16 h-16"
+                    className=" min-w-[3rem] w-16 h-16 text-accent"
                 >
                     <path
                         strokeLinecap="round"

@@ -96,7 +96,7 @@ export default async function FeaturedSeries({ series }) {
                             key={item.id}
                             className="carousel-item relative h-fit w-64 border border-base-200 flex justify-center"
                         >
-                            <div className=" flex flex-col my-12 items-center">
+                            <div className=" flex flex-col mt-12 items-center">
                                 <Image
                                     src={item.image}
                                     width={300}
@@ -111,11 +111,11 @@ export default async function FeaturedSeries({ series }) {
                                     >
                                         {item.title}
                                     </Link>
-                                    <p className="text-lg font-light text-red-500 mb-4">
+                                    <p className="text-lg font-light text-error mb-4">
                                         ${item.price.toFixed(2)}
                                     </p>
 
-                                    <button className="btn btn-block">
+                                    <button className="btn btn-block btn-accent text-white">
                                         Add To Cart
                                     </button>
                                 </div>

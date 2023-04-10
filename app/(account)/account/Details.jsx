@@ -225,7 +225,7 @@ export default function Details({ user }) {
                                             disabled
                                         />
                                         <label className="label">
-                                            <span className="label-text-alt text-warning">
+                                            <span className="label-text-alt text-error">
                                                 You cannot change your email.
                                             </span>
                                         </label>
