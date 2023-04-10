@@ -21,9 +21,12 @@ Any additional information goes here
 
 `;
     return (
-        <div className="grid grid-cols-3 mx-auto w-3/4 mt-12">
+        <div className="md:grid grid-cols-3 mx-auto w-11/12 md:w-3/4 mt-12">
             <div className=" col-span-1 justify-center">
-                <Link className="flex gap-2 justify-center" href="/article">
+                <Link
+                    className="flex gap-2 mb-4 md:justify-center"
+                    href="/article"
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

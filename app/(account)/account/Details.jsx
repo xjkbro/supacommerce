@@ -6,8 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSupabase } from "@/components/providers/supabase-provider";
 import { v4 as uuidv4 } from "uuid";
-import { ToastContainer, toast, TypeOptions } from "react-toastify";
-import { startWindToast } from "@mariojgt/wind-notify/packages/index.js";
+// import { ToastContainer, toast, TypeOptions } from "react-toastify";
+// import { startWindToast } from "@mariojgt/wind-notify/packages/index.js";
 import { clsx } from "clsx";
 
 // import NavBar from "@/components/Navbar";

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ThreeBlockBadge() {
     return (
-        <div className="grid md:grid-cols-3 w-3/4 my-12 mx-auto gap-4 p-8 border border-base-200">
+        <div className="grid md:grid-cols-3 w-11/12 md:w-3/4 my-12 mx-auto gap-4 p-8 border border-base-200">
             <div className="flex gap-4 items-center">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

@@ -1,10 +1,10 @@
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
-import Button from "@/components/UI Components/Button";
-import CallToAction from "@/components/UI Components/CallToAction";
-import FeaturedSeries from "@/components/UI Components/FeaturedSeries";
-import ThreeBlockBadge from "@/components/UI Components/ThreeBlockBadge";
+import Button from "@/components/ui/Button";
+import CallToAction from "@/components/ui/CallToAction";
+import FeaturedSeries from "@/components/ui/FeaturedSeries";
+import ThreeBlockBadge from "@/components/ui/ThreeBlockBadge";
 import VideoHero from "@/components/VideoHero";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";

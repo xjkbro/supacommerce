@@ -2,14 +2,15 @@
 import { useSupabase } from "@/components/providers/supabase-provider";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "./UI Components/Button";
-import LongLogo from "./UI Components/LongLogo";
+import Button from "./ui/Button";
+import LongLogo from "./ui/LongLogo";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { clsx } from "clsx";
 import { useShoppingCart } from "use-shopping-cart";
 import { filterCartItems } from "@/lib/stripe-helpers";
 import SearchBar from "@/components/SearchBar";
+import CategoryMenu from "./menus/CategoryMenu";
 
 export default function NavBar({ user }) {
     const { supabase } = useSupabase();
@@ -37,6 +38,7 @@ export default function NavBar({ user }) {
             setUserRole(data.role);
         }
         if (user) getRole();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     async function handleCartCheckout(event) {
@@ -97,26 +99,7 @@ export default function NavBar({ user }) {
                         </li>
                         <li>
                             <Link href="/category">Categories</Link>
-                            <ul className="menu bg-base-100 w-56 p-2 z-10">
-                                <li className="menu-title">
-                                    <span>Category</span>
-                                </li>
-                                <li>
-                                    <a>Item 1</a>
-                                </li>
-                                <li>
-                                    <a>Item 2</a>
-                                </li>
-                                <li className="menu-title">
-                                    <span>Category</span>
-                                </li>
-                                <li>
-                                    <a>Item 1</a>
-                                </li>
-                                <li>
-                                    <a>Item 2</a>
-                                </li>
-                            </ul>
+                            <CategoryMenu />
                         </li>
 
                         <li>

@@ -25,6 +25,7 @@ export default function SearchBar() {
         }
         getProducts();
         // console.log(products);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     const filterSearch = (e) => {
         if (e.target.value.length > 0) {

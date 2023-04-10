@@ -33,8 +33,8 @@ export default function AddToCart({ product }) {
             </button>
             <div
                 className={
-                    " toast toast-top toast-end z-50 transition-all  " +
-                    (toast ? "translate-x-0" : "translate-x-[30rem]")
+                    " toast toast-top top-[4rem] toast-end z-50 transition-all  " +
+                    (toast ? "translate-x-0" : "translate-x-[100rem]")
                 }
             >
                 <div className={"alert alert-success shadow-md"}>

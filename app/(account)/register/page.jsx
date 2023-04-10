@@ -5,7 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSupabase } from "@/components/providers/supabase-provider";
-import SquareLogo from "@/components/UI Components/SquareLogo";
+import SquareLogo from "@/components/ui/SquareLogo";
 
 export default function Login() {
     const router = useRouter();

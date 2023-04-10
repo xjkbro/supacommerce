@@ -5,8 +5,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSupabase } from "@/components/providers/supabase-provider";
-import LongLogo from "@/components/UI Components/LongLogo";
-import SquareLogo from "@/components/UI Components/SquareLogo";
+import LongLogo from "@/components/ui/LongLogo";
+import SquareLogo from "@/components/ui/SquareLogo";
 
 export default function Login() {
     const router = useRouter();

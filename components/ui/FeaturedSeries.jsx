@@ -17,7 +17,7 @@ export default async function FeaturedSeries({ series }) {
         .limit(6);
 
     return (
-        <div className="w-3/4 my-12 mx-auto relative">
+        <div className="w-11/12 md:w-3/4 my-12 mx-auto relative">
             <div className="flex justify-between items-center">
                 <h2 className="text-3xl font-black my-4">Featured Series</h2>
                 <Link className="hover:underline" href="/">

@@ -4,7 +4,7 @@ import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-next
 import { headers, cookies } from "next/headers";
 
 // do not cache this page
-// export const revalidate = 0;
+export const revalidate = 0;
 
 export default async function Products() {
     // const page = searchParams.page ? searchParams.page : 0;
@@ -15,7 +15,8 @@ export default async function Products() {
 
     let { data: products, error } = await supabase
         .from("products")
-        .select("id, title, slug, image, short_description, price");
+        .select("id, title, slug, image, short_description, price")
+        .eq("visible", true);
     return (
         <div>
             <ProductGrid products={products} />

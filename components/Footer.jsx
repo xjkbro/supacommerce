@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import LongLogo from "@/components/UI Components/LongLogo";
-import SquareLogo from "./UI Components/SquareLogo";
+import LongLogo from "@/components/ui/LongLogo";
+import SquareLogo from "./ui/SquareLogo";
 
 export default function Footer({ user }) {
     const path = usePathname();
@@ -84,7 +84,7 @@ export default function Footer({ user }) {
                     <div>
                         <Link href="/">
                             {/* <LongLogo className="w-48 h-12" /> */}
-                            <SquareLogo className="w-48" />
+                            <SquareLogo className="w-48" color="#ffffff" />
                         </Link>
                     </div>
                     <div>

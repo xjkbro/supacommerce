@@ -1,94 +1,94 @@
 "use client";
 
-import Pagination, {
-    getPagination,
-} from "@/components/UI Components/Pagination";
 import Link from "next/link";
-import { useSupabase } from "@/components/providers/supabase-provider";
 import { useEffect, useState } from "react";
 
-import useSWR from "swr";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-
-// const fetcher = (url) =>
-//     fetch(url, { method: "GET" }).then((res) => res.json());
+import AddToCart from "./AddToCart";
 
 export default function ProductGrid({ products }) {
-    // const searchParams = useSearchParams();
     const router = useRouter();
-    // const page = searchParams.get("page") ? searchParams.get("page") : 0;
     const [page, setPage] = useState(0);
-
-    // const { from, to } = getPagination(page, 25);
-    // const [products, setProducts] = useState();
+    const [perPage, setPerPage] = useState(25);
     const [pagedProducts, setPageProducts] = useState([]);
     useEffect(() => {
-        console.log(products.slice(25 * page, 25 * (page + 1)));
+        console.log(products.slice(perPage * page, perPage * (page + 1)));
         console.log(page);
-        setPageProducts(products.slice(25 * page, 25 * (page + 1)));
-    }, [page]);
-
-    // const pageProducts = products.splice(1 * page, 25 * page);
-    // setShowProducts( page
-
-    // const { data: products, error } = useSWR(
-    //     `api/products?from=${from}&to=${to}`,
-    //     fetcher
-    // );
-
-    console.log(pagedProducts);
+        setPageProducts(products.slice(perPage * page, perPage * (page + 1)));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [page, perPage]);
 
     const [checked, setChecked] = useState([]);
     const handleCheck = (e) => {
         let newArray = [...checked];
         newArray.push(e.target.value);
 
-        console.log(newArray);
-
         if (checked.includes(e.target.value)) {
             newArray = newArray.filter((id) => id !== e.target.value);
         }
         setChecked(newArray);
     };
+
     if (!products) return <div>Loading...</div>;
+
     return (
-        <div>
-            <div className="btn-group flex justify-center my-4">
-                <button
-                    className="btn"
-                    onClick={() =>
-                        // router.push(`/products?page=${parseInt(page) - 1}`)
-                        setPage(page - 1)
-                    }
+        <div className=" w-3/4 mx-auto mt-12">
+            <div className="flex justify-between my-4">
+                <div className="btn-group flex justify-center">
+                    <button
+                        className="btn"
+                        onClick={() => (page > 0 ? setPage(page - 1) : null)}
+                    >
+                        Prev
+                    </button>
+                    <button
+                        className="btn"
+                        onClick={() =>
+                            page < products.length / perPage - 1
+                                ? setPage(page + 1)
+                                : null
+                        }
+                    >
+                        Next
+                    </button>
+                    <div className="flex items-center ml-4">
+                        Showing {perPage * page} to {perPage * (page + 1)}
+                    </div>
+                </div>
+                <select
+                    className="select select-bordered w-full max-w-xs"
+                    onChange={(e) => {
+                        setPage(0);
+                        setPerPage(parseInt(e.target.value));
+                    }}
                 >
-                    Prev
-                </button>
-                <button
-                    className="btn"
-                    onClick={() =>
-                        // router.push(`/products?page=${parseInt(page) + 1}`)
-                        setPage(page + 1)
-                    }
-                >
-                    Next
-                </button>
+                    <option disabled selected>
+                        Products Per Page ({perPage})
+                    </option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="250">250</option>
+                    <option value="1000">1000</option>
+                </select>
             </div>
 
-            <div className="overflow-x-auto mx-auto w-2/3">
+            <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
                     <thead>
                         <tr>
                             <th></th>
                             <th>Name</th>
-                            <th>Slug</th>
+                            <th>Description</th>
                             <th>Price</th>
-                            <th>Add to Cart</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {pagedProducts?.map((item) => (
-                            <tr key={item.slug}>
+                            <tr key={item.slug} className="">
                                 <th>
                                     <input
                                         type="checkbox"
@@ -99,35 +99,53 @@ export default function ProductGrid({ products }) {
                                     />
                                     <label htmlFor={item.id}></label>
                                 </th>
-                                <td className="flex gap-2">
-                                    <div className="mask mask-squircle w-8 h-8">
-                                        <Image
-                                            width={25}
-                                            height={25}
-                                            className="object-cover"
-                                            alt="cat"
-                                            src={item.image}
-                                            // src="https://images.unsplash.com/photo-1659460542526-35b3257e1152?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2200&q=80"
-                                        />
-                                    </div>
+                                <td className="">
                                     <Link
-                                        className="w-full link link-primary"
+                                        className=" flex  items-center gap-2  w-72"
                                         href={"/products/" + item.slug}
                                     >
-                                        {item.title.substr(0, 10)}
+                                        <div className="flex items-center space-x-3 h-full">
+                                            <span className="avatar">
+                                                <div className="mask mask-squircle w-12 h-12">
+                                                    {/* <Image
+                                                        width={500}
+                                                        height={500}
+                                                        alt="cat"
+                                                        priority
+                                                        src={item.image}
+                                                    /> */}
+                                                </div>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <div className="font-bold whitespace-normal">
+                                                {item.title}
+                                            </div>
+                                            <div className="text-sm opacity-50">
+                                                {item.slug.length > 50
+                                                    ? item.slug.substr(0, 50) +
+                                                      "..."
+                                                    : item.slug.substr(0, 50)}
+                                            </div>
+                                        </div>
                                     </Link>
                                 </td>
                                 <td>
                                     <Link
-                                        className="w-full"
+                                        className="w-full whitespace-normal"
                                         href={"/products/" + item.slug}
                                     >
-                                        {item.slug.substr(0, 25)}
+                                        {item.short_description.substr(0, 100)}
                                     </Link>
                                 </td>
-                                <td>${item.price}</td>
+                                <td className="text-right">
+                                    ${item.price.toFixed(2)}
+                                </td>
                                 <td>
-                                    <a className="link">Add</a>
+                                    <AddToCart product={item} />
+                                    {/* <button className="btn btn-outline">
+                                        Add To Cart
+                                    </button> */}
                                 </td>
                             </tr>
                         ))}
@@ -136,9 +154,9 @@ export default function ProductGrid({ products }) {
                         <tr>
                             <th></th>
                             <th>Name</th>
-                            <th>Job</th>
-                            <th>company</th>
-                            <th>company</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th></th>
                         </tr>
                     </tfoot>
                 </table>
