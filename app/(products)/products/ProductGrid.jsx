@@ -8,19 +8,37 @@ import { useSupabase } from "@/components/providers/supabase-provider";
 import { useEffect, useState } from "react";
 
 import useSWR from "swr";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
-const fetcher = (url) =>
-    fetch(url, { method: "GET" }).then((res) => res.json());
+// const fetcher = (url) =>
+//     fetch(url, { method: "GET" }).then((res) => res.json());
 
-export default function ProductGrid({ page }) {
+export default function ProductGrid({ products }) {
+    // const searchParams = useSearchParams();
     const router = useRouter();
-    const { from, to } = getPagination(page, 25);
-    const { data: products, error } = useSWR(
-        `api/products?from=${from}&to=${to}`,
-        fetcher
-    );
+    // const page = searchParams.get("page") ? searchParams.get("page") : 0;
+    const [page, setPage] = useState(0);
+
+    // const { from, to } = getPagination(page, 25);
+    // const [products, setProducts] = useState();
+    const [pagedProducts, setPageProducts] = useState([]);
+    useEffect(() => {
+        console.log(products.slice(25 * page, 25 * (page + 1)));
+        console.log(page);
+        setPageProducts(products.slice(25 * page, 25 * (page + 1)));
+    }, [page]);
+
+    // const pageProducts = products.splice(1 * page, 25 * page);
+    // setShowProducts( page
+
+    // const { data: products, error } = useSWR(
+    //     `api/products?from=${from}&to=${to}`,
+    //     fetcher
+    // );
+
+    console.log(pagedProducts);
+
     const [checked, setChecked] = useState([]);
     const handleCheck = (e) => {
         let newArray = [...checked];
@@ -36,13 +54,12 @@ export default function ProductGrid({ page }) {
     if (!products) return <div>Loading...</div>;
     return (
         <div>
-            <div>Count: {products.length}</div>
-
             <div className="btn-group flex justify-center my-4">
                 <button
                     className="btn"
                     onClick={() =>
-                        router.push(`/products?page=${parseInt(page) - 1}`)
+                        // router.push(`/products?page=${parseInt(page) - 1}`)
+                        setPage(page - 1)
                     }
                 >
                     Prev
@@ -50,12 +67,14 @@ export default function ProductGrid({ page }) {
                 <button
                     className="btn"
                     onClick={() =>
-                        router.push(`/products?page=${parseInt(page) + 1}`)
+                        // router.push(`/products?page=${parseInt(page) + 1}`)
+                        setPage(page + 1)
                     }
                 >
                     Next
                 </button>
             </div>
+
             <div className="overflow-x-auto mx-auto w-2/3">
                 <table className="table table-zebra w-full">
                     <thead>
@@ -68,7 +87,7 @@ export default function ProductGrid({ page }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {products?.map((item) => (
+                        {pagedProducts?.map((item) => (
                             <tr key={item.slug}>
                                 <th>
                                     <input
@@ -83,8 +102,8 @@ export default function ProductGrid({ page }) {
                                 <td className="flex gap-2">
                                     <div className="mask mask-squircle w-8 h-8">
                                         <Image
-                                            width={50}
-                                            height={50}
+                                            width={25}
+                                            height={25}
                                             className="object-cover"
                                             alt="cat"
                                             src={item.image}
@@ -101,10 +120,7 @@ export default function ProductGrid({ page }) {
                                 <td>
                                     <Link
                                         className="w-full"
-                                        href={
-                                            "https://icpdas-usa.com/" +
-                                            item.slug
-                                        }
+                                        href={"/products/" + item.slug}
                                     >
                                         {item.slug.substr(0, 25)}
                                     </Link>
@@ -127,7 +143,7 @@ export default function ProductGrid({ page }) {
                     </tfoot>
                 </table>
             </div>
-
+            {/*
             <div className="btn-group flex justify-center my-4">
                 <button
                     className="btn"
@@ -145,7 +161,7 @@ export default function ProductGrid({ page }) {
                 >
                     Next
                 </button>
-            </div>
+            </div> */}
         </div>
     );
 }

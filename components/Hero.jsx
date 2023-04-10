@@ -4,9 +4,9 @@ export default function Hero() {
     return (
         <>
             <div
-                className="hero min-h-screen"
+                className="hero min-h-[80vh]"
                 style={{
-                    backgroundImage: `url("https://images.unsplash.com/photo-1604537466158-719b1972feb8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80")`,
+                    backgroundImage: `url("https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80")`,
                 }}
             >
                 <div className="hero-overlay bg-opacity-60"></div>

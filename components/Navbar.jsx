@@ -5,22 +5,67 @@ import Link from "next/link";
 import Button from "./UI Components/Button";
 import LongLogo from "./UI Components/LongLogo";
 import { useRouter, usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { clsx } from "clsx";
+import { useShoppingCart } from "use-shopping-cart";
+import { filterCartItems } from "@/lib/stripe-helpers";
+import SearchBar from "@/components/SearchBar";
 
 export default function NavBar({ user }) {
     const { supabase } = useSupabase();
     const path = usePathname();
     const router = useRouter();
+    const [userRole, setUserRole] = useState("user");
+    const [overlay, setOverlay] = useState(false);
+    const {
+        redirectToCheckout,
+        cartCount,
+        clearCart,
+        totalPrice,
+        cartDetails,
+    } = useShoppingCart();
+
+    useEffect(() => {
+        async function getRole() {
+            const { data } = await supabase
+                .from("users")
+                .select("id,role")
+                .eq("user_id", user?.id)
+                .single();
+            // setUserRole()
+            console.log(data);
+            setUserRole(data.role);
+        }
+        if (user) getRole();
+    }, []);
+
+    async function handleCartCheckout(event) {
+        event.preventDefault();
+        console.log(Object.values(cartDetails));
+        console.log(filterCartItems(cartDetails));
+
+        const response = await fetch("/api/checkout-session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(filterCartItems(cartDetails)),
+        })
+            .then((res) => res.json())
+            .catch((error) => {
+                /* Error handling */
+            });
+        console.log(response);
+        redirectToCheckout(response.id);
+    }
 
     const handleSignOut = async () => {
         const { error } = await supabase.auth.signOut();
         router.refresh();
-        console.log(error);
     };
-    // console.log(path);
     if (path == "/login" || path == "/register") return <></>;
+    console.log(user);
     return (
         <>
-            <div className="hidden md:navbar bg-base-100 z-10 ">
+            <div className="hidden md:navbar  bg-[#ffffff45] backdrop-blur-lg backdrop-brightness-125 backdrop-contrast-51 backdrop-saturate-150 shadow-xl z-[29] sticky top-0">
                 <div className="flex-1">
                     {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
                     <Link href="/">
@@ -75,7 +120,7 @@ export default function NavBar({ user }) {
                         </li>
 
                         <li>
-                            <a>Posts</a>
+                            <Link href="/article">Posts</Link>
                             <ul className="menu bg-base-100 w-56 p-2 z-10">
                                 <li className="menu-title">
                                     <span>Category</span>
@@ -100,13 +145,7 @@ export default function NavBar({ user }) {
                     </ul>
                 </div>
                 <div className="flex-none gap-2">
-                    <div className="form-control">
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            className="input input-bordered"
-                        />
-                    </div>
+                    <SearchBar />
                     <div className="dropdown dropdown-end">
                         <label
                             tabIndex={0}
@@ -128,7 +167,7 @@ export default function NavBar({ user }) {
                                     />
                                 </svg>
                                 <span className="badge badge-sm indicator-item">
-                                    8
+                                    {cartCount}
                                 </span>
                             </div>
                         </label>
@@ -138,15 +177,30 @@ export default function NavBar({ user }) {
                         >
                             <div className="card-body">
                                 <span className="font-bold text-lg">
-                                    8 Items
+                                    {cartCount} Items
                                 </span>
                                 <span className="text-info">
-                                    Subtotal: $999
+                                    Subtotal: ${(totalPrice / 100).toFixed(2)}
                                 </span>
                                 <div className="card-actions">
-                                    <button className="btn btn-primary btn-block">
-                                        View cart
-                                    </button>
+                                    {cartCount > 0 ? (
+                                        <>
+                                            <button
+                                                onClick={handleCartCheckout}
+                                                className="btn btn-primary btn-block"
+                                            >
+                                                Checkout
+                                            </button>
+                                            <button
+                                                onClick={clearCart}
+                                                className="btn btn-primary btn-outline btn-block"
+                                            >
+                                                Clear Cart
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -160,7 +214,8 @@ export default function NavBar({ user }) {
                                 <Image
                                     src={
                                         user
-                                            ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3276&q=80"
+                                            ? user?.user_metadata?.avatar ??
+                                              "https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352156-stock-illustration-default-placeholder-profile-icon.jpg"
                                             : "https://st3.depositphotos.com/9998432/13335/v/450/depositphotos_133352156-stock-illustration-default-placeholder-profile-icon.jpg"
                                     }
                                     width={50}
@@ -187,13 +242,20 @@ export default function NavBar({ user }) {
                                 className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
                             >
                                 <li>
-                                    <Link className="disabled" href="/account">
+                                    <a className="disabled hover:bg-transparent font-semibold">
                                         Hello {user.user_metadata.first_name}!
-                                    </Link>
+                                    </a>
                                 </li>
                                 <li>
                                     <Link href="/account">Account</Link>
                                 </li>
+                                {userRole == "admin" ? (
+                                    <li>
+                                        <Link href="/admin">Dashboard</Link>
+                                    </li>
+                                ) : (
+                                    <></>
+                                )}
                                 <li>
                                     <a onClick={handleSignOut}>Sign Out</a>
                                 </li>
@@ -202,6 +264,77 @@ export default function NavBar({ user }) {
                     </div>
                 </div>
             </div>
+
+            <div className="md:hidden flex justify-between h-16 items-center w-11/12 mx-auto">
+                <Link href="/">
+                    <LongLogo className="w-32 h-fit" />
+                </Link>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                    onClick={() => {
+                        setOverlay(!overlay);
+                    }}
+                >
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                    />
+                </svg>
+            </div>
+            {overlay ? (
+                <div className="drawer">
+                    <div className="drawer-side">
+                        <label
+                            htmlFor="my-drawer"
+                            className="drawer-overlay"
+                        ></label>
+                        <ul className="menu p-4 w-80 bg-base-100 h-screen text-base-content">
+                            <li>
+                                <a>Sidebar Item 1</a>
+                            </li>
+                            <li>
+                                <a>Sidebar Item 2</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            ) : (
+                <></>
+            )}
+            {/* <div className="md:hidden drawer">
+                <input
+                    id="my-drawer"
+                    type="checkbox"
+                    className="drawer-toggle"
+                />
+                <div className="drawer-content">
+                    <label
+                        htmlFor="my-drawer"
+                        className="btn btn-primary drawer-button"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                            />
+                        </svg>
+                    </label>
+                </div>
+            </div> */}
         </>
     );
 }

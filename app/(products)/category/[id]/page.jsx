@@ -2,6 +2,7 @@ import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-next
 import { headers, cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
+import CategoryHeader from "../CategoryHeader";
 
 export default async function SingleCategory({ params }) {
     const supabase = createServerComponentSupabaseClient({
@@ -14,7 +15,8 @@ export default async function SingleCategory({ params }) {
     let { data: category, error: currentError } = await supabase
         .from("categories")
         .select("id, name, description, parent")
-        .eq("id", params.id);
+        .eq("id", params.id)
+        .single();
 
     let { data: children, error: childrenError } = await supabase
         .from("categories")
@@ -26,7 +28,7 @@ export default async function SingleCategory({ params }) {
             `
             id,
             product_id (
-            id, title, slug, description, price 
+            id, title, slug, short_description, price 
             )
         `
         )
@@ -36,56 +38,60 @@ export default async function SingleCategory({ params }) {
     console.log(products);
     return (
         <main>
-            <div className="hero min-h-1/2 bg-base-200">
-                <div className="hero-content flex-col lg:flex-row">
-                    {/* <img src="/images/stock/photo-1635805737707-575885ab0820.jpg" className="max-w-sm rounded-lg shadow-2xl" /> */}
-                    <Image
-                        className="max-w-sm rounded-lg shadow-2xl"
-                        width={500}
-                        height={500}
-                        alt="cat"
-                        priority
-                        src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
-                        // src="https://images.unsplash.com/photo-1659460542526-35b3257e1152?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2200&q=80"
-                    />
-                    <div>
-                        <h1 className="text-5xl font-bold">
-                            {category[0].name}
-                        </h1>
-                        <p className="py-6">
-                            Provident cupiditate voluptatem et in. Quaerat
-                            fugiat ut assumenda excepturi exercitationem quasi.
-                            In deleniti eaque aut repudiandae et a id nisi.
-                        </p>
-                        <Link
-                            class="btn btn-primary"
-                            href={`/category/${category[0].parent ?? ""}`}
-                        >
-                            Go back
-                        </Link>
-                    </div>
-                </div>
-            </div>
+            <CategoryHeader category={category} />
 
             <hr />
 
-            <div className="w-full flex justify-center">
+            {/* <div className="w-full flex justify-center">
                 <ul className="menu menu-horizontal bg-base-100 rounded-box m-8 mx-auto shadow-xl">
                     {children.map((cat) => (
                         <li key={cat.id} className="">
                             <Link href={"/category/" + cat.id}>{cat.name}</Link>
                             <br />
-                            {/* <small>{cat.description}</small> */}
                         </li>
                     ))}
                 </ul>
+            </div> */}
+            <div className="p-2 md:p-0 grid grid-cols-1 md:grid-cols-3 w-3/4 mt-12 mx-auto gap-2">
+                {children.map((cat) => (
+                    <Link
+                        href={"/category/" + cat.id}
+                        key={cat.id}
+                        className="card w-full bg-base-100 shadow-xl image-full"
+                    >
+                        <figure>
+                            <Image
+                                className="w-full rounded-lg shadow-2xl"
+                                width={500}
+                                height={500}
+                                alt="cat"
+                                priority
+                                src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
+                                // src="https://images.unsplash.com/photo-1659460542526-35b3257e1152?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2200&q=80"
+                            />
+                        </figure>
+                        <div className="card-body">
+                            <h2 className="card-title">{cat.name}</h2>
+                            <p>
+                                {cat?.description?.length != 0
+                                    ? cat.description
+                                    : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nesciunt commodi voluptatum eaque. Incidunt minus, harum velit quam nostrum sunt nemo."}
+                            </p>
+                            <div className="card-actions justify-end">
+                                {/* <button className="btn btn-primary">
+                                    View
+                                </button> */}
+                            </div>
+                        </div>
+                    </Link>
+                ))}
             </div>
 
             <hr />
 
             {/*  */}
             {products.length > 0 ? (
-                <div className="overflow-x-auto container mx-auto my-2">
+                <div className="overflow-x-auto  w-3/4 mt-12 mx-auto my-2">
                     <table className="table w-full">
                         {/* head */}
                         <thead>
@@ -99,9 +105,9 @@ export default async function SingleCategory({ params }) {
                                     </label>
                                 </th>
                                 <th>Name</th>
-                                <th>Job</th>
-                                <th>Favorite Color</th>
-                                <th></th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>View</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -118,42 +124,48 @@ export default async function SingleCategory({ params }) {
                                             </label>
                                         </th>
                                         <td>
-                                            <div className="flex items-center space-x-3">
-                                                <Link
-                                                    href={
-                                                        "/products/" + prod.slug
-                                                    }
-                                                    className="avatar"
-                                                >
-                                                    <div className="mask mask-squircle w-12 h-12">
-                                                        <Image
-                                                            width={500}
-                                                            height={500}
-                                                            alt="cat"
-                                                            priority
-                                                            src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
-                                                            // src="https://images.unsplash.com/photo-1659460542526-35b3257e1152?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2200&q=80"
-                                                        />
+                                            <Link
+                                                className=" flex gap-2"
+                                                href={"/products/" + prod.slug}
+                                            >
+                                                <div className="flex items-center space-x-3">
+                                                    <span className="avatar">
+                                                        <div className="mask mask-squircle w-12 h-12">
+                                                            <Image
+                                                                width={500}
+                                                                height={500}
+                                                                alt="cat"
+                                                                priority
+                                                                src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
+                                                                // src="https://images.unsplash.com/photo-1659460542526-35b3257e1152?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2200&q=80"
+                                                            />
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <div className="font-bold">
+                                                        {prod.title}
                                                     </div>
-                                                </Link>
-                                            </div>
-                                            <div>
-                                                <div className="font-bold">
-                                                    {prod.title}
+                                                    <div className="text-sm opacity-50">
+                                                        {prod.slug}
+                                                    </div>
                                                 </div>
-                                                <div className="text-sm opacity-50">
-                                                    {prod.slug}
-                                                </div>
-                                            </div>
+                                            </Link>
                                         </td>
-                                        <td>
-                                            {prod.description.substr(0, 100)}
+                                        <td className="!w-96 whitespace-normal">
+                                            {prod.short_description.substr(
+                                                0,
+                                                100
+                                            )}
                                         </td>
                                         <td>{prod.price}</td>
                                         <th>
-                                            <button className="btn btn-ghost btn-xs">
-                                                details
-                                            </button>
+                                            <Link
+                                                href={"/products/" + prod.slug}
+                                                className="btn btn-ghost btn-xs"
+                                            >
+                                                Details
+                                            </Link>
                                         </th>
                                     </tr>
                                 </>

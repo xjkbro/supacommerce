@@ -22,13 +22,13 @@ export default async function RootLayout({ children }) {
     } = await supabase.auth.getUser();
 
     return (
-        <html lang="en" data-theme="bumblebee">
+        <html lang="en" data-theme="lofi">
             <body>
                 <SupabaseProvider>
                     <StripeProvider>
                         <NavBar user={user} />
                         {children}
-                        <Footer />
+                        <Footer user={user} />
                     </StripeProvider>
                 </SupabaseProvider>
             </body>

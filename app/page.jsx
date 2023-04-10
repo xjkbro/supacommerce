@@ -2,6 +2,9 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
 import Button from "@/components/UI Components/Button";
+import CallToAction from "@/components/UI Components/CallToAction";
+import FeaturedSeries from "@/components/UI Components/FeaturedSeries";
+import ThreeBlockBadge from "@/components/UI Components/ThreeBlockBadge";
 import VideoHero from "@/components/VideoHero";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
@@ -22,7 +25,11 @@ export default async function Home() {
     return (
         <div>
             {/* <Navbar user={user} /> */}
+            {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
             <Hero />
+            <ThreeBlockBadge />
+            <FeaturedSeries series="tgw" />
+            <CallToAction />
             {/* <div className="flex flex-col mx-auto lg:flex-row p-4 w-2/3">
                 <div className="grid flex-grow h-fit card bg-base-300 rounded-box place-items-center">
                     <div className="card w-96 bg-base-100 shadow-xl image-full">
