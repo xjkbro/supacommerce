@@ -5,7 +5,7 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 export default function Article() {
     const arr = ["1", "2", "3"];
     return (
-        <div className="md:grid grid-cols-3 mx-auto w-11/12 md:w-3/4 mt-12 gap-2">
+        <div className="md:grid grid-cols-3 mx-auto w-11/12 md:w-3/4 my-12 gap-2">
             <div className=" col-span-2 flex flex-col gap-4">
                 {arr.map((item) => (
                     <Link

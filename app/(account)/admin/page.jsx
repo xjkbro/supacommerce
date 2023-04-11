@@ -6,20 +6,34 @@ import React from "react";
 
 export default async function Admin() {
     return (
-        <>
-            <h1>Admin Panel</h1>
-            <ul>
-                <li>User Dashboard</li>
-                <li>Statistics</li>
-                <li>Products</li>
-                <li>Categories</li>
-                <li>Posts</li>
-                <li>Articles</li>
-                <li>Videos</li>
-                <li>
-                    <Link href="/admin/downloads">Downloads</Link>
-                </li>
-            </ul>
-        </>
+        <div className="w-11/12 grid grid-cols-2 gap-4">
+            <div className="card w-full h-96 bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <h2 className="card-title">Card title!</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div className="card-actions justify-end">
+                        <button className="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div className="card w-full h-96 bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <h2 className="card-title">Card title!</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div className="card-actions justify-end">
+                        <button className="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div className="card w-full h-96 bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <h2 className="card-title">Card title!</h2>
+                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <div className="card-actions justify-end">
+                        <button className="btn btn-primary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

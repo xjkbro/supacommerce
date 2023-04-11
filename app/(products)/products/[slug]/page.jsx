@@ -23,7 +23,7 @@ export default async function SingleProduct({ params }) {
 
     let { data: product, error: currentError } = await supabase
         .from("products")
-        .select()
+        .select("*")
         .eq("slug", params.slug)
         .single();
 
@@ -41,7 +41,7 @@ export default async function SingleProduct({ params }) {
 
     // console.log(product.id);
     return (
-        <main className="bg-base-100 shadow-lg md:border border-base-200 w-11/12 md:w-3/4 mt-12 rounded-xl mx-auto md:mt-12">
+        <main className="bg-base-100 shadow-lg md:border border-base-200 w-11/12 md:w-3/4 my-12 rounded-xl mx-auto md:y-12">
             <div className="max-h-1/2 h-1/2 w-11/12 mx-auto">
                 {/* Breadcrumb */}
                 <div className="m-2">
@@ -206,19 +206,29 @@ export default async function SingleProduct({ params }) {
                 </div>
             </div>
 
-            <div className="prose max-w-full m-8">
+            <div className="prose max-w-full m-8 ">
                 <h2>Introduction</h2>
-                {/* <ReactMarkdown>{product.description}</ReactMarkdown> */}
-                <div
+                <ReactMarkdown
+                    className="overflow-scroll"
+                    remarkPlugins={[remarkGfm]}
+                >
+                    {product.description}
+                </ReactMarkdown>
+                {/* <div
                     dangerouslySetInnerHTML={{ __html: product.description }}
-                />
+                /> */}
                 <hr />
                 <h2>Specifications</h2>
-                <div
+                {/* <div
                     id="specifications"
                     dangerouslySetInnerHTML={{ __html: product.specifications }}
-                />
-                {/* <ReactMarkdown className="prose"></ReactMarkdown> */}
+                /> */}
+                <ReactMarkdown
+                    className="overflow-scroll"
+                    remarkPlugins={[remarkGfm]}
+                >
+                    {product.specifications}
+                </ReactMarkdown>
             </div>
         </main>
     );

@@ -5,7 +5,7 @@ import Button from "@/components/ui/Button";
 import CallToAction from "@/components/ui/CallToAction";
 import FeaturedSeries from "@/components/ui/FeaturedSeries";
 import ThreeBlockBadge from "@/components/ui/ThreeBlockBadge";
-import VideoHero from "@/components/VideoHero";
+import VideoHero from "@/components/ui/VideoHero";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
 import Image from "next/image";
@@ -26,7 +26,9 @@ export default async function Home() {
         <div>
             {/* <Navbar user={user} /> */}
             {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
-            <Hero />
+            <VideoHero url="./pexels-harabe-6450803-1920x1080-25fps.mp4" />
+
+            {/* <Hero /> */}
             <ThreeBlockBadge />
             <FeaturedSeries series="tgw" />
             <CallToAction />
@@ -80,7 +82,6 @@ export default async function Home() {
                     </div>
                 </div>
             </div> */}
-            {/* <VideoHero url="./pexels-harabe-6450803-1920x1080-25fps.mp4" /> */}
         </div>
     );
 }

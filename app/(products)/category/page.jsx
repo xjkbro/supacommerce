@@ -21,7 +21,7 @@ export default async function Category() {
             <CategoryHeader />
 
             <hr />
-            <div className="p-2 md:p-0 grid grid-cols-1 md:grid-cols-3 w-11/12 md:w-3/4 mt-12 mx-auto gap-2">
+            <div className="p-2 md:p-0 grid grid-cols-1 md:grid-cols-3 w-11/12 md:w-3/4 my-12 mx-auto gap-2">
                 {categories.map((cat) => (
                     <Link
                         href={"/category/" + cat.id}

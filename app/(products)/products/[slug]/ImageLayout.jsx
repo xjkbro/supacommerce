@@ -12,7 +12,7 @@ const imgArr = [
 export default function ImageLayout({ product }) {
     const [modalImg, setModalImg] = useState("");
     const [toggleModal, setToggleModal] = useState(false);
-    const [prodImg, setProdImg] = useState(product.image);
+    const [prodImg, setProdImg] = useState(product.image ? product.image : "");
     return (
         <>
             <div className="flex flex-col md:flex-row gap-2">
@@ -24,7 +24,7 @@ export default function ImageLayout({ product }) {
                     className="border border-base-200 w-full h-96 md:w-96 md:h-96 object-contain flex justify-center items-center rounded-xl hover:cursor-zoom-in "
                 >
                     <Image
-                        className="w-64 h-64 md:w-64 md:h-64 object-contain"
+                        className="w-80 h-80 object-contain"
                         width={500}
                         height={500}
                         alt="cat"
@@ -32,11 +32,11 @@ export default function ImageLayout({ product }) {
                         src={prodImg}
                     />
                 </div>
-                <ul className="flex flex-row md:flex-col gap-2 w-full h-24 md:w-24 md:h-96 overflow-scroll">
+                <ul className="flex flex-row md:flex-col gap-2 w-full h-[6.5rem] md:w-[6.5rem] md:h-96 overflow-x-scroll overflow-y-hidden md:overflow-x-hidden md:overflow-y-scroll ">
                     {imgArr.map((img) => (
                         <li
                             key={img}
-                            className="flex justify-center items-center min-w-[6rem] min-h-[6rem] w-24  h-24 rounded-md border hover:border-4 border-base-200 -space-x-24 hover:cursor-pointer overflow-hidden"
+                            className="flex justify-center items-center min-w-[5rem] min-h-[5rem] w-24  h-24 rounded-md border hover:border-4 border-base-200 -space-x-24 hover:cursor-pointer overflow-hidden"
                         >
                             <Image
                                 className="w-28 h-28 object-cover hover:opacity-75 transition-opacity"

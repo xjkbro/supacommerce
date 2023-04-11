@@ -8,7 +8,7 @@ export default function Footer({ user }) {
     const path = usePathname();
     if (path == "/login" || path == "/register") return <></>;
     return (
-        <footer className="mt-24">
+        <footer className="mt-24 md:mt-0">
             <div className="btm-nav md:hidden z-50">
                 <Link href="/">
                     <svg

@@ -35,11 +35,11 @@ export default function NavBar({ user }) {
                 .single();
             // setUserRole()
             console.log(data);
-            setUserRole(data.role);
+            setUserRole(data?.role);
         }
         if (user) getRole();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [user]);
 
     async function handleCartCheckout(event) {
         event.preventDefault();
@@ -230,7 +230,7 @@ export default function NavBar({ user }) {
                             >
                                 <li>
                                     <a className="disabled hover:bg-transparent font-semibold">
-                                        Hello {user.user_metadata.first_name}!
+                                        Hello {user?.user_metadata?.first_name}!
                                     </a>
                                 </li>
                                 <li>
