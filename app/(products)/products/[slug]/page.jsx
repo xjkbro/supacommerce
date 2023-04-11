@@ -3,8 +3,8 @@ import { headers, cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
-import { remark } from "remark";
-import html from "remark-html";
+// import { remark } from "remark";
+// import html from "remark-html";
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
