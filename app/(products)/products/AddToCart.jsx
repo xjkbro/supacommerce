@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { DebugCart, useShoppingCart } from "use-shopping-cart";
 
-export default function AddToCart({ product }) {
+export default function AddToCart({ product, quantity }) {
     const { addItem } = useShoppingCart();
     const [toast, setToast] = useState(false);
 
-    console.log(product);
+    // console.log(product);
     const item = {
         name: product.title,
         description: product.short_description,
@@ -21,7 +21,7 @@ export default function AddToCart({ product }) {
         <>
             <button
                 onClick={() => {
-                    addItem(item);
+                    addItem(item, { count: quantity });
                     setToast(true);
                     setTimeout(() => {
                         setToast(false);

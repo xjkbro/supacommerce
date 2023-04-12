@@ -33,7 +33,7 @@ export default async function AdminLayout({ children }) {
                         <Link href="/admin/products">Products</Link>
                     </li>
                     <li>
-                        <Link href="/admin/Categories">Categories</Link>
+                        <Link href="/admin/categories">Categories</Link>
                     </li>
                     <li>
                         <Link href="/admin/users">Users</Link>

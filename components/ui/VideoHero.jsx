@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export default function VideoHero({ type, url }) {
@@ -16,13 +17,13 @@ export default function VideoHero({ type, url }) {
             {/* <div className="hero-content text-center text-neutral-content z-[2]"> */}
             <div className="flex justify-center items-center w-[105%] text-center backdrop-blur-[3px] backdrop-brightness-75 min-h-[80vh] text-neutral-content z-[2]">
                 <div className="max-w-md">
-                    <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+                    <h1 className="mb-5 text-5xl font-bold">SupaCommerce</h1>
                     <p className="mb-5">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut
-                        assumenda excepturi exercitationem quasi. In deleniti
-                        eaque aut repudiandae et a id nisi.
+                        A supa way to handle all your commerce needs
                     </p>
-                    <button className="btn btn-primary">Get Started</button>
+                    <Link href="/products" className="btn btn-primary">
+                        Start Shopping
+                    </Link>
                 </div>
             </div>
         </section>

@@ -14,7 +14,6 @@ export default function CategoryMenu() {
                 .from("categories")
                 .select("id, name")
                 .is("parent", null);
-            console.log({ hi: data });
             setCategories(data);
         }
         getCategories();
@@ -22,7 +21,7 @@ export default function CategoryMenu() {
 
     return (
         <ul className="menu bg-base-100 w-fit p-2 z-10">
-            {categories.map((item) => (
+            {categories?.map((item) => (
                 <li key={item.id}>
                     <Link href={"/category/" + item.id}>{item.name}</Link>
                 </li>

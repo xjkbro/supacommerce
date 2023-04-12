@@ -4,10 +4,10 @@ import { useState } from "react";
 import { DebugCart, useShoppingCart } from "use-shopping-cart";
 import { filterCartItems } from "@/lib/stripe-helpers";
 
-export default function BuyNow({ product }) {
+export default function BuyNow({ product, quantity }) {
     const { addItem, cartDetails, redirectToCheckout } = useShoppingCart();
 
-    console.log(product);
+    // console.log(product);
     const item = {
         name: product.title,
         description: product.short_description,
@@ -18,8 +18,7 @@ export default function BuyNow({ product }) {
     };
 
     async function handleBuy(item) {
-        const qty = 1;
-        console.log(filterCartItems(cartDetails));
+        // console.log(filterCartItems(cartDetails));
 
         const filtered = [
             {
@@ -32,10 +31,10 @@ export default function BuyNow({ product }) {
                         images: [product.image],
                     },
                 },
-                quantity: qty,
+                quantity,
             },
         ];
-        console.log(filtered);
+        // console.log(filtered);
 
         const response = await fetch("/api/checkout-session", {
             method: "POST",
@@ -46,6 +45,7 @@ export default function BuyNow({ product }) {
             .catch((error) => {
                 /* Error handling */
             });
+
         redirectToCheckout(response.id);
     }
 
@@ -53,7 +53,7 @@ export default function BuyNow({ product }) {
         <>
             <button
                 onClick={() => {
-                    addItem(item);
+                    // addItem(item);
                     handleBuy(item);
                 }}
                 className="btn btn-secondary"

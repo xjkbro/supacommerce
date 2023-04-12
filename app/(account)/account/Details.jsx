@@ -80,15 +80,15 @@ export default function Details({ user }) {
             .from("avatars")
             .upload(user?.id + "/" + uuidv4() + ".png", e.target.files[0]);
 
-        console.log(placeholder);
+        // console.log(placeholder);
         setAvatar(
             "https://anyzlthrxmlnduuesdhk.supabase.co/storage/v1/object/public/avatars/" +
                 placeholder.path
         );
     };
     const handleAvatar = (e) => {
-        console.log(e);
-        console.log(avatarInput);
+        // console.log(e);
+        // console.log(avatarInput);
         avatarInput.current.click();
     };
 

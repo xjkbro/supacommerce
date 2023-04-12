@@ -34,7 +34,7 @@ export default function NavBar({ user }) {
                 .eq("user_id", user?.id)
                 .single();
             // setUserRole()
-            console.log(data);
+            // console.log(data);
             setUserRole(data?.role);
         }
         if (user) getRole();
@@ -43,8 +43,8 @@ export default function NavBar({ user }) {
 
     async function handleCartCheckout(event) {
         event.preventDefault();
-        console.log(Object.values(cartDetails));
-        console.log(filterCartItems(cartDetails));
+        // console.log(Object.values(cartDetails));
+        // console.log(filterCartItems(cartDetails));
 
         const response = await fetch("/api/checkout-session", {
             method: "POST",
@@ -55,7 +55,7 @@ export default function NavBar({ user }) {
             .catch((error) => {
                 /* Error handling */
             });
-        console.log(response);
+        // console.log(response);
         redirectToCheckout(response.id);
     }
 
@@ -64,7 +64,7 @@ export default function NavBar({ user }) {
         router.refresh();
     };
     if (path == "/login" || path == "/register") return <></>;
-    console.log(user);
+    // console.log(user);
     return (
         <>
             <div className="hidden md:navbar  bg-[#ffffff45] backdrop-blur-lg backdrop-brightness-125 backdrop-contrast-51 backdrop-saturate-150 shadow-xl z-[29] sticky top-0">

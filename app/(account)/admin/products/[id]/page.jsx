@@ -15,10 +15,14 @@ export default async function Product({ params }) {
         .eq("id", params.id)
         .single();
 
+    const { data: bucket, error } = await supabase.storage
+        .from("products")
+        .list(params.id);
+
     return (
         <>
             {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
-            <ProductForm product={data} />
+            <ProductForm product={data} bucket={bucket} />
         </>
     );
 }

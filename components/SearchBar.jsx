@@ -20,7 +20,7 @@ export default function SearchBar() {
                 .select("title,slug,short_description, image")
                 .order("title", { ascending: false });
 
-            console.log(data);
+            // console.log(data);
             if (data) setProducts(data);
         }
         getProducts();
@@ -32,7 +32,7 @@ export default function SearchBar() {
             var wordList = products.filter((elem, index) =>
                 elem.title.toLowerCase().includes(e.target.value.toLowerCase())
             );
-            console.log(wordList);
+            // console.log(wordList);
             // console.log(result);
             setLiveSearch(wordList);
         } else {
@@ -44,7 +44,7 @@ export default function SearchBar() {
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
-                    console.log(e.target[0].value);
+                    // console.log(e.target[0].value);
                     router.push("/search?search=" + e.target[0].value);
                 }}
                 className="form-control menu relative md:w-[30vw]"
@@ -58,7 +58,6 @@ export default function SearchBar() {
                     onBlur={() => {
                         setTimeout(() => setShowResults(false), 300);
                     }}
-                    onEnter
                 />
                 {showResults ? (
                     <ul className="menu fixed top-[4rem] bg-base-100 md:w-[30vw] p-2 shadow-sm rounded-box flex-nowrap h-fit max-h-[50vh] overflow-scroll">

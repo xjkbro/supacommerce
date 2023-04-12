@@ -16,8 +16,8 @@ export default async function handler(req, res) {
                 automatic_tax: {
                     enabled: true,
                 },
-                success_url: `${req.headers.origin}/?session_id={CHECKOUT_SESSION_ID}&order=completed`,
-                cancel_url: `${req.headers.origin}/`,
+                success_url: `${req.headers.origin}/checkout/thank-you?session_id={CHECKOUT_SESSION_ID}&order=completed`,
+                cancel_url: `${req.headers.origin}/checkout`,
             };
             const checkoutSession = await stripe.checkout.sessions.create(
                 params

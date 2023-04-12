@@ -6,7 +6,9 @@ import SquareLogo from "./ui/SquareLogo";
 
 export default function Footer({ user }) {
     const path = usePathname();
+    const arr = path.split("/");
     if (path == "/login" || path == "/register") return <></>;
+    if (arr[1] == "admin") return <></>;
     return (
         <footer className="mt-24 md:mt-0">
             <div className="btm-nav md:hidden z-50">
