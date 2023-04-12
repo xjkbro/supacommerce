@@ -1,7 +1,7 @@
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import React from "react";
 import { headers, cookies } from "next/headers";
-import AddFile from "./addFile";
+// import AddFile from "./addFile";
 export default async function Downloads() {
     const supabase = createServerComponentSupabaseClient({
         headers,
@@ -18,7 +18,7 @@ export default async function Downloads() {
 
     return (
         <div>
-            <AddFile />
+            {/* <AddFile /> */}
             <br />
             <pre>{JSON.stringify(items, null, 2)}</pre>
         </div>
