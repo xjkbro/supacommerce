@@ -9,6 +9,11 @@ import VideoHero from "@/components/ui/VideoHero";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
 import Image from "next/image";
+import CallToAction2 from "@/components/ui/CallToAction2";
+import FeaturePosts from "@/components/ui/FeaturePosts";
+import Webinars from "@/components/ui/Webinars";
+import Welcome from "@/components/ui/Welcome";
+import DynamicGrid from "@/components/ui/DynamicGrid";
 
 // do not cache this page
 export const revalidate = 0;
@@ -26,11 +31,16 @@ export default async function Home() {
         <div>
             {/* <Navbar user={user} /> */}
             {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
-            <VideoHero url="./pexels-harabe-6450803-1920x1080-25fps.mp4" />
+            {/* <VideoHero url="./pexels-harabe-6450803-1920x1080-25fps.mp4" /> */}
 
-            {/* <Hero /> */}
+            <Hero />
             <ThreeBlockBadge />
+            <Welcome />
             <FeaturedSeries series="tgw" />
+            <CallToAction2 />
+            <FeaturePosts />
+            {/* <Webinars /> */}
+
             <CallToAction />
             {/* <div className="flex flex-col mx-auto lg:flex-row p-4 w-2/3">
                 <div className="grid flex-grow h-fit card bg-base-300 rounded-box place-items-center">

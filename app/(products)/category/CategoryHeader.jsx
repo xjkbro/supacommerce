@@ -4,7 +4,7 @@ import React from "react";
 
 export default function CategoryHeader({ category = null }) {
     return (
-        <div className="hero min-h-1/2 bg-base-200">
+        <div className="hero min-h-1/2 bg-secondary text-white">
             <div className="hero-content flex-col lg:flex-row">
                 <Image
                     className="w-96 rounded-lg shadow-2xl"

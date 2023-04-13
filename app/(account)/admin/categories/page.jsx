@@ -68,36 +68,6 @@ export default async function Categories() {
                     {recursiveCat(topCat)}
                 </ul>
             ))}
-            {topLevel.map((topCat) => (
-                <ul key={topCat.name}>
-                    <li>
-                        <Link href={`/admin/categories/${topCat.id}`}>
-                            {topCat.name}
-                        </Link>
-                    </li>
-                    {recursiveCat(topCat)}
-                </ul>
-            ))}
-            {topLevel.map((topCat) => (
-                <ul key={topCat.name}>
-                    <li>
-                        <Link href={`/admin/categories/${topCat.id}`}>
-                            {topCat.name}
-                        </Link>
-                    </li>
-                    {recursiveCat(topCat)}
-                </ul>
-            ))}
-            {topLevel.map((topCat) => (
-                <ul key={topCat.name}>
-                    <li>
-                        <Link href={`/admin/categories/${topCat.id}`}>
-                            {topCat.name}
-                        </Link>
-                    </li>
-                    {recursiveCat(topCat)}
-                </ul>
-            ))}
         </div>
     );
 }

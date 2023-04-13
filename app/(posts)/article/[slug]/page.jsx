@@ -50,8 +50,9 @@ Any additional information goes here
                     alt="feature"
                     width={800}
                     height={600}
-                    className="h-96 object-cover rounded-xl"
+                    className="h-96 object-cover"
                 />
+                <small></small>
                 <ReactMarkdown>{str}</ReactMarkdown>
             </div>
         </div>

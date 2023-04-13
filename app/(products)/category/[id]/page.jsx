@@ -3,6 +3,8 @@ import { headers, cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import CategoryHeader from "../CategoryHeader";
+import DynamicGrid from "@/components/ui/DynamicGrid";
+import CategoryTabs from "../CategoryTabs";
 
 export default async function SingleCategory({ params }) {
     const supabase = createServerComponentSupabaseClient({
@@ -40,47 +42,13 @@ export default async function SingleCategory({ params }) {
         <main>
             <CategoryHeader category={category} />
             <div className="w-11/12 md:w-3/4 my-12 mx-auto">
-                {children.length > 0 && (
+                <CategoryTabs subcategories={children} products={products} />
+                {/* {children.length >= 0 && (
                     <>
                         <h2 className="text-3xl font-bold my-4">
                             Subcategories
                         </h2>
-                        <div className="p-2 md:p-0 grid grid-cols-1 md:grid-cols-3  gap-2">
-                            {children.map((cat) => (
-                                <Link
-                                    href={"/category/" + cat.id}
-                                    key={cat.id}
-                                    className="card w-full bg-base-100 shadow-xl image-full"
-                                >
-                                    <figure>
-                                        <Image
-                                            className="w-full rounded-lg shadow-2xl"
-                                            width={500}
-                                            height={500}
-                                            alt="cat"
-                                            priority
-                                            src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
-                                            // src="https://images.unsplash.com/photo-1659460542526-35b3257e1152?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2200&q=80"
-                                        />
-                                    </figure>
-                                    <div className="card-body">
-                                        <h2 className="card-title">
-                                            {cat.name}
-                                        </h2>
-                                        <p>
-                                            {cat?.description?.length != 0
-                                                ? cat.description
-                                                : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nesciunt commodi voluptatum eaque. Incidunt minus, harum velit quam nostrum sunt nemo."}
-                                        </p>
-                                        <div className="card-actions justify-end">
-                                            {/* <button className="btn btn-primary">
-                                    View
-                                </button> */}
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
+                        <DynamicGrid items={children} />
                     </>
                 )}
                 {products.length > 0 && (
@@ -90,7 +58,6 @@ export default async function SingleCategory({ params }) {
                         </h2>
                         <div className="overflow-x-auto my-2">
                             <table className="table w-full">
-                                {/* head */}
                                 <thead>
                                     <tr>
                                         <th>
@@ -108,7 +75,6 @@ export default async function SingleCategory({ params }) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* row 1 */}
                                     {products.map(({ product_id: prod }) => (
                                         <>
                                             <tr key={prod.id}>
@@ -141,7 +107,6 @@ export default async function SingleCategory({ params }) {
                                                                         alt="cat"
                                                                         priority
                                                                         src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
-                                                                        // src="https://images.unsplash.com/photo-1659460542526-35b3257e1152?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2200&q=80"
                                                                     />
                                                                 </div>
                                                             </span>
@@ -178,7 +143,6 @@ export default async function SingleCategory({ params }) {
                                         </>
                                     ))}
                                 </tbody>
-                                {/* foot */}
                                 <tfoot>
                                     <tr>
                                         <th></th>
@@ -191,7 +155,7 @@ export default async function SingleCategory({ params }) {
                             </table>
                         </div>
                     </>
-                )}
+                )} */}
             </div>
         </main>
     );
