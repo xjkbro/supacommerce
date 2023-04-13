@@ -61,7 +61,7 @@ export default function FeaturePosts() {
                             <figure>
                                 <Image
                                     src={item.image}
-                                    alt={item.name}
+                                    alt={item.title}
                                     width={300}
                                     height={300}
                                     className="object-contain w-full h-96"

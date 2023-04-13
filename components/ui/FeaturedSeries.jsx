@@ -117,7 +117,7 @@ export default async function FeaturedSeries({ series }) {
                                         ${item.price.toFixed(2)}
                                     </p>
 
-                                    <button className="btn btn-block btn-accent text-white">
+                                    <button className="btn btn-block btn-accent ">
                                         Add To Cart
                                     </button>
                                 </div>

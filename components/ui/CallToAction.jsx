@@ -22,9 +22,7 @@ export default function CallToAction() {
                             />
                         </div>
                         <div className="form-control mt-0">
-                            <button className="btn btn-accent text-white">
-                                Sign Up
-                            </button>
+                            <button className="btn btn-accent">Sign Up</button>
                         </div>
                     </div>
                 </div>

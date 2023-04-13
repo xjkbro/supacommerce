@@ -21,9 +21,7 @@ export default function Webinars() {
                         assumenda excepturi exercitationem quasi. In deleniti
                         eaque aut repudiandae et a id nisi.
                     </p>
-                    <button className="btn btn-accent text-white">
-                        Get Started
-                    </button>
+                    <button className="btn btn-accent ">Get Started</button>
                 </div>
             </div>
         </div>

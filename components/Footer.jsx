@@ -85,15 +85,14 @@ export default function Footer({ user }) {
                 <div className="footer grid-rows-2 p-10 bg-secondary text-neutral-content">
                     <div>
                         <Link href="/">
-                            {/* <LongLogo className="w-48 h-12" /> */}
                             <SquareLogo className="w-48" color="#ffffff" />
                         </Link>
                     </div>
-                    <div>
-                        <p>123 Main St</p>
-                        <p>Los Angeles, CA 90123</p>
-                        <p>United States</p>
-                        <p className="mt-4">
+                    <div className="flex flex-col">
+                        <span>123 Main St</span>
+                        <span>Los Angeles, CA 90123</span>
+                        <span>United States</span>
+                        <span className="mt-4">
                             <Link
                                 prefetch={false}
                                 className="underline"
@@ -101,7 +100,7 @@ export default function Footer({ user }) {
                             >
                                 support@supacommerce.com
                             </Link>
-                        </p>
+                        </span>
                     </div>
                     <div>
                         <span className="footer-title">Services</span>
