@@ -52,7 +52,7 @@ Any additional information goes here
                     height={600}
                     className="h-96 object-cover"
                 />
-                <small></small>
+                <small>Published Date: </small>
                 <ReactMarkdown>{str}</ReactMarkdown>
             </div>
         </div>
