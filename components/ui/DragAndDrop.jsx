@@ -1,4 +1,5 @@
 "use client";
+import { supabaseCDN } from "@/lib/supabase-cdn";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 
@@ -30,12 +31,7 @@ export default function DragAndDrop({ path, array, arraySetter }) {
                     onDragOver={(e) => e.preventDefault()}
                 >
                     <Image
-                        src={
-                            "https://anyzlthrxmlnduuesdhk.supabase.co/storage/v1/object/public/products/" +
-                            path +
-                            "/" +
-                            item.name
-                        }
+                        src={supabaseCDN("products", path, item.name)}
                         width={50}
                         height={50}
                         alt={"prod " + i}
