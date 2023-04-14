@@ -8,7 +8,7 @@ export default function Welcome() {
         "https://images.unsplash.com/photo-1485083269755-a7b559a4fe5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2338&q=80",
     ];
     return (
-        <div className="hero min-h-screen bg-base-200">
+        <div className="hero min-h-screen bg-slate-100">
             <div className="hero-content flex-col lg:flex-row">
                 <div className="grid grid-cols-3 md:grid-cols-1 md:grid-row-3 gap-4 w-full md:w-56">
                     {arr.map((item, i) => (

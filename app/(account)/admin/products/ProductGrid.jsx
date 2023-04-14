@@ -33,7 +33,7 @@ export default function ProductGrid({ products }) {
         //     products.filter((items) => items.title.includes(e.target.value))
         // );
         // console.log(filteredProducts);
-
+        setPage(0);
         if (e.target.value.length > 0) {
             let wordList = products.filter((elem, index) =>
                 elem.title.toLowerCase().includes(e.target.value.toLowerCase())
@@ -47,7 +47,7 @@ export default function ProductGrid({ products }) {
     };
 
     return (
-        <div className="w-full mx-auto my-12">
+        <div className="w-11/12 mx-auto my-12">
             <div className="flex justify-between my-4">
                 <div className=" flex items-center">
                     <div className="btn-group flex justify-center">

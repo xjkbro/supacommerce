@@ -52,7 +52,7 @@ export default function FeaturePosts() {
             <div className="grid md:grid-cols-3 gap-2">
                 {testArr.map((item, i) => (
                     <div
-                        key={item.name}
+                        key={item.title}
                         className="card w-full h-64 bg-base-100 shadow-xl image-full"
                     >
                         {item.image == null ? (

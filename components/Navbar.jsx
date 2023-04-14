@@ -69,7 +69,6 @@ export default function NavBar({ user }) {
         <>
             <div className="hidden md:navbar  bg-[#ffffff45] backdrop-blur-lg backdrop-brightness-125 backdrop-contrast-51 backdrop-saturate-150 shadow-xl z-[29] sticky top-0">
                 <div className="flex-1">
-                    {/* <a className="btn btn-ghost normal-case text-xl">daisyUI</a> */}
                     <Link href="/">
                         <LongLogo className="w-48 h-12" />
                     </Link>
@@ -114,7 +113,7 @@ export default function NavBar({ user }) {
                                     <span>Videos</span>
                                 </li>
                                 <li>
-                                    <Link href="/article">Webinars</Link>
+                                    <Link href="/webinars">Webinars</Link>
                                 </li>
                                 <li>
                                     <Link href="/article">Training Videos</Link>
@@ -178,6 +177,12 @@ export default function NavBar({ user }) {
                                             >
                                                 Checkout
                                             </button>
+                                            <Link
+                                                href="/checkout"
+                                                className="btn btn-primary btn-block"
+                                            >
+                                                View Cart
+                                            </Link>
                                             <button
                                                 onClick={clearCart}
                                                 className="btn btn-primary btn-outline btn-block"
@@ -252,7 +257,7 @@ export default function NavBar({ user }) {
                 </div>
             </div>
 
-            <div className="md:hidden flex justify-between h-16 items-center w-11/12 mx-auto">
+            {/* <div className="md:hidden flex justify-between h-16 items-center w-11/12 mx-auto">
                 <Link href="/">
                     <LongLogo className="w-32 h-fit" />
                 </Link>
@@ -293,35 +298,7 @@ export default function NavBar({ user }) {
                 </div>
             ) : (
                 <></>
-            )}
-            {/* <div className="md:hidden drawer">
-                <input
-                    id="my-drawer"
-                    type="checkbox"
-                    className="drawer-toggle"
-                />
-                <div className="drawer-content">
-                    <label
-                        htmlFor="my-drawer"
-                        className="btn btn-primary drawer-button"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={1.5}
-                            stroke="currentColor"
-                            className="w-6 h-6"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                            />
-                        </svg>
-                    </label>
-                </div>
-            </div> */}
+            )} */}
         </>
     );
 }

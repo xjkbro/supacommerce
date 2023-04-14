@@ -42,7 +42,11 @@ export default async function SingleCategory({ params }) {
         <main>
             <CategoryHeader category={category} />
             <div className="w-11/12 md:w-3/4 my-12 mx-auto">
-                <CategoryTabs subcategories={children} products={products} />
+                <CategoryTabs
+                    category={category}
+                    subcategories={children}
+                    products={products}
+                />
                 {/* {children.length >= 0 && (
                     <>
                         <h2 className="text-3xl font-bold my-4">

@@ -3,6 +3,7 @@ import { headers, cookies } from "next/headers";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import Image from "next/image";
+import ProductCarousel from "./ProductCarousel";
 
 export default async function FeaturedSeries({ series }) {
     const supabase = createServerComponentSupabaseClient({
@@ -13,8 +14,7 @@ export default async function FeaturedSeries({ series }) {
     let { data: seriesQuery, error: currentError } = await supabase
         .from("products")
         .select("id, title, image, slug, short_description, price")
-        .textSearch("title", `${series}`)
-        .limit(6);
+        .textSearch("title", `${series}`);
 
     return (
         <div className="w-11/12 md:w-3/4 my-12 mx-auto relative">
@@ -89,45 +89,7 @@ export default async function FeaturedSeries({ series }) {
                     />
                 </div>
             </div> */}
-            <div className="carousel w-full gap-2">
-                {seriesQuery ? (
-                    seriesQuery.map((item) => (
-                        <div
-                            key={item.id}
-                            className="carousel-item relative h-fit w-64 border border-base-200 flex justify-center"
-                        >
-                            <div className=" flex flex-col mt-4 items-center">
-                                <Link href={"/products/" + item.slug}>
-                                    <Image
-                                        src={item.image}
-                                        width={300}
-                                        height={300}
-                                        alt="prod"
-                                        className="w-56 h-56 my-4 object-contain"
-                                    />
-                                </Link>
-                                <div className="w-56 my-4">
-                                    <Link
-                                        href={"/products/" + item.slug}
-                                        className="text-xl font-semibold"
-                                    >
-                                        {item.title}
-                                    </Link>
-                                    <p className="text-lg font-light text-error mb-4">
-                                        ${item.price.toFixed(2)}
-                                    </p>
-
-                                    <button className="btn btn-block btn-accent ">
-                                        Add To Cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <></>
-                )}
-            </div>
+            <ProductCarousel items={seriesQuery} />
             {/* <div className="absolute flex items-center justify-between transform left-5 right-5 top-1/2">
                 <button className="btn btn-circle">❮</button>
                 <button className="btn btn-circle">❯</button>

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import NavBar from "@/components/Navbar";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
+import MobileNav from "@/components/MobileNav";
 
 export const metadata = {
     title: "SupaCommerce",
@@ -29,9 +30,11 @@ export default async function RootLayout({ children }) {
             <body>
                 <SupabaseProvider>
                     <StripeProvider>
-                        <NavBar user={user} />
-                        {children}
-                        <Footer user={user} />
+                        <MobileNav user={user}>
+                            <NavBar user={user} />
+                            {children}
+                            <Footer user={user} />
+                        </MobileNav>
                     </StripeProvider>
                 </SupabaseProvider>
             </body>

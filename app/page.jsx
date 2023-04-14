@@ -31,9 +31,9 @@ export default async function Home() {
         <div>
             {/* <Navbar user={user} /> */}
             {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
-            {/* <VideoHero url="./pexels-harabe-6450803-1920x1080-25fps.mp4" /> */}
+            <VideoHero url="./pexels-harabe-6450803-1920x1080-25fps.mp4" />
 
-            <Hero />
+            {/* <Hero /> */}
             <ThreeBlockBadge />
             <Welcome />
             <FeaturedSeries series="tgw" />

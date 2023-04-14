@@ -63,7 +63,7 @@ export default function SearchBar() {
                     <ul className="menu fixed top-[4rem] bg-base-100 md:w-[30vw] p-2 shadow-sm rounded-box flex-nowrap h-fit max-h-[50vh] overflow-scroll">
                         {liveSearch.length > 0 ? (
                             <>
-                                {liveSearch.map((item, i) => (
+                                {liveSearch.slice(0, 10).map((item, i) => (
                                     <li key={i}>
                                         <Link
                                             href={"/products/" + item.slug}

@@ -6,6 +6,7 @@ export default function Hero() {
             <div
                 className="hero min-h-[80vh]"
                 style={{
+                    backgroundAttachment: "fixed",
                     backgroundImage: `url("https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80")`,
                 }}
             >

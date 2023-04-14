@@ -3,11 +3,11 @@ import { useShoppingCart } from "use-shopping-cart";
 import { filterCartItems } from "@/lib/stripe-helpers";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useSupabase } from "@/components/providers/supabase-provider";
 
 export default function Cart() {
     const {
-        redirectToCheckout,
-        cartCount,
         clearCart,
         totalPrice,
         incrementItem,
@@ -18,19 +18,33 @@ export default function Cart() {
     } = useShoppingCart();
     console.log(Object.values(cartDetails));
 
-    async function handleCartCheckout(event) {
-        event.preventDefault();
-        const response = await fetch("/api/checkout-session", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(filterCartItems(cartDetails)),
-        })
-            .then((res) => res.json())
-            .catch((error) => {
-                /* Error handling */
-            });
-        redirectToCheckout(response.id);
-    }
+    const [showResults, setShowResults] = useState(false);
+    const [liveSearch, setLiveSearch] = useState([]);
+    const { supabase } = useSupabase();
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        async function getProducts() {
+            const { data } = await supabase
+                .from("products")
+                .select("title,slug,short_description, image")
+                .order("title", { ascending: false });
+
+            if (data) setProducts(data);
+        }
+        getProducts();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    const filterSearch = (e) => {
+        if (e.target.value.length > 0) {
+            var wordList = products.filter((elem, index) =>
+                elem.title.toLowerCase().includes(e.target.value.toLowerCase())
+            );
+            setLiveSearch(wordList);
+        } else {
+            setLiveSearch([]);
+        }
+    };
 
     return (
         <main className="bg-base-100 shadow-lg md:border border-base-200 w-11/12 md:w-3/4 my-12 rounded-xl mx-auto md:y-12">
@@ -43,11 +57,12 @@ export default function Cart() {
                                 <Link href="/">Home</Link>
                             </li>
                             <li>
-                                <Link href="/checkout/">Checkout</Link>
+                                <Link href="/quotations/">Quotations</Link>
                             </li>
                         </ul>
                     </div>
                 </div>
+
                 <div className="pb-4">
                     {Object.values(cartDetails).length > 0 ? (
                         <>
@@ -240,17 +255,10 @@ export default function Cart() {
                                     onClick={(e) => {
                                         // console.log(e.target.innerHTML);
                                         e.target.innerHTML = "loading...";
-                                        handleCartCheckout(e);
                                     }}
                                     className="btn btn-primary  w-full md:w-fit"
                                 >
                                     Checkout
-                                </button>
-                                <button
-                                    onClick={handleCartCheckout}
-                                    className="btn btn-secondary btn-outline w-full md:w-fit"
-                                >
-                                    Request A Quote
                                 </button>
                             </div>
                         </>

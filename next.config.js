@@ -16,6 +16,15 @@ const nextConfig = {
             },
         ],
     },
+    // async redirects() {
+    //     return [
+    //         {
+    //             source: "/:slug",
+    //             destination: "/api/redirect?slug=:slug",
+    //             permanent: false,
+    //         },
+    //     ];
+    // },
 };
 
 module.exports = removeImports(nextConfig);

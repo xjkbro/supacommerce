@@ -6,7 +6,7 @@ import React, { useState } from "react";
 
 const tabs = ["Subcategories", "Products", "More Details"];
 
-export default function CategoryTabs({ subcategories, products }) {
+export default function CategoryTabs({ category, subcategories, products }) {
     // const tabs = ["Subcategories", "Products", "More Details"];
     const tabs = [];
     if (subcategories.length > 0) tabs.push("Subcategories");
@@ -149,7 +149,15 @@ export default function CategoryTabs({ subcategories, products }) {
                     )}
                 </>
             )}
-            {tabs[active] == "More Details" && <p>Some Details</p>}
+            {tabs[active] == "More Details" && (
+                <p>
+                    {category.description > 0 ? (
+                        category.description
+                    ) : (
+                        <>Some Details</>
+                    )}
+                </p>
+            )}
         </div>
     );
 }

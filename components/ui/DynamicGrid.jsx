@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 
 export default function DynamicGrid({ items }) {
-    const arr = [...items, ...arbritraryArray(20)];
+    const arr = [...items, ...arbritraryArray(3)];
 
     const grid = ["", "col-span-2", "row-span-2"];
     return (
