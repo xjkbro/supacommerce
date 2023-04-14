@@ -4,6 +4,8 @@ import Link from "next/link";
 import { notFound, useRouter, usePathname } from "next/navigation";
 import React from "react";
 import AdminMenu from "./AdminMenu";
+import { adminRoutes } from "@/lib/admin-constants";
+import RouteTitle from "./RouteTitle";
 
 export default async function AdminLayout({ children }) {
     // const path = usePathname();
@@ -33,14 +35,19 @@ export default async function AdminLayout({ children }) {
                     type="checkbox"
                     className="drawer-toggle"
                 />
-                <div className="drawer-content flex flex-col items-center py-8">
+                <div className="drawer-content w-11/12 mx-auto py-4">
                     <label
                         htmlFor="my-drawer-2"
-                        className="btn btn-primary drawer-button lg:hidden"
+                        className="w-full btn btn-accent btn-outline drawer-button lg:hidden"
                     >
-                        Open drawer
+                        Open Admin Drawer
                     </label>
-                    {children}
+                    <div className="w-full mx-auto my-4 border rounded-xl">
+                        <div className="m-4">
+                            <RouteTitle />
+                            {children}
+                        </div>
+                    </div>
                 </div>
                 <div className="drawer-side shadow-md">
                     <label
@@ -50,39 +57,6 @@ export default async function AdminLayout({ children }) {
                     <AdminMenu />
                 </div>
             </div>
-            {/* <ul className="menu bg-base-100 w-full m-auto p-2 rounded-box shadow-md ">
-                    <li>
-                        <Link href="/admin">User Dashboard</Link>
-                    </li>
-                    <li>
-                        <Link href="/admin/products">Products</Link>
-                    </li>
-                    <li>
-                        <Link href="/admin/categories">Categories</Link>
-                    </li>
-                    <li>
-                        <Link href="/admin/users">Users</Link>
-                    </li>
-                    <li>
-                        <Link href="/admin/orders">Orders</Link>
-                    </li>
-                    <li>
-                        <Link href="/admin/posts">Posts</Link>
-                    </li>
-                    <li>
-                        <Link href="/admin/videos">Videos</Link>
-                    </li>
-                    <li>
-                        <Link href="/admin/webinars">Webinars</Link>
-                    </li>
-                    <li>
-                        <Link href="/admin/downloads">Downloads</Link>
-                    </li>
-                </ul>
-            </div>
-            <div className="md:col-span-5 h-[90vh] w-full overflow-scroll">
-                {children}
-            </div> */}
         </div>
     );
 }

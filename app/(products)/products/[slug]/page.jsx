@@ -1,6 +1,6 @@
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
 // import { remark } from "remark";
@@ -8,9 +8,9 @@ import { Fragment } from "react";
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import AddToCart from "../AddToCart";
+// import AddToCart from "../AddToCart";
 import ImageLayout from "./ImageLayout";
-import BuyNow from "../BuyNow";
+// import BuyNow from "../BuyNow";
 import "./styles.css";
 import CartHandler from "./CartHandler";
 import JSONSpecificationTable from "@/components/ui/products/JSONSpecificationTable";

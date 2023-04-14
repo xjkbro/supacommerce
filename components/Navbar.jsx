@@ -11,6 +11,7 @@ import { useShoppingCart } from "use-shopping-cart";
 import { filterCartItems } from "@/lib/stripe-helpers";
 import SearchBar from "@/components/SearchBar";
 import CategoryMenu from "./menus/CategoryMenu";
+import SquareLogo from "./ui/SquareLogo";
 
 export default function NavBar({ user }) {
     const { supabase } = useSupabase();
@@ -71,6 +72,7 @@ export default function NavBar({ user }) {
                 <div className="flex-1">
                     <Link name="Logo" href="/">
                         <LongLogo className="w-48 h-12" />
+                        {/* <SquareLogo className="w-12 h-12" /> */}
                     </Link>
                     <ul className="menu menu-horizontal z-20">
                         <li>

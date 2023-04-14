@@ -7,7 +7,9 @@ import React from "react";
 export default async function Admin() {
     return (
         <>
-            <div className="w-11/12 grid grid-cols-1 md:grid-cols-3 gap-4 m-2">
+            {/* <h1 className="text-3xl font-bold ml-4">Admin Dashboard</h1>
+            <hr className="mb-4 mt-2" /> */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="stats shadow-md border border-base-200">
                     <div className="stat">
                         <div className="stat-title">Total Page Views</div>
@@ -36,7 +38,8 @@ export default async function Admin() {
                     </div>
                 </div>
             </div>
-            <div className="w-11/12 grid grid-cols-1 md:grid-cols-2 gap-4 m-2">
+            <br />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="card w-full h-96 bg-base-100 shadow-md border border-base-200">
                     <div className="card-body">
                         <h2 className="card-title">Card title!</h2>
