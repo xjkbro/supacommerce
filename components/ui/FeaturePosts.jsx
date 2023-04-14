@@ -52,7 +52,7 @@ export default function FeaturePosts() {
                     View All
                 </Link>
             </div>
-            <div className="grid md:grid-cols-3 gap-2">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
                 {testArr.map((item, i) => (
                     <div
                         key={item.title}

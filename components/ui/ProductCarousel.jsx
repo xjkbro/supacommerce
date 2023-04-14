@@ -6,7 +6,32 @@ import Carousel from "react-grid-carousel";
 
 export default function ProductCarousel({ items }) {
     return (
-        <Carousel cols={4} rows={1} gap={10} loop autoplay={3000} showDots>
+        <Carousel
+            cols={4}
+            rows={1}
+            gap={10}
+            loop
+            autoplay={3000}
+            responsiveLayout={[
+                {
+                    breakpoint: 1200,
+                    cols: 2,
+                    rows: 1,
+                    gap: 10,
+                    loop: true,
+                    autoplay: 1000,
+                },
+                {
+                    breakpoint: 560,
+                    cols: 1,
+                    rows: 1,
+                    gap: 10,
+                    loop: true,
+                    autoplay: 1000,
+                },
+            ]}
+            showDots
+        >
             {items.map((item) => (
                 <Carousel.Item key={item.id}>
                     <div className=" flex flex-col mt-4 items-center  border border-base-200 p-2">

@@ -6,7 +6,8 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "postinstall": "node ./tinymce-postinstall.js"
     },
     "dependencies": {
         "@ngneat/falso": "^6.4.0",
@@ -41,10 +42,13 @@
     },
     "devDependencies": {
         "@tailwindcss/typography": "^0.5.9",
+        "@tinymce/tinymce-react": "^4.3.0",
         "autoprefixer": "^10.4.14",
+        "fs-extra": "^11.1.1",
         "postcss": "^8.4.21",
         "react-grid-carousel": "^1.0.1",
         "react-json-editor-ajrm": "^2.5.14",
-        "tailwindcss": "^3.3.1"
+        "tailwindcss": "^3.3.1",
+        "tinymce": "^6.4.1"
     }
 }

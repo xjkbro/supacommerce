@@ -9,7 +9,7 @@ export default function Welcome() {
     ];
     return (
         <div className="hero min-h-screen bg-slate-100">
-            <div className="hero-content flex-col lg:flex-row">
+            <div className="hero-content flex-col md:flex-row">
                 <div className="grid grid-cols-3 md:grid-cols-1 md:grid-row-3 gap-4 w-full md:w-56">
                     {arr.map((item, i) => (
                         <Image
