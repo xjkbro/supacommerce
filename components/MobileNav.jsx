@@ -6,8 +6,12 @@ import Image from "next/image";
 
 export default function MobileNav({ children, user }) {
     return (
-        <div className="md:hidden drawer">
-            <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+        <div className="drawer">
+            <input
+                id="my-drawer"
+                type="checkbox"
+                className="md:hidden drawer-toggle"
+            />
             <div className="drawer-content">
                 <div className="md:hidden flex justify-between h-16 items-center shadow-md mx-auto">
                     <Link name="Logo" href="/">
