@@ -1,8 +1,6 @@
 import React from "react";
 import LongLogo from "./ui/LongLogo";
 import Link from "next/link";
-import Logo from "../public/supacommerce-long.svg";
-import Image from "next/image";
 
 export default function MobileNav({ children, user }) {
     return (
@@ -11,13 +9,7 @@ export default function MobileNav({ children, user }) {
             <div className="drawer-content">
                 <div className="md:hidden flex justify-between h-16 items-center shadow-md mx-auto">
                     <Link name="Logo" href="/">
-                        {/* <LongLogo className="w-48 h-12" /> */}
-                        <Image
-                            src={Logo}
-                            width={150}
-                            alt="logo"
-                            className="m-4"
-                        />
+                        <LongLogo className="w-48 h-12" />
                     </Link>
                     <label htmlFor="my-drawer" className="drawer-button m-4">
                         <svg

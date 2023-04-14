@@ -1,35 +1,26 @@
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import React from "react";
 import { headers, cookies } from "next/headers";
-import Link from "next/link";
+// import AddFile from "./addFile";
 export default async function Downloads() {
     const supabase = createServerComponentSupabaseClient({
         headers,
         cookies,
     });
 
-    // const { data: bucket } = await supabase.storage
-    //     .from("downloads")
-    //     .list("/", {
-    //         limit: 100,
-    //         offset: 0,
-    //         sortBy: { column: "name", order: "asc" },
-    //     });
-    const { data: downloads } = await supabase.from("downloads").select("*");
+    const { data: items, error } = await supabase.storage
+        .from("avatars")
+        .list("a1a331c7-4c5f-4d81-b93b-d183ccc42f06", {
+            limit: 100,
+            offset: 0,
+            sortBy: { column: "name", order: "asc" },
+        });
 
     return (
         <div>
+            {/* <AddFile /> */}
             <br />
-            {/* <pre>{JSON.stringify(downloads, null, 2)}</pre> */}
-            <ul>
-                {downloads.map((item) => (
-                    <li key={item.id}>
-                        <Link href={"/admin/downloads/" + item.id}>
-                            {item.name}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            <pre>{JSON.stringify(items, null, 2)}</pre>
         </div>
     );
 }

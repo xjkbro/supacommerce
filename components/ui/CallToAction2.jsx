@@ -12,21 +12,16 @@ export default function CallToAction2() {
                     alt="asd"
                     width={500}
                     height={500}
-                    className="w-full group-hover:-translate-x-10 transition-all group-hover:scale-105"
+                    className="max-w-sm group-hover:-translate-x-10 transition-all group-hover:scale-105"
                 />
                 <div className="w-full md:w-3/4">
                     <h1 className="text-3xl md:text-5xl font-bold">
                         Box Office News!
                     </h1>
-                    <p className="py-6 w-full">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Rem expedita reprehenderit hic accusamus
-                        voluptates nobis ab facilis facere, quod aut cum animi
-                        sapiente dolor impedit distinctio perspiciatis
-                        consequatur ex optio non aspernatur laudantium sequi
-                        similique enim numquam. Ad ratione eum sequi, culpa
-                        incidunt, delectus voluptate laudantium nihil doloremque
-                        voluptas aperiam!
+                    <p className="py-6 w-full whitespace-break-spaces">
+                        Provident cupiditate voluptatem et in. Quaerat fugiat ut
+                        assumenda excepturi exercitationem quasi. In deleniti
+                        eaque aut repudiandae et a id nisi.
                     </p>
                     <button className="btn btn-accent">Get Started</button>
                 </div>

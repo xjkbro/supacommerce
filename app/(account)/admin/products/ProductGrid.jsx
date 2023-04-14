@@ -47,7 +47,7 @@ export default function ProductGrid({ products }) {
     };
 
     return (
-        <div className="mx-auto my-12">
+        <div className="w-11/12 mx-auto my-12">
             <div className="flex justify-between my-4">
                 <div className=" flex items-center">
                     <div className="btn-group flex justify-center">

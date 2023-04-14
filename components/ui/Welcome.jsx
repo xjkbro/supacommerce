@@ -18,7 +18,7 @@ export default function Welcome() {
                             alt={i}
                             width={300}
                             height={300}
-                            className="h-56 w-56 object-cover"
+                            className="h-56 w-56"
                         />
                     ))}
                 </div>

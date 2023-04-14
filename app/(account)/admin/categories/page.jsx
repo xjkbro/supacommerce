@@ -57,7 +57,7 @@ export default async function Categories() {
     };
 
     return (
-        <div className="mx-auto my-12">
+        <div className="w-11/12 mx-auto my-12">
             {topLevel.map((topCat) => (
                 <ul key={topCat.name}>
                     <li>
