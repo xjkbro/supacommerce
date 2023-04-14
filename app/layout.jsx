@@ -1,13 +1,25 @@
 import "./globals.css";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
-import StripeProvider from "@/components/providers/stripe-provider";
-import SupabaseProvider from "@/components/providers/supabase-provider";
+// import StripeProvider from "@/components/providers/stripe-provider";
+// import SupabaseProvider from "@/components/providers/supabase-provider";
 // import Footer from "@/components/Footer";
 // import NavBar from "@/components/Navbar";
 // import MobileNav from "@/components/MobileNav";
 import dynamic from "next/dynamic";
 
+const StripeProvider = dynamic(
+    () => import("@/components/providers/stripe-provider"),
+    {
+        loading: () => <p>Loading...</p>,
+    }
+);
+const SupabaseProvider = dynamic(
+    () => import("@/components/providers/supabase-provider"),
+    {
+        loading: () => <p>Loading...</p>,
+    }
+);
 const MobileNav = dynamic(() => import("@/components/MobileNav"), {
     loading: () => <p>Loading...</p>,
 });
