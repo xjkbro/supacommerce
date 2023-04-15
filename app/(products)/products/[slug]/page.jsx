@@ -52,7 +52,7 @@ export default async function SingleProduct({ params }) {
 
     return (
         <main className="bg-base-100 shadow-lg md:border border-base-200 w-11/12 md:w-3/4 my-12 rounded-xl mx-auto md:y-12">
-            <div className="max-h-1/2 h-1/2 w-11/12 mx-auto">
+            <div className="max-h-1/2 h-1/2 w-11/12 mx-auto mb-12">
                 {/* Breadcrumb */}
                 <div className="m-2">
                     <div className="text-sm breadcrumbs p-2">
@@ -178,27 +178,26 @@ export default async function SingleProduct({ params }) {
                     </div>
                 </div>
             </div>
-
+            <hr />
+            <h2 className="text-2xl font-bold m-4 text-center ">
+                Introduction
+            </h2>
             <div className="prose max-w-full m-8 ">
-                <h2>Introduction</h2>
-                <ReactMarkdown
+                {/* <ReactMarkdown
                     className="overflow-scroll"
                     remarkPlugins={[remarkGfm]}
                 >
                     {product.description}
-                </ReactMarkdown>
-                <hr />
-                <h2>Specifications</h2>
-                <ReactMarkdown
-                    className="overflow-scroll"
-                    remarkPlugins={[remarkGfm]}
-                >
-                    {product.specifications}
-                </ReactMarkdown>
-                <h2>JSON Specifications</h2>
-                <pre>
-                    {JSON.stringify(product.json_specifications, null, 2)}
-                </pre>
+                </ReactMarkdown> */}
+                <div
+                    dangerouslySetInnerHTML={{ __html: product.description }}
+                />
+            </div>
+            <hr />
+            <h2 className="text-2xl font-bold m-4 text-center ">
+                Specifications
+            </h2>
+            <div className="max-w-full md:m-8">
                 <JSONSpecificationTable data={product.json_specifications} />
             </div>
         </main>

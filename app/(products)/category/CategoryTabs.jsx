@@ -7,7 +7,6 @@ import React, { useState } from "react";
 const tabs = ["Subcategories", "Products", "More Details"];
 
 export default function CategoryTabs({ category, subcategories, products }) {
-    // const tabs = ["Subcategories", "Products", "More Details"];
     const tabs = [];
     if (subcategories.length > 0) tabs.push("Subcategories");
     if (products.length > 0) tabs.push("Products");
@@ -22,7 +21,6 @@ export default function CategoryTabs({ category, subcategories, products }) {
                     <a
                         key={i}
                         className={
-                            // "tab tab-lg tab-lifted " +
                             "tab tab-bordered text-3xl h-12 font-bold  " +
                             (i == active && "tab-active")
                         }
@@ -60,75 +58,69 @@ export default function CategoryTabs({ category, subcategories, products }) {
                                     <tbody>
                                         {products.map(
                                             ({ product_id: prod }) => (
-                                                <>
-                                                    <tr key={prod.id}>
-                                                        <th>
-                                                            <label>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    className="checkbox"
-                                                                />
-                                                            </label>
-                                                        </th>
-                                                        <td>
-                                                            <Link
-                                                                className=" flex gap-2"
-                                                                href={
-                                                                    "/products/" +
-                                                                    prod.slug
-                                                                }
-                                                            >
-                                                                <div className="flex items-center space-x-3">
-                                                                    <span className="avatar">
-                                                                        <div className="mask mask-squircle w-12 h-12">
-                                                                            <Image
-                                                                                width={
-                                                                                    500
-                                                                                }
-                                                                                height={
-                                                                                    500
-                                                                                }
-                                                                                alt="cat"
-                                                                                priority
-                                                                                src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
-                                                                            />
-                                                                        </div>
-                                                                    </span>
-                                                                </div>
-                                                                <div>
-                                                                    <div className="font-bold">
-                                                                        {
-                                                                            prod.title
-                                                                        }
+                                                <tr key={prod.id}>
+                                                    <th>
+                                                        <label>
+                                                            <input
+                                                                type="checkbox"
+                                                                className="checkbox"
+                                                            />
+                                                        </label>
+                                                    </th>
+                                                    <td>
+                                                        <Link
+                                                            className=" flex gap-2"
+                                                            href={
+                                                                "/products/" +
+                                                                prod.slug
+                                                            }
+                                                        >
+                                                            <div className="flex items-center space-x-3">
+                                                                <span className="avatar">
+                                                                    <div className="mask mask-squircle w-12 h-12">
+                                                                        <Image
+                                                                            width={
+                                                                                500
+                                                                            }
+                                                                            height={
+                                                                                500
+                                                                            }
+                                                                            alt="cat"
+                                                                            priority
+                                                                            src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
+                                                                        />
                                                                     </div>
-                                                                    <div className="text-sm opacity-50">
-                                                                        {
-                                                                            prod.slug
-                                                                        }
-                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <div className="font-bold">
+                                                                    {prod.title}
                                                                 </div>
-                                                            </Link>
-                                                        </td>
-                                                        <td className="!w-96 whitespace-normal">
-                                                            {prod.short_description.substr(
-                                                                0,
-                                                                100
-                                                            )}
-                                                        </td>
-                                                        <td>{prod.price}</td>
-                                                        <th>
-                                                            <Link
-                                                                href={
-                                                                    "/products/" +
-                                                                    prod.slug
-                                                                }
-                                                                className="btn btn-ghost btn-xs"
-                                                            >
-                                                                Details
-                                                            </Link>
-                                                        </th>
-                                                    </tr>
-                                                </>
+                                                                <div className="text-sm opacity-50">
+                                                                    {prod.slug}
+                                                                </div>
+                                                            </div>
+                                                        </Link>
+                                                    </td>
+                                                    <td className="!w-96 whitespace-normal">
+                                                        {prod.short_description.substr(
+                                                            0,
+                                                            100
+                                                        )}
+                                                    </td>
+                                                    <td>{prod.price}</td>
+                                                    <th>
+                                                        <Link
+                                                            href={
+                                                                "/products/" +
+                                                                prod.slug
+                                                            }
+                                                            className="btn btn-ghost btn-xs"
+                                                        >
+                                                            Details
+                                                        </Link>
+                                                    </th>
+                                                </tr>
                                             )
                                         )}
                                     </tbody>

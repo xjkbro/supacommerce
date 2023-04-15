@@ -13,8 +13,8 @@ export default function ProductGrid({ products }) {
     const [perPage, setPerPage] = useState(25);
     const [pagedProducts, setPageProducts] = useState([]);
     useEffect(() => {
-        console.log(products.slice(perPage * page, perPage * (page + 1)));
-        console.log(page);
+        // console.log(products.slice(perPage * page, perPage * (page + 1)));
+        // console.log(page);
         setPageProducts(products.slice(perPage * page, perPage * (page + 1)));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, perPage]);
@@ -66,10 +66,9 @@ export default function ProductGrid({ products }) {
                         setPage(0);
                         setPerPage(parseInt(e.target.value));
                     }}
+                    defaultValue="25"
                 >
-                    <option disabled selected>
-                        Products Per Page ({perPage})
-                    </option>
+                    <option disabled>Products Per Page ({perPage})</option>
                     <option value="10">10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>

@@ -1,9 +1,6 @@
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
-import Image from "next/image";
-import Link from "next/link";
 import CategoryHeader from "../CategoryHeader";
-import DynamicGrid from "@/components/ui/DynamicGrid";
 import CategoryTabs from "../CategoryTabs";
 
 export default async function SingleCategory({ params }) {
@@ -11,8 +8,6 @@ export default async function SingleCategory({ params }) {
         headers,
         cookies,
     });
-
-    // const { data } = await supabase.from("categories").select("*");
 
     let { data: category, error: currentError } = await supabase
         .from("categories")
@@ -36,8 +31,6 @@ export default async function SingleCategory({ params }) {
         )
         .eq("category_id", params.id);
 
-    // console.log(category);
-    console.log(products);
     return (
         <main>
             <CategoryHeader category={category} />
@@ -47,119 +40,6 @@ export default async function SingleCategory({ params }) {
                     subcategories={children}
                     products={products}
                 />
-                {/* {children.length >= 0 && (
-                    <>
-                        <h2 className="text-3xl font-bold my-4">
-                            Subcategories
-                        </h2>
-                        <DynamicGrid items={children} />
-                    </>
-                )}
-                {products.length > 0 && (
-                    <>
-                        <h2 className="text-3xl font-bold my-4">
-                            Product Table
-                        </h2>
-                        <div className="overflow-x-auto my-2">
-                            <table className="table w-full">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <label>
-                                                <input
-                                                    type="checkbox"
-                                                    className="checkbox"
-                                                />
-                                            </label>
-                                        </th>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Price</th>
-                                        <th>View</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {products.map(({ product_id: prod }) => (
-                                        <>
-                                            <tr key={prod.id}>
-                                                <th>
-                                                    <label>
-                                                        <input
-                                                            type="checkbox"
-                                                            className="checkbox"
-                                                        />
-                                                    </label>
-                                                </th>
-                                                <td>
-                                                    <Link
-                                                        className=" flex gap-2"
-                                                        href={
-                                                            "/products/" +
-                                                            prod.slug
-                                                        }
-                                                    >
-                                                        <div className="flex items-center space-x-3">
-                                                            <span className="avatar">
-                                                                <div className="mask mask-squircle w-12 h-12">
-                                                                    <Image
-                                                                        width={
-                                                                            500
-                                                                        }
-                                                                        height={
-                                                                            500
-                                                                        }
-                                                                        alt="cat"
-                                                                        priority
-                                                                        src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
-                                                                    />
-                                                                </div>
-                                                            </span>
-                                                        </div>
-                                                        <div>
-                                                            <div className="font-bold">
-                                                                {prod.title}
-                                                            </div>
-                                                            <div className="text-sm opacity-50">
-                                                                {prod.slug}
-                                                            </div>
-                                                        </div>
-                                                    </Link>
-                                                </td>
-                                                <td className="!w-96 whitespace-normal">
-                                                    {prod.short_description.substr(
-                                                        0,
-                                                        100
-                                                    )}
-                                                </td>
-                                                <td>{prod.price}</td>
-                                                <th>
-                                                    <Link
-                                                        href={
-                                                            "/products/" +
-                                                            prod.slug
-                                                        }
-                                                        className="btn btn-ghost btn-xs"
-                                                    >
-                                                        Details
-                                                    </Link>
-                                                </th>
-                                            </tr>
-                                        </>
-                                    ))}
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th>Name</th>
-                                        <th>Job</th>
-                                        <th>Favorite Color</th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    </>
-                )} */}
             </div>
         </main>
     );

@@ -3,25 +3,28 @@ import { useSupabase } from "@/components/providers/supabase-provider";
 import DragAndDrop from "@/components/ui/DragAndDrop";
 import { useFormik } from "formik";
 import Link from "next/link";
-import { useRef, useState } from "react";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import remarkGfm from "remark-gfm";
-import { v4 as uuidv4 } from "uuid";
+import { useEffect, useRef, useState } from "react";
+// import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+// import remarkGfm from "remark-gfm";
+// import { v4 as uuidv4 } from "uuid";
 
-import "@uiw/react-md-editor/markdown-editor.css";
-import "@uiw/react-markdown-preview/markdown.css";
-import dynamic from "next/dynamic";
+// import "@uiw/react-md-editor/markdown-editor.css";
+// import "@uiw/react-markdown-preview/markdown.css";
+// import dynamic from "next/dynamic";
 
-const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
-import JSONInput from "react-json-editor-ajrm";
-import locale from "react-json-editor-ajrm/locale/en";
+// const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
+// import JSONInput from "react-json-editor-ajrm";
+// import locale from "react-json-editor-ajrm/locale/en";
+// import { Fragment } from "react";
+import { Editor } from "@tinymce/tinymce-react";
 
-const specificationPlaceholder = {
-    data: [{ header: "Title", rows: [{ key: "key", val: "value" }] }],
-};
+const specificationPlaceholder = [
+    { heading: "", rows: [{ key: "", value: "" }] },
+];
 
 export default function ProductForm({ product, bucket }) {
     const { supabase } = useSupabase();
+    const editorRef = useRef(null);
     const [description, setDescription] = useState(
         product?.description ? product.description : ""
     );
@@ -201,12 +204,56 @@ export default function ProductForm({ product, bucket }) {
                             // {...formik.getFieldProps("description")}
                         ></textarea>
                     </div> */}
-                    <MDEditor
+                    <Editor
+                        tinymceScriptSrc={
+                            process.env.NEXT_PUBLIC_URL +
+                            "/tinymce/tinymce.min.js"
+                        }
+                        onInit={(evt, editor) => (editorRef.current = editor)}
+                        // initialValue={description}
                         value={description}
+                        onEditorChange={(value) => {
+                            console.log(value);
+                            setDescription(value);
+                        }}
+                        init={{
+                            height: 500,
+                            menubar: false,
+                            plugins: [
+                                "advlist",
+                                "autolink",
+                                "lists",
+                                "link",
+                                "image",
+                                "charmap",
+                                "anchor",
+                                "searchreplace",
+                                "visualblocks",
+                                "code",
+                                "fullscreen",
+                                "insertdatetime",
+                                "media",
+                                "table",
+                                "preview",
+                                "help",
+                                "wordcount",
+                            ],
+                            toolbar:
+                                "undo redo | blocks | " +
+                                "bold italic forecolor | alignleft aligncenter " +
+                                "alignright alignjustify | bullist numlist outdent indent | " +
+                                "image | code | removeformat | help",
+                            content_style:
+                                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                        }}
+                    />
+                    {/* <MDEditor
+                        value={description}
+                        height={"500px"}
                         onChange={(val) => setDescription(val)}
                         preview="edit"
                         // extraCommands={[]}
-                    />
+                    /> */}
 
                     {/* <div name="specification" className="form-control w-full">
                         <label className="label" htmlFor="specification">
@@ -227,7 +274,7 @@ export default function ProductForm({ product, bucket }) {
                             // {...formik.getFieldProps("specification")}
                         ></textarea>
                     </div> */}
-                    <div
+                    {/* <div
                         name="jsonSpecification"
                         className="form-control w-full"
                     >
@@ -247,7 +294,11 @@ export default function ProductForm({ product, bucket }) {
                                 setJsonSpecifications(e.jsObject);
                             }}
                         />
-                    </div>
+                    </div> */}
+
+                    <SpecificationInput
+                        input={{ jsonSpecifications, setJsonSpecifications }}
+                    />
                     <div className="flex justify-between">
                         <button type="submit" className="btn btn-primary">
                             Save
@@ -274,3 +325,159 @@ export default function ProductForm({ product, bucket }) {
         </div>
     );
 }
+
+const SpecificationInput = ({
+    input: { jsonSpecifications: data, setJsonSpecifications: setData },
+}) => {
+    // console.log(specifications);
+
+    const baseTable = { heading: "", rows: [{ key: "", value: "" }] };
+    const baseRow = { key: "", value: "" };
+    // const [data, setData] = useState([
+    //     {
+    //         heading: "test header",
+    //         rows: [
+    //             { key: "test row1 key", value: "test row1 value" },
+    //             { key: "test row2 key", value: "test row2 value" },
+    //             { key: "test row3 key", value: "test row3 value" },
+    //         ],
+    //     },
+    //     {
+    //         heading: "test header2",
+    //         rows: [
+    //             { key: "test row1 key", value: "test row1 value" },
+    //             { key: "test row2 key", value: "test row2 value" },
+    //             { key: "test row3 key", value: "test row3 value" },
+    //         ],
+    //     },
+    // ]);
+    useEffect(() => {
+        console.log(data);
+    }, [data]);
+    const handleInput = (event, tableIndex, rowIndex, type) => {
+        const temp = [...data];
+        switch (type) {
+            case "heading":
+                temp[tableIndex].heading = event.target.value;
+                break;
+            case "key":
+                temp[tableIndex].rows[rowIndex].key = event.target.value;
+                break;
+            case "value":
+                temp[tableIndex].rows[rowIndex].value = event.target.value;
+                break;
+        }
+        setData(temp);
+    };
+    const handleNewTable = () => {
+        const temp = [...data, baseTable];
+        setData(temp);
+    };
+    const handleRemoveTable = (tableIndex) => {
+        const temp = [...data];
+        // delete temp[tableIndex];
+        temp.splice(tableIndex, 1);
+        setData(temp);
+    };
+    const handleNewRow = (tableIndex, rowIndex) => {
+        const temp = [...data];
+        temp[tableIndex].rows.push(baseRow);
+        setData(temp);
+    };
+    const handleRemoveRow = (tableIndex, rowIndex) => {
+        const temp = [...data];
+        temp[tableIndex].rows.splice(rowIndex, 1);
+        setData(temp);
+    };
+
+    return (
+        <div name="specifications" className="form-control w-full">
+            <label className="label" htmlFor="specification">
+                <span className="label-text">Specifications</span>{" "}
+                <button
+                    className="btn btn-ghost text-sm"
+                    onClick={() => setData([baseTable])}
+                >
+                    Restart Table
+                </button>
+            </label>
+            {data.map((item, i) => (
+                <div
+                    key={i}
+                    className=" flex flex-col gap-2 p-2 bg-slate-100 mb-2"
+                >
+                    <div className="flex gap-1">
+                        <input
+                            type="text"
+                            placeholder="Table Heading"
+                            className="input input-bordered w-full"
+                            value={item.heading}
+                            onChange={(e) => handleInput(e, i, null, "heading")}
+                        />
+
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleRemoveTable(i);
+                            }}
+                            className="btn btn-square btn-outline btn-accent"
+                        >
+                            -
+                        </button>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                handleNewTable(i);
+                            }}
+                            className="btn btn-square btn-outline btn-accent"
+                        >
+                            +
+                        </button>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        {item.rows.map((row, j) => (
+                            <div key={j} className="flex gap-1">
+                                <input
+                                    type="text"
+                                    placeholder="Type here"
+                                    className="input input-bordered w-full max-w-xs"
+                                    value={row.key}
+                                    onChange={(e) =>
+                                        handleInput(e, i, j, "key")
+                                    }
+                                />
+                                <textarea
+                                    // type="text"
+                                    placeholder="Type here"
+                                    className="input input-bordered w-full"
+                                    value={row.value}
+                                    onChange={(e) =>
+                                        handleInput(e, i, j, "value")
+                                    }
+                                />
+                                <button
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleRemoveRow(i, j);
+                                    }}
+                                    className="btn btn-square btn-outline btn-accent"
+                                >
+                                    -
+                                </button>
+                                <button
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleNewRow(i);
+                                    }}
+                                    className="btn btn-square btn-outline btn-accent"
+                                >
+                                    +
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};

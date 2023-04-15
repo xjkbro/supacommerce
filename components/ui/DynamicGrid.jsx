@@ -4,12 +4,12 @@ import Link from "next/link";
 import React from "react";
 
 export default function DynamicGrid({ items }) {
-    const arr = [...items, ...arbritraryArray(3)];
+    // const arr = [...items, ...arbritraryArray(3)];
 
     const grid = ["", "col-span-2", "row-span-2"];
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 grid-flow-row-dense">
-            {arr.map((item) => {
+            {items.map((item) => {
                 const rand = Math.floor(Math.random() * 3);
                 return (
                     <Link
@@ -27,7 +27,6 @@ export default function DynamicGrid({ items }) {
                                 height={200}
                                 alt="item"
                                 src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
-                                // src="https://images.unsplash.com/photo-1659460542526-35b3257e1152?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2200&q=80"
                             />
                         </figure>
                         <div className="card-body">

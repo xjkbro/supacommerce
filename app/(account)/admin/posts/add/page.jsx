@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+// import Lexical from "./Lexical";
 
 export default function AddPost() {
     const editorRef = useRef(null);
@@ -52,6 +53,10 @@ export default function AddPost() {
                 }}
             />
             <button onClick={log}>Log editor content</button>
+
+            <hr />
+            <hr />
+            {/* <Lexical /> */}
         </>
     );
 }

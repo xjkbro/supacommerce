@@ -19,7 +19,7 @@ export default async function Webinars() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                 {[...webinars, ...arr].map((item) => (
                     <div
-                        key={item}
+                        key={item?.id ? item.id : item}
                         className="card w-full bg-base-100 shadow-xl"
                     >
                         <div className="card-body">
@@ -30,7 +30,7 @@ export default async function Webinars() {
                                 Date: {new Date(item.date).toDateString()} at
                                 10:00AM
                             </small>
-                            <p className="prose">
+                            <div className="prose">
                                 If a dog chews shoes whose shoes does he choose?
                                 <ul>
                                     <li>list1</li>
@@ -38,7 +38,7 @@ export default async function Webinars() {
                                     <li>list3</li>
                                     <li>list4</li>
                                 </ul>
-                            </p>
+                            </div>
                             <div className="card-actions justify-end">
                                 <Link
                                     href={

@@ -2,32 +2,39 @@ import React, { Fragment } from "react";
 
 export default function JSONSpecificationTable({ data }) {
     return (
-        <>
-            {data?.data?.map((table, i) => (
-                <table key={i}>
+        <div className="overflow-x-auto">
+            {data?.map((table, i) => (
+                <table key={i} className="table w-full">
                     <thead>
                         <tr>
-                            <th colspan="2">{table.header}</th>
+                            <th
+                                className="rounded-none bg-primary text-base-100"
+                                colspan="2"
+                            >
+                                {table.heading}
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {table.rows.map((row, j) => (
                             <tr key={j}>
                                 <td>{row.key}</td>
-                                {typeof row.val == "object" ? (
+                                {typeof row.value == "object" ? (
                                     <td>
-                                        {row.val.map((r, k) => (
+                                        {row.value.map((r, k) => (
                                             <div key={k}>{r}</div>
                                         ))}
                                     </td>
                                 ) : (
-                                    <td>{row.val}</td>
+                                    <td className="whitespace-pre-line">
+                                        {row.value}
+                                    </td>
                                 )}
                             </tr>
                         ))}
                     </tbody>
                 </table>
             ))}
-        </>
+        </div>
     );
 }
