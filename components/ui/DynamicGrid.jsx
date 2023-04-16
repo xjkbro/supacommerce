@@ -13,7 +13,7 @@ export default function DynamicGrid({ items }) {
                 const rand = Math.floor(Math.random() * 3);
                 return (
                     <Link
-                        href={"/category/" + (item.id ?? "")}
+                        href={"/categories/" + (item.id ?? "")}
                         key={item.id}
                         className={
                             "card w-full bg-base-100 shadow-xl image-full " +

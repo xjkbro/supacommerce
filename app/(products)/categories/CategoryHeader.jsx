@@ -34,7 +34,7 @@ export default function CategoryHeader({ category = null }) {
                     {category != null && (
                         <Link
                             className="btn btn-accent text-white"
-                            href={`/category/${category?.parent ?? ""}`}
+                            href={`/categories/${category?.parent ?? ""}`}
                         >
                             Go back
                         </Link>

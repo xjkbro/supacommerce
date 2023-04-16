@@ -6,6 +6,7 @@ import Image from "next/image";
 
 export default function MobileNav({ children, user }) {
     return (
+        // <>{children}</>
         <div className="drawer">
             <input
                 id="my-drawer"

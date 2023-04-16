@@ -12,6 +12,9 @@ import { filterCartItems } from "@/lib/stripe-helpers";
 import SearchBar from "@/components/SearchBar";
 import CategoryMenu from "./menus/CategoryMenu";
 import SquareLogo from "./ui/SquareLogo";
+import SoftwareMenu from "./menus/SoftwareMenu";
+import SolutionsMenu from "./menus/SolutionsMenu";
+import ResourcesMenu from "./menus/ResourcesMenu";
 
 export default function NavBar({ user }) {
     const { supabase } = useSupabase();
@@ -76,59 +79,36 @@ export default function NavBar({ user }) {
                     </Link>
                     <ul className="menu menu-horizontal z-20">
                         <li>
-                            <Link href="/products">Products</Link>
-                            <ul className="menu bg-base-100 w-56 p-2 z-10">
+                            <Link href="/category">Products</Link>
+                            <ul
+                                id="category-menu"
+                                className="menu bg-base-100 w-fit z-10"
+                            >
+                                <CategoryMenu />
                                 <li>
-                                    <a>All Products</a>
+                                    <Link href="/products">New Products</Link>
                                 </li>
                                 <li>
-                                    <a>New Products</a>
+                                    <Link href="/products/sale">On Sale</Link>
                                 </li>
                                 <li>
-                                    <a>On Sale</a>
-                                </li>
-                                <li>
-                                    <a>Phased Out Items</a>
+                                    <Link href="/products/phased-out">
+                                        Phased Out Items
+                                    </Link>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <Link href="/category">Categories</Link>
-                            <CategoryMenu />
+                            <Link href="/category">Software</Link>
+                            <SoftwareMenu />
                         </li>
-
+                        <li>
+                            <Link href="/category">Solutions</Link>
+                            <SolutionsMenu />
+                        </li>
                         <li>
                             <Link href="/">Resources</Link>
-                            <ul className="menu bg-base-100 w-56 p-2 z-10">
-                                <li className="menu-title">
-                                    <span>Written</span>
-                                </li>
-                                <li>
-                                    <Link href="/article">Articles</Link>
-                                </li>
-                                <li>
-                                    <Link href="/article">
-                                        Application Stories
-                                    </Link>
-                                </li>
-                                <li className="menu-title">
-                                    <span>Videos</span>
-                                </li>
-                                <li>
-                                    <Link href="/webinars">Webinars</Link>
-                                </li>
-                                <li>
-                                    <Link href="/article">Training Videos</Link>
-                                </li>
-                                <li className="menu-title">
-                                    <span>Other</span>
-                                </li>
-                                <li>
-                                    <Link href="/article">
-                                        Product Downloads
-                                    </Link>
-                                </li>
-                            </ul>
+                            <ResourcesMenu />
                         </li>
                     </ul>
                 </div>

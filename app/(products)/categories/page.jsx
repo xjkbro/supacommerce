@@ -24,7 +24,7 @@ export default async function Category() {
             <div className="p-2 md:p-0 grid grid-cols-1 md:grid-cols-3 w-11/12 md:w-3/4 my-12 mx-auto gap-2">
                 {categories.map((cat) => (
                     <Link
-                        href={"/category/" + cat.id}
+                        href={"/categories/" + cat.id}
                         key={cat.id}
                         className="card w-full bg-base-100 shadow-xl image-full"
                     >

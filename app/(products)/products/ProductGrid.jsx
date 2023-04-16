@@ -82,11 +82,13 @@ export default function ProductGrid({ products }) {
                 <table className="table table-zebra w-full">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th></th>
+                            <th className="bg-primary text-white"></th>
+                            <th className="bg-primary text-white">Name</th>
+                            <th className="bg-primary text-white">
+                                Description
+                            </th>
+                            <th className="bg-primary text-white">Price</th>
+                            <th className="bg-primary text-white"></th>
                         </tr>
                     </thead>
                     <tbody>

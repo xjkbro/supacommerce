@@ -2,10 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+/* Scroll bar */
+
+/* ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
 }
+@media screen and (min-width: 600px) {
+    ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+    }
+} */
 
 /* Remove Controls for Number Inputs */
 /* Chrome, Safari, Edge, Opera */
@@ -19,3 +27,7 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+/* 
+#category-menu.menu > :where(li) > :where(ul) :where(li) :where(ul) {
+    padding-left: 0rem;
+} */

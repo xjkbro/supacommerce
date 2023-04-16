@@ -49,18 +49,36 @@ export default function SearchBar() {
                 }}
                 className="form-control menu relative md:w-[30vw]"
             >
-                <input
-                    type="text"
-                    placeholder="Search"
-                    className="input input-bordered"
-                    onChange={filterSearch}
-                    onFocus={() => setShowResults(true)}
-                    onBlur={() => {
-                        setTimeout(() => setShowResults(false), 300);
-                    }}
-                />
+                <div className="flex items-center">
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        className="input input-bordered w-full focus:outline-none"
+                        onChange={filterSearch}
+                        onFocus={() => setShowResults(true)}
+                        onBlur={() => {
+                            setTimeout(() => setShowResults(false), 300);
+                        }}
+                    />
+                    <button className="btn btn-square btn-accent text-white">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                            />
+                        </svg>
+                    </button>
+                </div>
                 {showResults ? (
-                    <ul className="menu fixed top-[4rem] bg-base-100 md:w-[30vw] p-2 shadow-sm rounded-box flex-nowrap h-fit max-h-[50vh] overflow-scroll">
+                    <ul className="menu fixed top-[4rem] bg-base-100 md:w-[30vw] p-2 shadow-sm rounded-box flex-nowrap h-fit max-h-[50vh] overflow-y-scroll">
                         {liveSearch.length > 0 ? (
                             <>
                                 {liveSearch.slice(0, 10).map((item, i) => (

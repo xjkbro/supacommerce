@@ -11,6 +11,7 @@ import CallToAction2 from "@/components/ui/CallToAction2";
 // import Webinars from "@/components/ui/Webinars";
 
 import dynamic from "next/dynamic";
+import Top3Products from "@/components/ui/Top3Products";
 
 const DynamicFeatureSeries = dynamic(
     () => import("@/components/ui/FeaturedSeries"),
@@ -44,9 +45,10 @@ export default async function Home() {
         <div>
             {/* <VideoHero url="./pexels-harabe-6450803-1920x1080-25fps.mp4" /> */}
             <Hero />
+            <Top3Products />
             <ThreeBlockBadge />
-            <DynamicWelcome />
             <DynamicFeatureSeries series="tgw" />
+            <DynamicWelcome />
             <CallToAction2 />
             <DynamicFeaturePosts />
 
