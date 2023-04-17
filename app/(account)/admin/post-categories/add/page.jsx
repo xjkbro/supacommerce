@@ -1,21 +1,22 @@
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
-import Link from "next/link";
+import CategoryForm from "./CategoryForm";
 
+// do not cache this page
 export const revalidate = 0;
 
-export default async function Categories() {
+export default async function AddPostCategory() {
     const supabase = createServerComponentSupabaseClient({
         headers,
         cookies,
     });
 
-    let { data: posts } = await supabase.from("posts").select("*");
+    let { data: categories, error } = await supabase
+        .from("post_category")
+        .select("*");
     return (
         <div>
-            {posts.map((item) => (
-                <div key={item.slug}>{item.title}</div>
-            ))}
+            <CategoryForm categories={categories} />
         </div>
     );
 }

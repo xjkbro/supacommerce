@@ -3,10 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import { useRouter, useSearchParams } from "next/navigation";
-
 export default function ProductGrid({ products }) {
-    const router = useRouter();
     const [page, setPage] = useState(0);
     const [perPage, setPerPage] = useState(25);
     const [pagedProducts, setPageProducts] = useState([]);
@@ -18,28 +15,12 @@ export default function ProductGrid({ products }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filteredProducts, page, perPage]);
 
-    const [checked, setChecked] = useState([]);
-    const handleCheck = (e) => {
-        let newArray = [...checked];
-        newArray.push(e.target.value);
-
-        if (checked.includes(e.target.value)) {
-            newArray = newArray.filter((id) => id !== e.target.value);
-        }
-        setChecked(newArray);
-    };
     const handleSearch = (e) => {
-        // setFilteredProducts(
-        //     products.filter((items) => items.title.includes(e.target.value))
-        // );
-        // console.log(filteredProducts);
         setPage(0);
         if (e.target.value.length > 0) {
             let wordList = products.filter((elem, index) =>
                 elem.title.toLowerCase().includes(e.target.value.toLowerCase())
             );
-            console.log(wordList);
-            // console.log(result);
             setFilteredProducts(wordList);
         } else {
             setFilteredProducts([...products]);
@@ -90,111 +71,49 @@ export default function ProductGrid({ products }) {
                 </div>
             </div>
 
-            <div className="overflow-x-auto">
-                <table className="table table-zebra w-full">
+            <div className="">
+                <table className="table table-compact table-zebra w-full">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th></th>
+                            <th className="rounded-none bg-primary text-white">
+                                Name
+                            </th>
+                            <th className="rounded-none bg-primary text-white">
+                                Visibility
+                            </th>
+                            <th className="rounded-none bg-primary text-white">
+                                Availability
+                            </th>
+                            <th className="rounded-none bg-primary text-white">
+                                Price
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {pagedProducts?.map((item) => (
                             <tr key={item.slug} className="">
-                                <th>
-                                    <input
-                                        type="checkbox"
-                                        name={item.id}
-                                        value={item.id}
-                                        className="checkbox"
-                                        onClick={handleCheck}
-                                    />
-                                    <label htmlFor={item.id}></label>
-                                </th>
-                                <td className="">
+                                <td>
                                     <Link
-                                        className=" flex  items-center gap-2  w-72"
+                                        className="w-full font-bold whitespace-normal"
                                         href={"/admin/products/" + item.id}
                                     >
-                                        <div className="flex items-center space-x-3 h-full">
-                                            <span className="avatar">
-                                                <div className="mask mask-squircle w-12 h-12">
-                                                    {/* <Image
-                                                        width={500}
-                                                        height={500}
-                                                        alt="cat"
-                                                        priority
-                                                        src={item.image}
-                                                    /> */}
-                                                </div>
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <div className="font-bold whitespace-normal">
-                                                {item.title}
-                                            </div>
-                                            <div className="text-sm opacity-50">
-                                                {item.slug.length > 50
-                                                    ? item.slug.substr(0, 50) +
-                                                      "..."
-                                                    : item.slug.substr(0, 50)}
-                                            </div>
-                                        </div>
+                                        {item.title}
                                     </Link>
                                 </td>
-                                <td>
-                                    <Link
-                                        className="w-full whitespace-normal"
-                                        href={"/products/" + item.slug}
-                                    >
-                                        {item.short_description.substr(0, 100)}
-                                    </Link>
+                                <td className="w-8">
+                                    {item.visible ? "true" : "false"}
                                 </td>
-                                <td className="text-right">
+                                <td className="w-8">
+                                    {item.available ? "true" : "false"}
+                                </td>
+                                <td className="w-12">
                                     ${item.price.toFixed(2)}
-                                </td>
-                                <td>
-                                    {/* <AddToCart product={item} /> */}
-                                    {/* <button className="btn btn-outline">
-                                        Add To Cart
-                                    </button> */}
                                 </td>
                             </tr>
                         ))}
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th></th>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
-            {/*
-            <div className="btn-group flex justify-center my-4">
-                <button
-                    className="btn"
-                    onClick={() =>
-                        router.push(`/products?page=${parseInt(page) - 1}`)
-                    }
-                >
-                    Prev
-                </button>
-                <button
-                    className="btn"
-                    onClick={() =>
-                        router.push(`/products?page=${parseInt(page) + 1}`)
-                    }
-                >
-                    Next
-                </button>
-            </div> */}
         </div>
     );
 }

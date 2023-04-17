@@ -25,7 +25,7 @@ export default async function Categories() {
         if (filtered.length == 0) return <></>;
         else
             return (
-                <ul className="m-2 pl-8 p-2">
+                <ul className="">
                     {filtered.map((children) => {
                         const childfilter = categories.filter(
                             (cat) => cat.parent == children.id
@@ -59,7 +59,7 @@ export default async function Categories() {
     };
 
     return (
-        <div className="mx-auto my-12">
+        <div className="prose w-full">
             {topLevel.map((topCat) => (
                 <ul key={topCat.name}>
                     <li>

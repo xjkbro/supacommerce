@@ -140,11 +140,14 @@ export default function ProductGrid({ products }) {
                                         className="w-full whitespace-normal"
                                         href={"/products/" + item.slug}
                                     >
-                                        {item.short_description.substr(0, 100)}
+                                        {item?.short_description?.substr(
+                                            0,
+                                            100
+                                        )}
                                     </Link>
                                 </td>
                                 <td className="text-right">
-                                    ${item.price.toFixed(2)}
+                                    ${item?.price.toFixed(2)}
                                 </td>
                                 <td>
                                     <AddToCart product={item} />

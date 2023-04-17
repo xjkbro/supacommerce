@@ -21,9 +21,9 @@ export default async function Downloads() {
 
     return (
         <div>
-            <br />
+            {/* <br /> */}
             {/* <pre>{JSON.stringify(downloads, null, 2)}</pre> */}
-            <ul>
+            {/* <ul>
                 {downloads.map((item) => (
                     <li key={item.id}>
                         <Link href={"/admin/downloads/" + item.id}>
@@ -31,7 +31,40 @@ export default async function Downloads() {
                         </Link>
                     </li>
                 ))}
-            </ul>
+            </ul> */}
+            <div className="">
+                <table className="table table-compact w-full">
+                    <thead>
+                        <tr>
+                            <th className="rounded-none bg-primary text-white">
+                                Name
+                            </th>
+                            <th className="rounded-none bg-primary text-white">
+                                Type
+                            </th>
+                            <th className="rounded-none bg-primary text-white">
+                                Products
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {downloads.map((item) => (
+                            <tr className="text-sm" key={item.id}>
+                                <td>
+                                    <Link
+                                        className="font-bold"
+                                        href={"/admin/downloads/" + item.id}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                </td>
+                                <td>{item.type}</td>
+                                <td>{"products"}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }
