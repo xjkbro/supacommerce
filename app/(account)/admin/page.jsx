@@ -3,6 +3,7 @@ import { headers, cookies } from "next/headers";
 import Link from "next/link";
 import { notFound, useRouter } from "next/navigation";
 import React from "react";
+export const revalidate = 0;
 
 export default async function Admin() {
     return (

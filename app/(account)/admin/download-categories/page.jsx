@@ -2,6 +2,7 @@ import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-next
 import React from "react";
 import Link from "next/link";
 import { headers, cookies } from "next/headers";
+export const revalidate = 0;
 
 export default async function DownloadCategories() {
     const supabase = createServerComponentSupabaseClient({

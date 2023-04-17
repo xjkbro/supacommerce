@@ -2,6 +2,8 @@ import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-next
 import React from "react";
 import { headers, cookies } from "next/headers";
 import Link from "next/link";
+export const revalidate = 0;
+
 export default async function Downloads() {
     const supabase = createServerComponentSupabaseClient({
         headers,
