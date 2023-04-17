@@ -73,7 +73,7 @@ export default function NavBar({ user }) {
                     </Link>
                     <ul className="menu menu-horizontal z-20">
                         <li>
-                            <Link href="/category">Products</Link>
+                            <Link href="/categories">Products</Link>
                             <ul
                                 id="category-menu"
                                 className="menu bg-base-100 w-fit z-10"
@@ -101,7 +101,7 @@ export default function NavBar({ user }) {
                             <SolutionsMenu />
                         </li>
                         <li>
-                            <Link href="/">Resources</Link>
+                            <Link href="/resources">Resources</Link>
                             <ResourcesMenu />
                         </li>
                     </ul>

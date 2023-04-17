@@ -4,7 +4,7 @@
 
 /* Scroll bar */
 
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 0px;
     height: 0px;
 }
@@ -13,7 +13,7 @@
         width: 5px;
         height: 5px;
     }
-} */
+}
 
 /* Remove Controls for Number Inputs */
 /* Chrome, Safari, Edge, Opera */
