@@ -7,6 +7,8 @@ import AdminMenu from "./AdminMenu";
 import { adminRoutes } from "@/lib/admin-constants";
 import RouteTitle from "./RouteTitle";
 
+export const revalidate = 0;
+
 export default async function AdminLayout({ children }) {
     // const path = usePathname();
     const supabase = createServerComponentSupabaseClient({
