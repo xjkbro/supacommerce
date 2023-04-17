@@ -16,7 +16,7 @@ import CartHandler from "./CartHandler";
 import JSONSpecificationTable from "@/components/ui/products/JSONSpecificationTable";
 import DownloadsReferences from "./DownloadsReferences";
 
-export const revalidate = "0";
+export const revalidate = 0;
 
 export default async function SingleProduct({ params }) {
     const supabase = createServerComponentSupabaseClient({
@@ -29,6 +29,7 @@ export default async function SingleProduct({ params }) {
         .select("*")
         .eq("slug", params.slug)
         .single();
+
     let { data: bucket, error: bucketError } = await supabase.storage
         .from("products")
         .list(`${product.id}`, {
@@ -43,6 +44,7 @@ export default async function SingleProduct({ params }) {
     const prodImages = bucket.map((item) => {
         return `https://anyzlthrxmlnduuesdhk.supabase.co/storage/v1/object/public/products/${product.id}/${item.name}`;
     });
+
     let { data: belongsTo, error: productsError } = await supabase
         .from("product_to_category")
         .select(
