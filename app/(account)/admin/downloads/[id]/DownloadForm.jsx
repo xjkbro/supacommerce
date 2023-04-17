@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
+import { fileTypeOptions } from "@/lib/admin-constants";
+
 export default function DownloadForm({
     products,
     download,
@@ -29,6 +31,7 @@ export default function DownloadForm({
         initialValues: {
             name: download.name,
             slug: download.slug,
+            type: download.type,
             description: download.description,
             file: download.file,
             // recent: "",
@@ -89,6 +92,7 @@ export default function DownloadForm({
             .update({
                 name: values.name,
                 slug: values.slug,
+                type: values.type,
                 description: values.description,
                 file: values.file,
             })
@@ -137,12 +141,29 @@ export default function DownloadForm({
                         <label className="label" htmlFor="description">
                             <span className="label-text">Description</span>
                         </label>
+
                         <textarea
                             className="textarea textarea-bordered h-56"
                             name="description"
                             placeholder="Description"
                             {...formik.getFieldProps("description")}
                         ></textarea>
+                    </div>
+                    <div className="form-control w-full">
+                        <label className="label">
+                            <span className="label-text">Parent</span>
+                        </label>
+                        <select
+                            defaultValue={"user-manual"}
+                            className="select select-bordered w-full"
+                            {...formik.getFieldProps("type")}
+                        >
+                            {fileTypeOptions.map((item) => (
+                                <option key={item.value} value={item.value}>
+                                    {item.name}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div name="image" className="form-control w-full">
                         <label className="label">

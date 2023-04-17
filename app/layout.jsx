@@ -27,7 +27,7 @@ export default async function RootLayout({ children }) {
 
     return (
         <html lang="en" data-theme="icp">
-            <body>
+            <body className="antialiased">
                 <SupabaseProvider>
                     <StripeProvider>
                         <MobileNav user={user}>

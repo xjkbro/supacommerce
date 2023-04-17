@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSupabase } from "@/components/providers/supabase-provider";
 import Link from "next/link";
+import { fileTypeOptions } from "@/lib/admin-constants";
 
 export default function DownloadsReferences({ productDownloads }) {
     const { supabase } = useSupabase();
@@ -53,7 +54,10 @@ export default function DownloadsReferences({ productDownloads }) {
                         </svg>
                         <div className="flex flex-col gap-1">
                             <span className="font-bold text-sm ">
-                                {item.name ? item.name : "User Manual"}
+                                {fileTypeOptions.map((type) =>
+                                    type.value == item.type ? type.name : ""
+                                )}
+                                {/* {item.name ? item.name : "User Manual"} */}
                             </span>
                             <span className="font- text-sm text-neutral">
                                 4 downloads
