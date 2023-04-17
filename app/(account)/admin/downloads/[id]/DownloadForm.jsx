@@ -1,12 +1,19 @@
 "use client";
 import { useSupabase } from "@/components/providers/supabase-provider";
 import { supabaseCDN } from "@/lib/supabase-cdn";
+import { containsObject } from "@/lib/utils";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
-export default function DownloadForm({ download, bucket }) {
+export default function DownloadForm({
+    products,
+    download,
+    bucket,
+    prodSelected,
+    downloadToProducts,
+}) {
     const { supabase } = useSupabase();
     const router = useRouter();
     console.log(bucket);
@@ -14,6 +21,9 @@ export default function DownloadForm({ download, bucket }) {
     const [isUploading, setIsUploading] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [listDownloads, setListDownloads] = useState(bucket);
+
+    const [selectedProducts, setSelectedProducts] = useState(prodSelected);
+    const [filteredSearch, setFilteredSearch] = useState([]);
 
     const formik = useFormik({
         initialValues: {
@@ -46,8 +56,33 @@ export default function DownloadForm({ download, bucket }) {
         setListDownloads(data);
         setIsUploading(false);
     }
+    const filterSearch = (e) => {
+        if (e.target.value.length > 0) {
+            var wordList = products.filter((elem, index) =>
+                elem.title.toLowerCase().includes(e.target.value.toLowerCase())
+            );
+            // console.log(wordList);
+            // console.log(result);
+            setFilteredSearch(wordList);
+        } else {
+            setFilteredSearch([]);
+        }
+    };
     async function handleSubmit(values) {
         // console.log(values);
+        // Delete all old product_downloads relationship entries
+        downloadToProducts.map(async (item) => {
+            const { data } = await supabase
+                .from("product_downloads")
+                .delete()
+                .eq("id", item.id);
+        });
+        //Insert new product_downloads relationship
+        selectedProducts.map(async (item) => {
+            const { data } = await supabase
+                .from("product_downloads")
+                .insert({ product_id: item.id, download_id: download.id });
+        });
 
         const { data, error } = await supabase
             .from("downloads")
@@ -69,8 +104,8 @@ export default function DownloadForm({ download, bucket }) {
             onSubmit={formik.handleSubmit}
             className="flex flex-col gap-4 p-2"
         >
-            <div className="grid grid-cols-2 gap-4 md:h-[90vh]">
-                <div className="w-full p-2 overflow-y-scroll col-span-1 row-span-2">
+            <div className="grid grid-cols-2 gap-4 md:min-h-[90vh] h-fit">
+                <div className="w-full p-2  col-span-1 row-span-2">
                     <div className="flex justify-end">
                         <button type="submit" className="btn btn-primary">
                             Save
@@ -136,20 +171,103 @@ export default function DownloadForm({ download, bucket }) {
                             <span className="label-text">File</span>
                         </label>
                         <select
+                            defaultValue={""}
                             className="select select-bordered w-full"
                             {...formik.getFieldProps("file")}
                         >
-                            <option value="" selected>
-                                None
-                            </option>
+                            <option value="">None</option>
                             {listDownloads.map((item) => (
-                                <option key={item.id} value={item.id}>
+                                <option key={item.id} value={item.name}>
                                     {item.name}
                                 </option>
                             ))}
                         </select>
                     </div>
-                    <div className="flex justify-end">
+
+                    <div className="my-2">
+                        <label>Selected Products</label>
+                        <ul className="flex gap-1 mb-2 flex-wrap">
+                            {selectedProducts.map((item, i) => (
+                                <li
+                                    key={item.id}
+                                    className="px-2 py-1 border border-base-200 flex gap-2 justify-center items-center "
+                                >
+                                    <span>{item.title}</span>
+                                    <span
+                                        onClick={() => {
+                                            const id =
+                                                selectedProducts.indexOf(item);
+                                            const temp = [...selectedProducts];
+                                            temp.splice(id, 1);
+                                            console.log("Temp:", temp);
+                                            setSelectedProducts(temp);
+                                        }}
+                                        className="hover:bg-base-300 cursor-pointer flex justify-center items-center  w-4 h-4"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth={1.5}
+                                            stroke="currentColor"
+                                            className="w-3 h-3"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M6 18L18 6M6 6l12 12"
+                                            />
+                                        </svg>
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                        <input
+                            type="text"
+                            placeholder="Filter Products..."
+                            className="input input-bordered w-full focus:outline-none"
+                            onChange={filterSearch}
+                        />
+                        <ul className=" bg-base-100 border border-base-200 w-full p-2 shadow-sm rounded-box flex-nowrap  h-fit max-h-[30vh] overflow-y-scroll">
+                            {filteredSearch.length > 0 ? (
+                                <>
+                                    {filteredSearch
+                                        .slice(0, 100)
+                                        .map((item, i) => (
+                                            <li key={i}>
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        console.log(
+                                                            selectedProducts
+                                                        );
+                                                        if (
+                                                            !containsObject(
+                                                                item,
+                                                                selectedProducts
+                                                            )
+                                                        ) {
+                                                            setSelectedProducts(
+                                                                [
+                                                                    ...selectedProducts,
+                                                                    item,
+                                                                ]
+                                                            );
+                                                        }
+                                                    }}
+                                                    className="flex gap-2"
+                                                >
+                                                    <div>{item.title}</div>
+                                                </button>
+                                            </li>
+                                        ))}
+                                </>
+                            ) : (
+                                <li>No Results</li>
+                            )}
+                        </ul>
+                    </div>
+                    <div className="flex justify-end mt-4">
                         <button type="submit" className="btn btn-primary">
                             Save
                         </button>

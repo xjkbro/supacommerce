@@ -14,6 +14,14 @@ export default async function EditDownload({ params }) {
         .select("*")
         .eq("id", params.id)
         .single();
+    const { data: products } = await supabase
+        .from("products")
+        .select("id, title");
+
+    const { data: downloadToProducts } = await supabase
+        .from("product_downloads")
+        .select("*")
+        .eq("download_id", download.id);
 
     const { data: bucket } = await supabase.storage
         .from("downloads")
@@ -22,11 +30,23 @@ export default async function EditDownload({ params }) {
             offset: 0,
             sortBy: { column: "name", order: "asc" },
         });
+
+    // const selectedProducts = [...products]
+    const selected = downloadToProducts.map((item) => {
+        return products.filter((prod) => prod.id == item.product_id)[0];
+    });
+    console.log(selected);
     return (
         <div>
             {/* <br /> */}
             {/* <pre>{JSON.stringify(bucket, null, 2)}</pre> */}
-            <DownloadForm download={download} bucket={bucket} />
+            <DownloadForm
+                products={products}
+                download={download}
+                bucket={bucket}
+                prodSelected={selected}
+                downloadToProducts={downloadToProducts}
+            />
         </div>
     );
 }

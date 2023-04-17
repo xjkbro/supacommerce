@@ -35,6 +35,11 @@ export default async function SingleProduct({ params }) {
             sortBy: { column: "name", order: "asc" },
         });
 
+    let { data: productDownloads } = await supabase
+        .from("product_downloads")
+        .select("*")
+        .eq("product_id", product.id);
+
     const prodImages = bucket.map((item) => {
         return `https://anyzlthrxmlnduuesdhk.supabase.co/storage/v1/object/public/products/${product.id}/${item.name}`;
     });
@@ -173,7 +178,9 @@ export default async function SingleProduct({ params }) {
                             <h3 className="text-xl font-bold my-4">
                                 Product Documentation & References
                             </h3>
-                            <DownloadsReferences />
+                            <DownloadsReferences
+                                productDownloads={productDownloads}
+                            />
                         </div>
                     </div>
                 </div>

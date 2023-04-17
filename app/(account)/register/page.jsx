@@ -34,7 +34,7 @@ export default function Login() {
                     },
                 },
             },
-            { redirectTo: "http://localhost:3000/login" }
+            { redirectTo: `${process.env.NEXT_HOME_URL}/login` }
         );
         console.log({ user });
         if (!error) router.push("/login");

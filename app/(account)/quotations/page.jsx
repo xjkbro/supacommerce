@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSupabase } from "@/components/providers/supabase-provider";
+import QuickAdd from "./QuickAdd";
+import Form from "./Form";
 
 export default function Cart() {
     const {
@@ -27,7 +29,7 @@ export default function Cart() {
         async function getProducts() {
             const { data } = await supabase
                 .from("products")
-                .select("title,slug,short_description, image")
+                .select("title,slug,short_description, price, image")
                 .order("title", { ascending: false });
 
             if (data) setProducts(data);
@@ -48,7 +50,7 @@ export default function Cart() {
 
     return (
         <main className="bg-base-100 shadow-lg md:border border-base-200 w-11/12 md:w-3/4 my-12 rounded-xl mx-auto md:y-12">
-            <div className="w-11/12 mx-auto">
+            <div className="w-11/12 mx-auto ">
                 {/* Breadcrumb */}
                 <div className="m-2">
                     <div className="text-sm breadcrumbs p-2">
@@ -62,18 +64,32 @@ export default function Cart() {
                         </ul>
                     </div>
                 </div>
-
+                <div className="my-4">
+                    <h1 className="text-3xl font-bold">Quotation Center</h1>
+                    <p>
+                        Please add items to your list and enter your name and
+                        details to generate your quote
+                    </p>
+                </div>
+                {/* Quick Add */}
+                <QuickAdd />
                 <div className="pb-4">
                     {Object.values(cartDetails).length > 0 ? (
                         <>
-                            <div className="overflow-x-auto w-full pb-8">
-                                <table className="hidden md:block table w-full ">
+                            <div className=" w-full pb-8">
+                                <table className="hidden md:block table w-full border border-base-200 ">
                                     <thead className="text-center">
                                         <tr>
-                                            <th>Product</th>
-                                            <th>Quantity</th>
-                                            <th>Total</th>
-                                            <th></th>
+                                            <th className="bg-primary text-white rounded-none">
+                                                Product
+                                            </th>
+                                            <th className="bg-primary text-white">
+                                                Quantity
+                                            </th>
+                                            <th className="bg-primary text-white">
+                                                Total
+                                            </th>
+                                            <th className="bg-primary text-white rounded-none"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,7 +99,7 @@ export default function Cart() {
                                                     <td>
                                                         <div className="flex items-center space-x-3">
                                                             <div className="avatar">
-                                                                <div className="mask mask-squircle w-12 h-12">
+                                                                <div className="w-12 h-12">
                                                                     <Image
                                                                         src={
                                                                             item.image
@@ -97,6 +113,7 @@ export default function Cart() {
                                                                         height={
                                                                             100
                                                                         }
+                                                                        className="w-12 h-12 !object-contain"
                                                                     />
                                                                 </div>
                                                             </div>
@@ -104,7 +121,7 @@ export default function Cart() {
                                                                 <div className="font-bold">
                                                                     {item.name}
                                                                 </div>
-                                                                <div className="text-sm opacity-50">
+                                                                <div className="text-sm opacity-50 whitespace-normal">
                                                                     {item.description.substring(
                                                                         0,
                                                                         120
@@ -166,14 +183,14 @@ export default function Cart() {
                                             )
                                         )}
                                     </tbody>
-                                    <tfoot>
+                                    {/* <tfoot>
                                         <tr>
-                                            <th>Product</th>
-                                            <th>Quantity</th>
-                                            <th>Total</th>
-                                            <th></th>
+                                            <th className="bg-primary text-white">Product</th>
+                                            <th className="bg-primary text-white">Quantity</th>
+                                            <th className="bg-primary text-white">Total</th>
+                                            <th className="bg-primary text-white"></th>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot> */}
                                 </table>
                                 <div className="flex md:hidden flex-col gap-8 w-full">
                                     {Object.values(cartDetails).map((item) => (
@@ -183,12 +200,13 @@ export default function Cart() {
                                         >
                                             <div className="flex items-center space-x-3">
                                                 <div className="avatar">
-                                                    <div className="mask mask-squircle w-12 h-12">
+                                                    <div className="w-12 h-12">
                                                         <Image
                                                             src={item.image}
                                                             alt={item.name}
                                                             width={100}
                                                             height={100}
+                                                            className="w-12 h-12 !object-contain"
                                                         />
                                                     </div>
                                                 </div>
@@ -249,25 +267,14 @@ export default function Cart() {
                                     ))}
                                 </div>
                             </div>
-
-                            <div className="flex flex-wrap gap-2 my-4">
-                                <button
-                                    onClick={(e) => {
-                                        // console.log(e.target.innerHTML);
-                                        e.target.innerHTML = "loading...";
-                                    }}
-                                    className="btn btn-primary  w-full md:w-fit"
-                                >
-                                    Checkout
-                                </button>
-                            </div>
                         </>
                     ) : (
                         <div className="flex justify-center items-center h-56">
-                            No items in cart
+                            No items in cart to create a quote
                         </div>
                     )}
                 </div>
+                <Form />
             </div>
         </main>
     );

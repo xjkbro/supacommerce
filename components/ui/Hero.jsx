@@ -114,8 +114,8 @@ export default function Hero() {
 
 const AdditionalInformation = () => {
     return (
-        <div className="hidden w-full h-16 md:flex justify-between px-12 text-secondary font-semibold  bg-[#ffffff45] backdrop-blur-xl backdrop-brightness-125 backdrop-contrast-51 backdrop-saturate-150 shadow-xl z-[29] -translate-y-4 items-center">
-            <ul className="flex gap-12 w-full ">
+        <div className="hidden w-full h-16 md:flex justify-between px-12 text-secondary text-xs font-semibold  bg-[#ffffff45] backdrop-blur-xl backdrop-brightness-125 backdrop-contrast-51 backdrop-saturate-150 shadow-xl z-[29] -translate-y-4 items-center">
+            <ul className="flex gap-8 w-full ">
                 <li>
                     <Link href="/">
                         <svg
@@ -124,7 +124,7 @@ const AdditionalInformation = () => {
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            className="inline w-6 h-6 mr-2"
+                            className="inline w-4 h-4 mr-2"
                         >
                             <path
                                 strokeLinecap="round"
@@ -144,7 +144,7 @@ const AdditionalInformation = () => {
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            className="inline w-6 h-6 mr-2"
+                            className="inline w-4 h-4 mr-2"
                         >
                             <path
                                 strokeLinecap="round"
@@ -164,7 +164,7 @@ const AdditionalInformation = () => {
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            className="inline w-6 h-6 mr-2"
+                            className="inline w-4 h-4 mr-2"
                         >
                             <path
                                 strokeLinecap="round"
@@ -175,9 +175,12 @@ const AdditionalInformation = () => {
                     </Link>
                 </li>
             </ul>
-            <div className="flex justify-end w-full ">
-                Cage/NCage Code: 3FNF0
-            </div>
+            <ul className="flex gap-8 justify-end w-full ">
+                <li>
+                    <Link href="/quotations">Request a Quote</Link>
+                </li>
+                <li>Cage/NCage Code: 3FNF0</li>
+            </ul>
         </div>
     );
 };
