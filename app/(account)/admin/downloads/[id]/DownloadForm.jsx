@@ -316,8 +316,7 @@ export default function DownloadForm({
                                 <Link
                                     href={supabaseCDN(
                                         "downloads",
-                                        download.id,
-                                        selectedFile?.name
+                                        download.id + "/" + selectedFile?.name
                                     )}
                                 >
                                     download

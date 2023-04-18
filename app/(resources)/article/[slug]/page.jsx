@@ -4,6 +4,7 @@ import React from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
+import { supabaseCDN } from "@/lib/supabase-cdn";
 
 export default async function SingleArticle({ params }) {
     //     const str = `
@@ -56,7 +57,7 @@ export default async function SingleArticle({ params }) {
             </div>
             <div className=" col-span-2 prose">
                 <Image
-                    src={`https://anyzlthrxmlnduuesdhk.supabase.co/storage/v1/object/public/posts/${post.slug}.png`}
+                    src={supabaseCDN("posts", post.slug + ".png")}
                     alt="feature"
                     width={800}
                     height={600}

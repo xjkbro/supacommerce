@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+// import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { arbritraryArray } from "@/lib/utils";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
+import { supabaseCDN } from "@/lib/supabase-cdn";
 
 export default async function Article() {
-    const arr = arbritraryArray(10);
+    // const arr = arbritraryArray(10);
     const supabase = createServerComponentSupabaseClient({
         headers,
         cookies,
@@ -76,7 +77,7 @@ export default async function Article() {
                                 height={150}
                                 alt="cat"
                                 className="w-full md:w-42 md:h-42 object-cover"
-                                src={`https://anyzlthrxmlnduuesdhk.supabase.co/storage/v1/object/public/posts/${item.slug}.png`}
+                                src={supabaseCDN("posts", item.slug + ".png")}
                             />
                         </div>
                         <div className="co-span-1 md:col-span-3">

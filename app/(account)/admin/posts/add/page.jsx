@@ -1,11 +1,9 @@
 "use client";
 import { Editor } from "@tinymce/tinymce-react";
 import { useSupabase } from "@/components/providers/supabase-provider";
-import { supabaseCDN } from "@/lib/supabase-cdn";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
-import { useState, useRef } from "react";
-// import Lexical from "./Lexical";
+import { useRef } from "react";
 export const revalidate = 0;
 
 export default function AddPost() {
