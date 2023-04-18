@@ -1,27 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
 import { supabaseCDN } from "@/lib/supabase-cdn";
 
+export const revalidate = 3600;
+
 export default async function SingleArticle({ params }) {
-    //     const str = `
-    // # QuickCommerce
-
-    // A quick ecommerce site that I whipped up to test the capabilites to scale a large B2B ecommerce site with Nextjs, TailwindCSS, Prisma, MySQL, and Stripe from a standard PHP, HTML, CSS, JS and jQuery website. I was really happy with the result and how fast I did it. Now to use this approach for the B2B site.
-    // ## Acknowledgements
-
-    //  - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
-    //  - [Awesome README](https://github.com/matiassingers/awesome-readme)
-    //  - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
-
-    // ## Appendix
-
-    // Any additional information goes here
-
-    // `;
     const supabase = createServerComponentSupabaseClient({
         headers,
         cookies,
@@ -63,10 +49,12 @@ export default async function SingleArticle({ params }) {
                     height={600}
                     className="h-96 object-cover"
                 />
+                <h2 className="text-2xl font-bold">{post.title}</h2>
+
                 <small>
-                    Published Date: {Date(post.created_at.toString())}
+                    Published Date: {new Date(post.created_at).toDateString()}
                 </small>
-                {/* <ReactMarkdown>{str}</ReactMarkdown> */}
+
                 <div
                     className="prose"
                     dangerouslySetInnerHTML={{ __html: post.content }}

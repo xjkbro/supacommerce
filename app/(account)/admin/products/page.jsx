@@ -7,7 +7,6 @@ import { headers, cookies } from "next/headers";
 export const revalidate = 0;
 
 export default async function Products() {
-    // const page = searchParams.page ? searchParams.page : 0;
     const supabase = createServerComponentSupabaseClient({
         headers,
         cookies,

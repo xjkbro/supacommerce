@@ -13,12 +13,24 @@ export default async function Categories() {
     let { data: posts } = await supabase
         .from("posts")
         .select("id,title,created_at");
+    let { data: categories } = await supabase
+        .from("post_category")
+        .select("title,id");
+    let { data: postCategories } = await supabase
+        .from("post_to_category")
+        .select("*");
+
+    const arr = posts.map((item) => {
+        const postCategory = postCategories.filter(
+            (x) => item.id == x.post_id
+        )[0];
+        const cat = categories.filter(
+            (x) => x.id == postCategory.category_id
+        )[0];
+        return { ...item, category: cat.title };
+    });
     return (
         <div>
-            {/* {posts.map((item) => (
-                <Link key={item.slug}>{item.title}</Link>
-            ))} */}
-
             <table className="table table-compact w-full">
                 <thead>
                     <tr>
@@ -34,20 +46,24 @@ export default async function Categories() {
                     </tr>
                 </thead>
                 <tbody>
-                    {posts.map((item) => (
-                        <tr className="text-sm" key={item.id}>
-                            <td>
-                                <Link
-                                    className="font-bold"
-                                    href={"/admin/posts/" + item.id}
-                                >
-                                    {item.title}
-                                </Link>
-                            </td>
-                            <td>{item.title}</td>
-                            <td>{Date(item.created_at).toString()}</td>
-                        </tr>
-                    ))}
+                    {arr.map((item) => {
+                        return (
+                            <tr className="text-sm" key={item.id}>
+                                <td>
+                                    <Link
+                                        className="font-bold"
+                                        href={"/admin/posts/" + item.id}
+                                    >
+                                        {item.title}
+                                    </Link>
+                                </td>
+                                <td>{item.category}</td>
+                                <td>
+                                    {new Date(item.created_at).toDateString()}
+                                </td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
         </div>

@@ -269,7 +269,7 @@ export default function Cart() {
                             </div>
                         </>
                     ) : (
-                        <div className="flex justify-center items-center h-56">
+                        <div className="flex justify-center items-center h-56 bg-base-200 text-sm">
                             No items in cart to create a quote
                         </div>
                     )}

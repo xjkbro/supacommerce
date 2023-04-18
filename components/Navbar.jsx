@@ -71,7 +71,7 @@ export default function NavBar({ user }) {
                         <LongLogo className="w-48 h-12" />
                         {/* <SquareLogo className="w-12 h-12" /> */}
                     </Link>
-                    <ul className="menu menu-horizontal z-20">
+                    <ul className="menu menu-horizontal z-20 text-sm">
                         <li>
                             <Link href="/categories">Products</Link>
                             <ul

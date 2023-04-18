@@ -54,7 +54,7 @@ export default function QuickAdd() {
                     <input
                         type="text"
                         placeholder="Search for an item..."
-                        className="input input-bordered w-full"
+                        className="input input-bordered w-full focus:outline-none"
                         onChange={filterSearch}
                         onFocus={() => setShowResults(true)}
                         onBlur={() => {
@@ -83,31 +83,23 @@ export default function QuickAdd() {
                                         }}
                                         className="flex gap-2"
                                     >
-                                        <div className="">
-                                            {/* <Image
-                                                    src={item.image}
-                                                    width={32}
-                                                    height={32}
-                                                    alt={item.title}
-                                                /> */}
-                                        </div>
                                         <div className="text-left">
                                             <div>{item.title}</div>
-                                            <div>
+                                            <small className=" text-base-content">
                                                 {item.short_description
                                                     ? item?.short_description?.replace(
                                                           /(<([^>]+)>)/gi,
                                                           ""
                                                       )
                                                     : "No Description"}
-                                            </div>
+                                            </small>
                                         </div>
                                     </button>
                                 </li>
                             ))}
                         </>
                     ) : (
-                        <li className="flex justify-center items-center h-full">
+                        <li className="flex justify-center items-center h-full ">
                             No Results
                         </li>
                     )}

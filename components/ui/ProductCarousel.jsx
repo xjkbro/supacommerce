@@ -51,10 +51,9 @@ export default function ProductCarousel({ items }) {
                             >
                                 {item.title}
                             </Link>
-                            <p className="text-lg font-light text-error mb-4">
+                            <p className="text-lg font-bold text-red-500 mb-4">
                                 ${item.price.toFixed(2)}
                             </p>
-
                             <button className="btn btn-block btn-accent ">
                                 Add To Cart
                             </button>
