@@ -2,9 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import { arbritraryArray } from "@/lib/utils";
+import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { headers, cookies } from "next/headers";
 
-export default function Article() {
-    const arr = Array.from(Array(10).keys());
+export default async function Article() {
+    const arr = arbritraryArray(10);
+    const supabase = createServerComponentSupabaseClient({
+        headers,
+        cookies,
+    });
+    let { data: posts } = await supabase
+        .from("posts")
+        .select("id,title,slug,short_description");
     return (
         <div className="md:grid grid-cols-3 mx-auto w-11/12 md:w-3/4 my-12 gap-4">
             <div className="col-span-1 space-y-2">
@@ -54,11 +64,11 @@ export default function Article() {
                 </div>
             </div>
             <div className=" col-span-2 flex flex-col gap-4">
-                {arr.map((item) => (
+                {posts.map((item) => (
                     <Link
-                        key={item}
+                        key={item.id}
                         className="hover:bg-base-200 transition-all p-4 grid md:grid-cols-4 grid-cols-1 gap-2"
-                        href={"/article/" + item}
+                        href={"/article/" + item.slug}
                     >
                         <div className="md:w-42 md:h-42 object-cover col-span-1">
                             <Image
@@ -66,17 +76,13 @@ export default function Article() {
                                 height={150}
                                 alt="cat"
                                 className="w-full md:w-42 md:h-42 object-cover"
-                                src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
+                                src={`https://anyzlthrxmlnduuesdhk.supabase.co/storage/v1/object/public/posts/${item.slug}.png`}
                             />
                         </div>
                         <div className="co-span-1 md:col-span-3">
-                            <h2 className="text-2xl font-bold">Some Title</h2>
+                            <h2 className="text-2xl font-bold">{item.title}</h2>
                             <p className="font-light">
-                                Lorem ipsum dolor, sit amet consectetur
-                                adipisicing elit. Odit, aspernatur. Ab, placeat
-                                numquam. Perferendis quo molestias amet ea et.
-                                Earum repellendus odio asperiores ut accusantium
-                                obcaecati, sequi exercitationem ad inventore!
+                                {item.short_description}
                             </p>
                         </div>
                     </Link>

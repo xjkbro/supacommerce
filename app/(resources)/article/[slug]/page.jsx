@@ -2,24 +2,34 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { headers, cookies } from "next/headers";
 
-export default function SingleArticle() {
-    const str = `
-# QuickCommerce
+export default async function SingleArticle({ params }) {
+    //     const str = `
+    // # QuickCommerce
 
-A quick ecommerce site that I whipped up to test the capabilites to scale a large B2B ecommerce site with Nextjs, TailwindCSS, Prisma, MySQL, and Stripe from a standard PHP, HTML, CSS, JS and jQuery website. I was really happy with the result and how fast I did it. Now to use this approach for the B2B site.
-## Acknowledgements
+    // A quick ecommerce site that I whipped up to test the capabilites to scale a large B2B ecommerce site with Nextjs, TailwindCSS, Prisma, MySQL, and Stripe from a standard PHP, HTML, CSS, JS and jQuery website. I was really happy with the result and how fast I did it. Now to use this approach for the B2B site.
+    // ## Acknowledgements
 
- - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+    //  - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+    //  - [Awesome README](https://github.com/matiassingers/awesome-readme)
+    //  - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
 
+    // ## Appendix
 
-## Appendix
+    // Any additional information goes here
 
-Any additional information goes here
-
-`;
+    // `;
+    const supabase = createServerComponentSupabaseClient({
+        headers,
+        cookies,
+    });
+    let { data: post } = await supabase
+        .from("posts")
+        .select("*")
+        .eq("slug", params.slug)
+        .single();
     return (
         <div className="md:grid grid-cols-3 mx-auto w-11/12 md:w-3/4 my-12">
             <div className=" col-span-1 justify-center">
@@ -46,14 +56,20 @@ Any additional information goes here
             </div>
             <div className=" col-span-2 prose">
                 <Image
-                    src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1364&q=80"
+                    src={`https://anyzlthrxmlnduuesdhk.supabase.co/storage/v1/object/public/posts/${post.slug}.png`}
                     alt="feature"
                     width={800}
                     height={600}
                     className="h-96 object-cover"
                 />
-                <small>Published Date: </small>
-                <ReactMarkdown>{str}</ReactMarkdown>
+                <small>
+                    Published Date: {Date(post.created_at.toString())}
+                </small>
+                {/* <ReactMarkdown>{str}</ReactMarkdown> */}
+                <div
+                    className="prose"
+                    dangerouslySetInnerHTML={{ __html: post.content }}
+                />
             </div>
         </div>
     );

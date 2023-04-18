@@ -1,5 +1,5 @@
 import React from "react";
-import { Saira } from "@next/font/google";
+import { Saira } from "next/font/google";
 import Link from "next/link";
 const saira = Saira({
     subsets: ["latin"],

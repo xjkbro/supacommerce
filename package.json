@@ -10,7 +10,6 @@
         "postinstall": "node ./tinymce-postinstall.js"
     },
     "dependencies": {
-        "@next/font": "^13.3.0",
         "@ngneat/falso": "^6.4.0",
         "@stripe/stripe-js": "^1.52.0",
         "@supabase/auth-helpers-nextjs": "^0.5.6",
