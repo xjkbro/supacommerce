@@ -18,7 +18,7 @@ const content = [
 
 const img = [
     "https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1647427060118-4911c9821b82?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3540&q=80",
+    "https://images.unsplash.com/photo-1647427060118-4911c9821b82?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2240&q=80",
 ];
 export default function Hero() {
     return (
@@ -28,7 +28,7 @@ export default function Hero() {
                 style={{
                     backgroundAttachment: "fixed",
                     backgroundPosition: "center",
-                    backgroundImage: `url(${img[1]})`,
+                    backgroundImage: `url("/hero.avif")`,
                 }}
             >
                 <div className="hero-overlay bg-opacity-60"></div>

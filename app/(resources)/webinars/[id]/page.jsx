@@ -4,7 +4,6 @@ import React from "react";
 
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 export default async function Webinar({ params }) {
     const supabase = createServerComponentSupabaseClient({

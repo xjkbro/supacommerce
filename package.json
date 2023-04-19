@@ -6,11 +6,9 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint",
-        "postinstall": "node ./tinymce-postinstall.js"
+        "lint": "next lint"
     },
     "dependencies": {
-        "@ngneat/falso": "^6.4.0",
         "@stripe/stripe-js": "^1.52.0",
         "@supabase/auth-helpers-nextjs": "^0.5.6",
         "@supabase/supabase-js": "^2.13.1",
@@ -22,10 +20,7 @@
         "next": "13.2.4",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "react-markdown": "^8.0.6",
         "react-quill": "^2.0.0",
-        "remark": "^14.0.2",
-        "remark-gfm": "^3.0.1",
         "stripe": "^12.0.0",
         "swr": "^2.1.2",
         "tailwindcss-animate": "^1.0.5",
@@ -35,13 +30,10 @@
     "devDependencies": {
         "@lexical/react": "^0.9.2",
         "@tailwindcss/typography": "^0.5.9",
-        "@tinymce/tinymce-react": "^4.3.0",
         "autoprefixer": "^10.4.14",
-        "fs-extra": "^11.1.1",
         "lexical": "^0.9.2",
         "postcss": "^8.4.21",
         "react-grid-carousel": "^1.0.1",
-        "tailwindcss": "^3.3.1",
-        "tinymce": "^6.4.1"
+        "tailwindcss": "^3.3.1"
     }
 }

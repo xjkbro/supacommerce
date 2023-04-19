@@ -232,49 +232,6 @@ export default function NavBar({ user }) {
                     </div>
                 </div>
             </div>
-
-            {/* <div className="md:hidden flex justify-between h-16 items-center w-11/12 mx-auto">
-                <Link href="/">
-                    <LongLogo className="w-32 h-fit" />
-                </Link>
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                    onClick={() => {
-                        setOverlay(!overlay);
-                    }}
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                    />
-                </svg>
-            </div>
-            {overlay ? (
-                <div className="drawer">
-                    <div className="drawer-side">
-                        <label
-                            htmlFor="my-drawer"
-                            className="drawer-overlay"
-                        ></label>
-                        <ul className="menu p-4 w-80 bg-base-100 h-screen text-base-content">
-                            <li>
-                                <a>Sidebar Item 1</a>
-                            </li>
-                            <li>
-                                <a>Sidebar Item 2</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            ) : (
-                <></>
-            )} */}
         </>
     );
 }
