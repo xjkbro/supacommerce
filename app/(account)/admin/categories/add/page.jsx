@@ -1,6 +1,6 @@
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
-import CategoryForm from "./CategoryForm";
+import CategoryForm from "../CategoryForm";
 
 // do not cache this page
 export const revalidate = 0;

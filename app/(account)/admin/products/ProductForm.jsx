@@ -79,13 +79,14 @@ export default function ProductForm({ product, categories, bucket, category }) {
             });
             // Upserts item to product_to_category table
             if (category != null) {
+                console.log(category.id, values.category);
                 const { data: productCategory } = await supabase
                     .from("product_to_category")
-                    .upsert({
-                        id: category.id,
+                    .update({
                         product_id: product.id,
                         category_id: values.category,
-                    });
+                    })
+                    .eq("id", category.id);
             } else {
                 const { data: productCategory } = await supabase
                     .from("product_to_category")
@@ -327,7 +328,7 @@ export default function ProductForm({ product, categories, bucket, category }) {
                             </option>
                             {categories.map((item) => (
                                 <option key={item.id} value={item.id}>
-                                    {item.name}
+                                    {item.title}
                                 </option>
                             ))}
                         </select>

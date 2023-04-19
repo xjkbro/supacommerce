@@ -1,3 +1,4 @@
+import { supabaseCDN } from "@/lib/supabase-cdn";
 import { arbritraryArray } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +14,7 @@ export default function DynamicGrid({ items }) {
                 const rand = Math.floor(Math.random() * 3);
                 return (
                     <Link
-                        href={"/categories/" + (item.id ?? "")}
+                        href={"/categories/" + (item.slug ?? "")}
                         key={item.id}
                         className={
                             "card w-full bg-base-100 shadow-xl image-full " +
@@ -26,15 +27,19 @@ export default function DynamicGrid({ items }) {
                                 width={200}
                                 height={200}
                                 alt="item"
-                                src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
+                                src={supabaseCDN(
+                                    "categories",
+                                    item.slug + ".png"
+                                )}
+                                // src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
                             />
                         </figure>
                         <div className="card-body">
                             <h2 className="card-title">
-                                {item.name ?? "Lorem Ipsum"}
+                                {item.title ?? "Lorem Ipsum"}
                             </h2>
                             <p>
-                                {item?.description ??
+                                {item?.short_description ??
                                     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nesciunt commodi voluptatum eaque. Incidunt minus, harum velit quam nostrum sunt nemo."}
                             </p>
                         </div>

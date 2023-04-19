@@ -46,7 +46,7 @@ export default async function SingleProduct({ params }) {
             `
             id,
             category_id (
-            id, name
+            id, title
             )
         `
         )
@@ -68,73 +68,13 @@ export default async function SingleProduct({ params }) {
                                 </li>
                                 <li>
                                     <Link href={"/category/" + c.id}>
-                                        {c.name}
+                                        {c.title}
                                     </Link>
                                 </li>
                             </ul>
                         ))}
                     </div>
                 </div>
-                {/* Product Details */}
-                {/* <div className="flex  flex-col lg:flex-row justify-between gap-4">
-                    <div className="flex flex-col md:flex-row gap-2">
-                        <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
-                            <div className="carousel-item">
-                                <Image
-                                    className="w-32 h-32 md:w-96 md:h-96 object-contain bg-white rounded-xl"
-                                    width={500}
-                                    height={500}
-                                    alt="cat"
-                                    priority
-                                    src={product.image}
-                                />
-                            </div>
-                            <div className="carousel-item">
-                                <Image
-                                    className="w-32 h-32 md:w-96 md:h-96 object-contain bg-white rounded-xl"
-                                    width={500}
-                                    height={500}
-                                    alt="cat"
-                                    priority
-                                    src={product.image}
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="w-full md:w-1/2 m-2">
-                        <div>
-                            {belongsTo.map(({ category_id: c }) => (
-                                <Link
-                                    key={c.id}
-                                    className="badge"
-                                    href={"/category/" + c.id}
-                                >
-                                    New Product
-                                </Link>
-                            ))}
-                        </div>
-                        <h1 className="text-5xl font-bold">{product.title}</h1>
-                        <span className="text-4xl font-bold">
-                            ${product.price}
-                        </span>
-                        <p className="py-6">{product.short_description}</p>
-                        <div className="flex gap-2 flex-wrap w-full">
-                            <Link href="/" className="btn btn-secondary">
-                                Buy Now
-                            </Link>
-                            <Link href="/" className="btn btn-primary">
-                                Add To Cart
-                            </Link>
-                            <Link
-                                href="/"
-                                className="btn btn-outline btn-accent"
-                            >
-                                Add To Quote
-                            </Link>
-                        </div>
-                    </div>
-                </div> */}
                 <div className="flex  flex-col lg:flex-row md:items-center justify-between gap-4">
                     <ImageLayout product={product} images={prodImages} />
 
@@ -159,16 +99,6 @@ export default async function SingleProduct({ params }) {
                             </span>
                             <p className="py-6">{product.short_description}</p>
                             <CartHandler product={product} />
-                            {/* <div className="flex gap-2 flex-wrap w-full">
-                                <BuyNow product={product} />
-                                <AddToCart product={product} />
-                                <Link
-                                    href="/"
-                                    className="btn btn-outline btn-accent"
-                                >
-                                    Add To Quote
-                                </Link>
-                            </div> */}
                         </div>
 
                         {productDownloads.length > 0 ? (
@@ -192,7 +122,7 @@ export default async function SingleProduct({ params }) {
             ) : (
                 <>
                     <hr />
-                    <h2 className="text-2xl font-bold m-4 text-center ">
+                    <h2 className="text-2xl font-bold m-4 ml-8 ">
                         Product Description
                     </h2>
                     <div className="prose max-w-full m-8 ">
@@ -207,13 +137,15 @@ export default async function SingleProduct({ params }) {
 
             {product?.json_specifications == "" ||
             product?.json_specifications == null ||
-            product?.json_specifications ==
-                { heading: "", rows: [{ key: "", value: "" }] } ? (
+            JSON.stringify(product?.json_specifications) ==
+                JSON.stringify([
+                    { rows: [{ key: "", value: "" }], heading: "" },
+                ]) ? (
                 <></>
             ) : (
                 <>
                     <hr />
-                    <h2 className="text-2xl font-bold m-4 text-center ">
+                    <h2 className="text-2xl font-bold m-4 ml-8">
                         Specifications
                     </h2>
                     <div className="max-w-full md:m-8">

@@ -3,6 +3,7 @@ import { headers, cookies } from "next/headers";
 import CategoryHeader from "../CategoryHeader";
 import CategoryTabs from "../CategoryTabs";
 
+export const revalidate = 0;
 export default async function SingleCategory({ params }) {
     const supabase = createServerComponentSupabaseClient({
         headers,
@@ -11,14 +12,15 @@ export default async function SingleCategory({ params }) {
 
     let { data: category, error: currentError } = await supabase
         .from("categories")
-        .select("id, name, description, parent")
-        .eq("id", params.id)
+        .select("id, title, slug, description, short_description, parent")
+        .eq("slug", params.slug)
         .single();
 
     let { data: children, error: childrenError } = await supabase
         .from("categories")
-        .select("id, name, description, parent")
-        .eq("parent", params.id);
+        .select("id, title, slug, short_description, parent")
+        .eq("parent", category.id);
+
     let { data: products, error: productsError } = await supabase
         .from("product_to_category")
         .select(
@@ -29,7 +31,7 @@ export default async function SingleCategory({ params }) {
             )
         `
         )
-        .eq("category_id", params.id);
+        .eq("category_id", category.id);
 
     return (
         <main>

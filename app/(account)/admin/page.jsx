@@ -43,8 +43,40 @@ export default async function Admin() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="card w-full h-96 bg-base-100 shadow-md border border-base-200">
                     <div className="card-body">
-                        <h2 className="card-title">Card title!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <h2 className="card-title">Most Recent Leads</h2>
+                        <div className="h-full">
+                            {[1, 2, 3, 4, 5].map((item) => (
+                                <div
+                                    key={item}
+                                    className="flex justify-between"
+                                >
+                                    <span>John Doe</span>
+                                    <span>jdoe@acme.com</span>
+                                    <span>Acme</span>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="card-actions justify-end">
+                            <button className="btn btn-primary">
+                                View more
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div className="card w-full h-96 bg-base-100 shadow-md border border-base-200">
+                    <div className="card-body">
+                        <h2 className="card-title">Top Downloads</h2>
+                        <div className="h-full">
+                            {[1, 2, 3, 4, 5].map((item) => (
+                                <div
+                                    key={item}
+                                    className="flex justify-between"
+                                >
+                                    <span>Item {item}</span>
+                                    <span>{item}</span>
+                                </div>
+                            ))}
+                        </div>
                         <div className="card-actions justify-end">
                             <button className="btn btn-primary">Buy Now</button>
                         </div>
@@ -52,16 +84,7 @@ export default async function Admin() {
                 </div>
                 <div className="card w-full h-96 bg-base-100 shadow-md border border-base-200">
                     <div className="card-body">
-                        <h2 className="card-title">Card title!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="card w-full h-96 bg-base-100 shadow-md border border-base-200">
-                    <div className="card-body">
-                        <h2 className="card-title">Card title!</h2>
+                        <h2 className="card-title">Overview</h2>
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                         <div className="card-actions justify-end">
                             <button className="btn btn-primary">Buy Now</button>

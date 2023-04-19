@@ -13,10 +13,10 @@ export default function CategoryMenu() {
         async function getCategories() {
             let { data: categories } = await supabase
                 .from("categories")
-                .select("id, name, parent");
+                .select("id, title, slug, parent");
             let { data: topLevel } = await supabase
                 .from("categories")
-                .select("id, name, parent")
+                .select("id, title,slug, parent")
                 .is("parent", null);
 
             setTopLevel(topLevel);
@@ -38,25 +38,20 @@ export default function CategoryMenu() {
                         );
                         if (childfilter.length == 0)
                             return (
-                                <li key={children.name}>
-                                    <Link href={`/categories/${children.id}`}>
-                                        {children.name}
+                                <li key={children.title}>
+                                    <Link href={`/categories/${children.slug}`}>
+                                        {children.title}
                                     </Link>
                                 </li>
                             );
                         else
                             return (
-                                // <ul
-                                //     className="menu bg-base-100 w-fit z-10"
-                                //     key={children.name}
-                                // >
                                 <li>
-                                    <Link href={`/categories/${children.id}`}>
-                                        {children.name}
+                                    <Link href={`/categories/${children.slug}`}>
+                                        {children.title}
                                     </Link>
                                     {recursiveCat(children)}
                                 </li>
-                                // </ul>
                             );
                     })}
                 </ul>
@@ -67,19 +62,10 @@ export default function CategoryMenu() {
         <>
             {topLevel?.map((item) => (
                 <li key={item.id}>
-                    <Link href={"/categories/" + item.id}>{item.name}</Link>
+                    <Link href={"/categories/" + item.slug}>{item.title}</Link>
                     {recursiveCat(item)}
                 </li>
             ))}
         </>
-    );
-    return (
-        <ul className="menu bg-base-100 w-fit p-2 z-10">
-            {topLevel?.map((item) => (
-                <li key={item.id}>
-                    <Link href={"/category/" + item.id}>{item.name}</Link>
-                </li>
-            ))}
-        </ul>
     );
 }

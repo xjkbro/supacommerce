@@ -15,9 +15,11 @@ export default function RouteTitle() {
                     <h1 className="text-3xl font-bold ml-4">
                         {title[0]?.name}
                     </h1>
-                    <Link href={path + "/add"} className="btn btn-primary">
-                        Add
-                    </Link>
+                    {path != "/admin" && (
+                        <Link href={path + "/add"} className="btn btn-primary">
+                            Add
+                        </Link>
+                    )}
                 </div>
                 <hr className="mb-4 mt-2" />
             </>

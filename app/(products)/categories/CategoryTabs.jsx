@@ -142,13 +142,17 @@ export default function CategoryTabs({ category, subcategories, products }) {
                 </>
             )}
             {tabs[active] == "More Details" && (
-                <p>
-                    {category.description > 0 ? (
-                        category.description
-                    ) : (
-                        <>Some Details</>
-                    )}
-                </p>
+                <div
+                    className="prose max-w-full"
+                    dangerouslySetInnerHTML={{ __html: category.description }}
+                />
+                // <p>
+                //     {category.description > 0 ? (
+                //         category.description
+                //     ) : (
+                //         <>Some Details</>
+                //     )}
+                // </p>
             )}
         </div>
     );

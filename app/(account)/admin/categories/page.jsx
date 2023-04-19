@@ -11,10 +11,10 @@ export default async function Categories() {
 
     let { data: categories } = await supabase
         .from("categories")
-        .select("id, name, parent");
+        .select("id, title, parent");
     let { data: topLevel } = await supabase
         .from("categories")
-        .select("id, name, parent")
+        .select("id, title, parent")
         .is("parent", null);
 
     console.log("=========================");
@@ -32,22 +32,22 @@ export default async function Categories() {
                         );
                         if (childfilter.length == 0)
                             return (
-                                <li key={children.name}>
+                                <li key={children.title}>
                                     <Link
                                         href={`/admin/categories/${children.id}`}
                                     >
-                                        {children.name}
+                                        {children.title}
                                     </Link>
                                 </li>
                             );
                         else
                             return (
-                                <ul className="" key={children.name}>
+                                <ul className="" key={children.title}>
                                     <li>
                                         <Link
                                             href={`/admin/categories/${children.id}`}
                                         >
-                                            {children.name}
+                                            {children.title}
                                         </Link>
                                     </li>
                                     {recursiveCat(children)}
@@ -61,10 +61,10 @@ export default async function Categories() {
     return (
         <div className="prose w-full">
             {topLevel.map((topCat) => (
-                <ul key={topCat.name}>
+                <ul key={topCat.title}>
                     <li>
                         <Link href={`/admin/categories/${topCat.id}`}>
-                            {topCat.name}
+                            {topCat.title}
                         </Link>
                     </li>
                     {recursiveCat(topCat)}

@@ -31,3 +31,8 @@ input[type="number"] {
 #category-menu.menu > :where(li) > :where(ul) :where(li) :where(ul) {
     padding-left: 0rem;
 } */
+
+.prose iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+}

@@ -93,11 +93,11 @@ export default function NavBar({ user }) {
                             </ul>
                         </li>
                         <li>
-                            <Link href="/category">Software</Link>
+                            <Link href="/categories/software">Software</Link>
                             <SoftwareMenu />
                         </li>
                         <li>
-                            <Link href="/category">Solutions</Link>
+                            <Link href="/solutions">Solutions</Link>
                             <SolutionsMenu />
                         </li>
                         <li>
