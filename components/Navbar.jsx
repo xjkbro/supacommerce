@@ -65,7 +65,7 @@ export default function NavBar({ user }) {
     if (path == "/login" || path == "/register") return <></>;
     return (
         <>
-            <div className="hidden md:navbar  bg-[#ffffff45] backdrop-blur-lg backdrop-brightness-125 backdrop-contrast-51 backdrop-saturate-150 shadow-xl z-[29] sticky top-0">
+            <div className="hidden md:navbar  bg-[#ffffff45] hover:bg-white transition-all backdrop-blur-lg backdrop-brightness-125 backdrop-contrast-51 backdrop-saturate-150 shadow-xl z-[29] sticky top-0">
                 <div className="flex-1">
                     <Link name="Logo" href="/">
                         <LongLogo className="w-48 h-12" />

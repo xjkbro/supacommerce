@@ -8,7 +8,7 @@ const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
 export default function Editor({ value, onChange }) {
     return (
         <QuillNoSSRWrapper
-            className="h-96 mb-12 z-50"
+            // className="min-h-[24rem]"
             onChange={onChange}
             value={value}
             modules={modules}

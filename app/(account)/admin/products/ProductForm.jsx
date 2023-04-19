@@ -4,52 +4,32 @@ import DragAndDrop from "@/components/ui/DragAndDrop";
 import { useFormik } from "formik";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-// import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-// import remarkGfm from "remark-gfm";
-// import { v4 as uuidv4 } from "uuid";
-
-// import "@uiw/react-md-editor/markdown-editor.css";
-// import "@uiw/react-markdown-preview/markdown.css";
-// import dynamic from "next/dynamic";
-
-// const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
-// import JSONInput from "react-json-editor-ajrm";
-// import locale from "react-json-editor-ajrm/locale/en";
-// import { Fragment } from "react";
-// import { Editor } from "@tinymce/tinymce-react";
 import Editor from "@/components/Editor";
 import { slugify } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
-const specificationPlaceholder = [
-    { heading: "", rows: [{ key: "", value: "" }] },
-];
-
-export default function ProductForm({ product, bucket }) {
+export default function ProductForm({ product, categories, bucket, category }) {
     const { supabase } = useSupabase();
-    // const editorRef = useRef(null);
-    // const [description, setDescription] = useState(
-    //     product?.description ? product.description : ""
-    // );
-    // const [specifications, setSpecifications] = useState(
-    //     product?.specifications ? product.specifications : ""
-    // );
+    const router = useRouter();
+    const productImageInput = useRef();
+    const [imgArr, setImgArr] = useState(bucket ? bucket : []);
     const [jsonSpecifications, setJsonSpecifications] = useState(
         product?.json_specifications
             ? product.json_specifications
             : specificationPlaceholder
     );
-    const productImageInput = useRef();
-    const [imgArr, setImgArr] = useState(bucket);
-
     const formik = useFormik({
         initialValues: {
-            title: product?.title,
-            slug: product?.slug,
-            price: product?.price,
-            short_description: product?.short_description,
-            description: product?.description,
-            available: product?.available,
-            visible: product?.visible,
+            title: product?.title ? product.title : "",
+            slug: product?.slug ? product.slug : "",
+            price: product?.price ? product.price : "",
+            short_description: product?.short_description
+                ? product.short_description
+                : "",
+            description: product?.description ? product.description : "",
+            available: product?.available ? product.available : true,
+            visible: product?.visible ? product.visible : true,
+            category: category?.category_id ? category.category_id : "",
         },
         onSubmit: handleSubmit,
     });
@@ -72,32 +52,83 @@ export default function ProductForm({ product, bucket }) {
         setImgArr(data);
     }
     async function handleSubmit(values) {
-        const { error } = await supabase
-            .from("products")
-            .update({
-                title: values.title,
-                slug: values.slug,
-                price: parseFloat(values.price),
-                short_description: values.short_description,
-                description: values.description,
-                // specifications,
-                json_specifications: jsonSpecifications,
-                available: values.available,
-                visible: values.visible,
-            })
-            .eq("id", product.id);
-
         const rand = Math.random() * (1000 - 100) + 100;
-        imgArr.map(async (item, i) => {
-            const { data, error } = await supabase.storage
+
+        if (product) {
+            const { data: updatedProd, error } = await supabase
                 .from("products")
-                .move(
-                    `${product.id}/${item.name}`,
-                    `${product.id}/${i + rand}.png`
-                );
-            item.name = `${i + rand}.png`;
-        });
-        console.log(imgArr);
+                .update({
+                    title: values.title,
+                    slug: values.slug,
+                    price: parseFloat(values.price),
+                    short_description: values.short_description,
+                    description: values.description,
+                    json_specifications: jsonSpecifications,
+                    available: values.available,
+                    visible: values.visible,
+                })
+                .eq("id", product.id);
+            imgArr.map(async (item, i) => {
+                const { data, error } = await supabase.storage
+                    .from("products")
+                    .move(
+                        `${product.id}/${item.name}`,
+                        `${product.id}/${i + rand}.png`
+                    );
+                item.name = `${i + rand}.png`;
+            });
+            // Upserts item to product_to_category table
+            if (category != null) {
+                const { data: productCategory } = await supabase
+                    .from("product_to_category")
+                    .upsert({
+                        id: category.id,
+                        product_id: product.id,
+                        category_id: values.category,
+                    });
+            } else {
+                const { data: productCategory } = await supabase
+                    .from("product_to_category")
+                    .insert({
+                        product_id: product.id,
+                        category_id: values.category,
+                    });
+            }
+            router.refresh();
+        } else {
+            const { data, error } = await supabase
+                .from("products")
+                .insert({
+                    title: values.title,
+                    slug: values.slug,
+                    price: parseFloat(values.price),
+                    short_description: values.short_description,
+                    description: values.description,
+                    json_specifications: jsonSpecifications,
+                    available: values.available,
+                    visible: values.visible,
+                })
+                .select("*")
+                .single();
+            imgArr.map(async (item, i) => {
+                const { data: img, error } = await supabase.storage
+                    .from("products")
+                    .move(
+                        `${product.id}/${item.name}`,
+                        `${product.id}/${i + rand}.png`
+                    );
+                item.name = `${i + rand}.png`;
+            });
+            // Upserts item to product_to_category table
+            const { data: productCategory } = await supabase
+                .from("product_to_category")
+                .insert({
+                    // id: category.id,
+                    product_id: data.id,
+                    category_id: values.category,
+                });
+            router.push("/admin/products/" + data.id);
+        }
     }
 
     return (
@@ -112,26 +143,30 @@ export default function ProductForm({ product, bucket }) {
                         <button type="submit" className="btn btn-primary">
                             Save
                         </button>
-                        <Link
-                            prefetch={false}
-                            href={"/products/" + product.slug}
-                            className="btn btn-outline"
-                        >
-                            View
-                        </Link>
-                        <button
-                            className="btn btn-error cursor-pointer"
-                            onClick={async (e) => {
-                                e.preventDefault();
-                                const { data } = await supabase
-                                    .from("products")
-                                    .delete()
-                                    .match({ id: post.id });
-                                router.push("/admin/products");
-                            }}
-                        >
-                            Delete
-                        </button>
+                        {product && (
+                            <>
+                                <Link
+                                    prefetch={false}
+                                    href={"/products/" + product.slug}
+                                    className="btn btn-outline"
+                                >
+                                    View
+                                </Link>
+                                <button
+                                    className="btn btn-error cursor-pointer"
+                                    onClick={async (e) => {
+                                        e.preventDefault();
+                                        const { data } = await supabase
+                                            .from("products")
+                                            .delete()
+                                            .match({ id: product.id });
+                                        router.push("/admin/products");
+                                    }}
+                                >
+                                    Delete
+                                </button>
+                            </>
+                        )}
                     </div>
                     <div name="title" className="form-control w-full">
                         <label className="label">
@@ -197,12 +232,14 @@ export default function ProductForm({ product, bucket }) {
                         </label>
                         <div className="flex">
                             <input
+                                disabled={product ? false : true}
                                 ref={productImageInput}
                                 type="file"
                                 accept="image/png"
                                 className="file-input file-input-bordered w-full focus:outline-none"
                             />
                             <button
+                                disabled={product ? false : true}
                                 className="btn btn-outline"
                                 onClick={(e) => {
                                     e.preventDefault();
@@ -212,11 +249,13 @@ export default function ProductForm({ product, bucket }) {
                                 Upload
                             </button>
                         </div>
-                        <DragAndDrop
-                            path={product.id}
-                            array={imgArr}
-                            arraySetter={setImgArr}
-                        />
+                        {product && (
+                            <DragAndDrop
+                                path={product.id}
+                                array={imgArr}
+                                arraySetter={setImgArr}
+                            />
+                        )}
                     </div>
                     <div name="price" className="form-control w-full">
                         <label className="label">
@@ -274,6 +313,26 @@ export default function ProductForm({ product, bucket }) {
                             {...formik.getFieldProps("short_description")}
                         />
                     </div>
+                    <div name="category" className="form-control w-full">
+                        <label className="label">
+                            <span className="label-text">Category</span>
+                        </label>
+                        <select
+                            defaultValue={category ? category.category_id : ""}
+                            className="select select-bordered w-full"
+                            {...formik.getFieldProps("category")}
+                        >
+                            <option value="" selected>
+                                None
+                            </option>
+                            {categories.map((item) => (
+                                <option key={item.id} value={item.id}>
+                                    {item.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
                     <Editor
                         value={formik.values.description}
                         onChange={(description) => {
@@ -288,13 +347,6 @@ export default function ProductForm({ product, bucket }) {
                         <button type="submit" className="btn btn-primary">
                             Save
                         </button>
-                        <Link
-                            prefetch={false}
-                            href={"/products/" + product.slug}
-                            className="btn btn-outline"
-                        >
-                            View
-                        </Link>
                     </div>
                 </form>
             </div>
@@ -302,14 +354,18 @@ export default function ProductForm({ product, bucket }) {
     );
 }
 
+const specificationPlaceholder = [
+    { heading: "", rows: [{ key: "", value: "" }] },
+];
+
 const SpecificationInput = ({
     input: { jsonSpecifications: data, setJsonSpecifications: setData },
 }) => {
     const baseTable = { heading: "", rows: [{ key: "", value: "" }] };
     const baseRow = { key: "", value: "" };
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
+    // useEffect(() => {
+    //     console.log(data);
+    // }, [data]);
     const handleInput = (event, tableIndex, rowIndex, type) => {
         const temp = [...data];
         switch (type) {

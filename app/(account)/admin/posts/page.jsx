@@ -1,6 +1,7 @@
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
 import Link from "next/link";
+import PostsTable from "./PostsTable";
 
 export const revalidate = 0;
 
@@ -29,43 +30,10 @@ export default async function Categories() {
         )[0];
         return { ...item, category: cat.title };
     });
+    console.log(arr);
     return (
         <div>
-            <table className="table table-compact w-full">
-                <thead>
-                    <tr>
-                        <th className="rounded-none bg-primary text-white">
-                            Title
-                        </th>
-                        <th className="rounded-none bg-primary text-white">
-                            Type
-                        </th>
-                        <th className="rounded-none bg-primary text-white">
-                            Published Date
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {arr.map((item) => {
-                        return (
-                            <tr className="text-sm" key={item.id}>
-                                <td>
-                                    <Link
-                                        className="font-bold"
-                                        href={"/admin/posts/" + item.id}
-                                    >
-                                        {item.title}
-                                    </Link>
-                                </td>
-                                <td>{item.category}</td>
-                                <td>
-                                    {new Date(item.created_at).toDateString()}
-                                </td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+            <PostsTable posts={arr} />
         </div>
     );
 }

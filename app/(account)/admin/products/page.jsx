@@ -1,4 +1,4 @@
-import ProductGrid from "./ProductGrid";
+import ProductTable from "./ProductTable";
 
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
@@ -17,11 +17,11 @@ export default async function Products() {
         .select(
             "id, title, slug, image, short_description, price, visible, available"
         )
-        .eq("visible", true)
+        // .eq("visible", true)
         .order("title", { ascending: true });
     return (
         <div>
-            <ProductGrid products={products} />
+            <ProductTable products={products} />
         </div>
     );
 }

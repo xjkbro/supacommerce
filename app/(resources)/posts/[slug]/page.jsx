@@ -41,7 +41,7 @@ export default async function SingleArticle({ params }) {
                     Go back
                 </Link>
             </div>
-            <div className=" col-span-2 prose">
+            <div className=" col-span-2 prose w-full">
                 <Image
                     src={supabaseCDN("posts", post.slug + ".png")}
                     alt="feature"

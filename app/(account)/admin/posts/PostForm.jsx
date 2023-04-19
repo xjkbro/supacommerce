@@ -1,9 +1,13 @@
 "use client";
 import { useSupabase } from "@/components/providers/supabase-provider";
 import { useFormik } from "formik";
-import { useRouter, use } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import Editor from "@/components/Editor";
+import Link from "next/link";
+import { supabaseCDN } from "@/lib/supabase-cdn";
+import Image from "next/image";
+import { slugify } from "@/lib/utils";
 
 export default function PostForm({ post, categories, category }) {
     const { supabase } = useSupabase();
@@ -93,19 +97,27 @@ export default function PostForm({ post, categories, category }) {
                             Save
                         </button>
                         {post && (
-                            <button
-                                className="btn btn-error cursor-pointer"
-                                onClick={async (e) => {
-                                    e.preventDefault();
-                                    const { data } = await supabase
-                                        .from("posts")
-                                        .delete()
-                                        .match({ id: post.id });
-                                    router.push("/admin/posts");
-                                }}
-                            >
-                                Delete
-                            </button>
+                            <>
+                                <Link
+                                    className="btn btn-outline"
+                                    href={"/posts/" + formik.values.slug}
+                                >
+                                    View
+                                </Link>
+                                <button
+                                    className="btn btn-error cursor-pointer"
+                                    onClick={async (e) => {
+                                        e.preventDefault();
+                                        const { data } = await supabase
+                                            .from("posts")
+                                            .delete()
+                                            .match({ id: post.id });
+                                        router.push("/admin/posts");
+                                    }}
+                                >
+                                    Delete
+                                </button>
+                            </>
                         )}
                     </div>
                     <div className="form-control w-full">
@@ -123,12 +135,48 @@ export default function PostForm({ post, categories, category }) {
                         <label className="label">
                             <span className="label-text">Slug</span>
                         </label>
-                        <input
-                            type="text"
-                            placeholder="Type here"
-                            className="input input-bordered w-full "
-                            {...formik.getFieldProps("slug")}
-                        />
+                        <div className="flex flex-wrap items-center w-full">
+                            <input
+                                type="text"
+                                placeholder="Type here"
+                                className="input input-bordered flex-grow "
+                                {...formik.getFieldProps("slug")}
+                            />
+                            <span
+                                className="tooltip w-12 before:-translate-x-48"
+                                data-tip="Must have title filled out to work"
+                            >
+                                <button
+                                    disabled={formik.values.title.length == 0}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        console.log(
+                                            slugify(formik.values.title)
+                                        );
+                                        formik.setFieldValue(
+                                            "slug",
+                                            slugify(formik.values.title)
+                                        );
+                                    }}
+                                    className="btn btn-square btn-outline"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        strokeWidth={1.5}
+                                        stroke="currentColor"
+                                        className="w-6 h-6"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                                        />
+                                    </svg>
+                                </button>
+                            </span>
+                        </div>
                     </div>
                     <div className="form-control w-full">
                         <label className="label">
@@ -162,11 +210,23 @@ export default function PostForm({ post, categories, category }) {
                     </div>
 
                     <div name="image" className="form-control w-full">
-                        {/* <div>
-                            <Image src={}/>
-                        </div> */}
+                        {post ? (
+                            <div className="mx-auto">
+                                <Image
+                                    src={supabaseCDN(
+                                        "posts",
+                                        formik.values.slug + ".png"
+                                    )}
+                                    alt={formik.values.title}
+                                    width={200}
+                                    height={200}
+                                />
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                         <label className="label">
-                            <span className="label-text">Upload File</span>
+                            <span className="label-text">Feature Image</span>
                         </label>
                         <div className="flex">
                             <input

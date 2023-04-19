@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export default function ProductGrid({ products }) {
+export default function ProductTable({ products }) {
     const [page, setPage] = useState(0);
     const [perPage, setPerPage] = useState(25);
     const [pagedProducts, setPageProducts] = useState([]);

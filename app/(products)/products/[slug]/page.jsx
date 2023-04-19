@@ -5,6 +5,7 @@ import ImageLayout from "./ImageLayout";
 import CartHandler from "./CartHandler";
 import JSONSpecificationTable from "@/components/ui/products/JSONSpecificationTable";
 import DownloadsReferences from "./DownloadsReferences";
+import { notFound } from "next/navigation";
 
 export const revalidate = 0;
 
@@ -19,6 +20,10 @@ export default async function SingleProduct({ params }) {
         .select("*")
         .eq("slug", params.slug)
         .single();
+
+    if (!product) {
+        notFound();
+    }
 
     let { data: bucket, error: bucketError } = await supabase.storage
         .from("products")
@@ -46,7 +51,7 @@ export default async function SingleProduct({ params }) {
         `
         )
         .eq("product_id", product.id);
-
+    console.log(product.json_specifications);
     return (
         <main className="bg-base-100 shadow-lg md:border border-base-200 w-11/12 md:w-3/4 my-12 rounded-xl mx-auto md:y-12">
             <div className="max-h-1/2 h-1/2 w-11/12 mx-auto mb-12">
@@ -166,39 +171,58 @@ export default async function SingleProduct({ params }) {
                             </div> */}
                         </div>
 
-                        <div className="my-2">
-                            <h3 className="text-xl font-bold my-4">
-                                Product Documentation & References
-                            </h3>
-                            <DownloadsReferences
-                                productDownloads={productDownloads}
-                            />
-                        </div>
+                        {productDownloads.length > 0 ? (
+                            <div className="my-2">
+                                <h3 className="text-xl font-bold my-4">
+                                    Product Documentation & References
+                                </h3>
+                                <DownloadsReferences
+                                    productDownloads={productDownloads}
+                                />
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                     </div>
                 </div>
             </div>
-            <hr />
-            <h2 className="text-2xl font-bold m-4 text-center ">
-                Introduction
-            </h2>
-            <div className="prose max-w-full m-8 ">
-                {/* <ReactMarkdown
-                    className="overflow-scroll"
-                    remarkPlugins={[remarkGfm]}
-                >
-                    {product.description}
-                </ReactMarkdown> */}
-                <div
-                    dangerouslySetInnerHTML={{ __html: product.description }}
-                />
-            </div>
-            <hr />
-            <h2 className="text-2xl font-bold m-4 text-center ">
-                Specifications
-            </h2>
-            <div className="max-w-full md:m-8">
-                <JSONSpecificationTable data={product.json_specifications} />
-            </div>
+
+            {product.description == "" ? (
+                <></>
+            ) : (
+                <>
+                    <hr />
+                    <h2 className="text-2xl font-bold m-4 text-center ">
+                        Product Description
+                    </h2>
+                    <div className="prose max-w-full m-8 ">
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: product.description,
+                            }}
+                        />
+                    </div>
+                </>
+            )}
+
+            {product?.json_specifications == "" ||
+            product?.json_specifications == null ||
+            product?.json_specifications ==
+                { heading: "", rows: [{ key: "", value: "" }] } ? (
+                <></>
+            ) : (
+                <>
+                    <hr />
+                    <h2 className="text-2xl font-bold m-4 text-center ">
+                        Specifications
+                    </h2>
+                    <div className="max-w-full md:m-8">
+                        <JSONSpecificationTable
+                            data={product.json_specifications}
+                        />
+                    </div>
+                </>
+            )}
         </main>
     );
 }

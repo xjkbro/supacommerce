@@ -16,6 +16,7 @@ export default async function Article() {
     let { data: posts } = await supabase
         .from("posts")
         .select("id,title,slug,short_description, created_at");
+    // let {data: categories}
     return (
         <div className=" mx-auto w-11/12 md:w-3/4 my-12">
             <div>
@@ -97,7 +98,7 @@ export default async function Article() {
                 </div> */}
                 </div>
                 <div className=" col-span-2 flex flex-col gap-4">
-                    {posts.map((item) => (
+                    {[...posts, ...posts, ...posts].map((item) => (
                         <Link
                             key={item.id}
                             className="hover:bg-base-200 transition-all p-4 grid md:grid-cols-4 grid-cols-1 items-center gap-2"
