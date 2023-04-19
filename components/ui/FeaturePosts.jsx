@@ -13,45 +13,6 @@ export default async function FeaturePosts() {
     let { data: posts } = await supabase
         .from("posts")
         .select("id,title,slug,short_description");
-
-    // const testArr = [
-    //     {
-    //         title: "Test 1",
-    //         description:
-    //             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo eveniet recusandae repudiandae!",
-    //         image: "https://plus.unsplash.com/premium_photo-1663011472110-7eae3fcd7a22?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80",
-    //     },
-    //     {
-    //         title: "Test 2",
-    //         description:
-    //             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo eveniet recusandae repudiandae!",
-    //         image: "https://images.unsplash.com/photo-1493476523860-a6de6ce1b0c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2338&q=80",
-    //     },
-    //     {
-    //         title: "Test 3",
-    //         description:
-    //             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo eveniet recusandae repudiandae!",
-    //         image: null,
-    //     },
-    //     {
-    //         title: "Test 4",
-    //         description:
-    //             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo eveniet recusandae repudiandae!",
-    //         image: "https://images.unsplash.com/photo-1498631906572-66c58d46ecf7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2483&q=80",
-    //     },
-    //     {
-    //         title: "Test 5",
-    //         description:
-    //             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo eveniet recusandae repudiandae!",
-    //         image: "https://images.unsplash.com/photo-1485083269755-a7b559a4fe5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2338&q=80",
-    //     },
-    //     {
-    //         title: "Test 6",
-    //         description:
-    //             "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo eveniet recusandae repudiandae!",
-    //         image: "https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80",
-    //     },
-    // ];
     return (
         <div className="w-11/12 md:w-3/4 my-12 mx-auto">
             <div className="flex justify-between items-center">
@@ -64,9 +25,9 @@ export default async function FeaturePosts() {
                 </Link>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
-                {[...posts, ...posts, ...posts].map((item, i) => (
+                {[...posts, ...posts].map((item, i) => (
                     <div
-                        key={item.title}
+                        key={item.title + i}
                         className="card w-full h-full bg-base-100 shadow-xl image-full"
                     >
                         <figure>

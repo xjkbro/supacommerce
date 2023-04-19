@@ -19,6 +19,7 @@ export default async function Products() {
         )
         // .eq("visible", true)
         .order("title", { ascending: true });
+
     return (
         <div>
             <ProductTable products={products} />

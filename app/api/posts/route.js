@@ -1,19 +1,15 @@
 import { createRouteHandlerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { headers, cookies } from "next/headers";
 
 // do not cache this page
 export const revalidate = 0;
 
-export async function GET(request) {
+export async function GET() {
     const supabase = createRouteHandlerSupabaseClient({
         headers,
         cookies,
     });
-    const { data } = await supabase
-        .from("products")
-        .select("id,title,slug,short_description,price")
-        .eq("visible", true);
-
+    const { data } = await supabase.from("posts").select("*");
     return NextResponse.json(data);
 }

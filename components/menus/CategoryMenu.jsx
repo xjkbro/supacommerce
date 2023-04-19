@@ -38,7 +38,7 @@ export default function CategoryMenu() {
                         );
                         if (childfilter.length == 0)
                             return (
-                                <li key={children.title}>
+                                <li key={children.id}>
                                     <Link href={`/categories/${children.slug}`}>
                                         {children.title}
                                     </Link>
@@ -46,7 +46,7 @@ export default function CategoryMenu() {
                             );
                         else
                             return (
-                                <li>
+                                <li key={children.id}>
                                     <Link href={`/categories/${children.slug}`}>
                                         {children.title}
                                     </Link>

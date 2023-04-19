@@ -5,25 +5,30 @@ import { useSupabase } from "./providers/supabase-provider";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
+import useSWR from "swr";
+const fetcher = (url) =>
+    fetch(url, { method: "GET" }).then((res) => res.json());
+
 export default function SearchBar() {
     const router = useRouter();
     const [showResults, setShowResults] = useState(false);
     const [liveSearch, setLiveSearch] = useState([]);
     const searchForm = useRef();
     const { supabase } = useSupabase();
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
+
+    const { data: products, error } = useSWR("api/products", fetcher);
 
     useEffect(() => {
-        async function getProducts() {
-            const { data } = await supabase
-                .from("products")
-                .select("title,slug,short_description, image")
-                .order("title", { ascending: false });
-
-            // console.log(data);
-            if (data) setProducts(data);
-        }
-        getProducts();
+        // async function getProducts() {
+        //     const { data } = await supabase
+        //         .from("products")
+        //         .select("title,slug,short_description, image")
+        //         .order("title", { ascending: false });
+        //     // console.log(data);
+        //     if (data) setProducts(data);
+        // }
+        // getProducts();
         // console.log(products);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

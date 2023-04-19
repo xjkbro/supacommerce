@@ -46,7 +46,10 @@ export default function DownloadForm({
                 .from("downloads")
                 .upload(
                     `${download.id}/${downloadInput.current.files[0].name}`,
-                    downloadInput.current.files[0]
+                    downloadInput.current.files[0],
+                    {
+                        upsert: true,
+                    }
                 );
         }
         const { data, error } = await supabase.storage
