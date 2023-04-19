@@ -132,9 +132,9 @@ export default function ProductForm({ product, categories, bucket, category }) {
     }
 
     return (
-        <div className="grid grid-cols-1 ms:grid-cols-2 gap-4 md:h-[90vh]">
+        <div className="grid grid-cols-1 ms:grid-cols-2 gap-4 md:min-h-[90vh]">
             {/* Product Form */}
-            <div className="w-full p-2 overflow-y-scroll ">
+            <div className="w-full p-2">
                 <form
                     onSubmit={formik.handleSubmit}
                     className="flex flex-col gap-4 p-2"

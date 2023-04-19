@@ -33,3 +33,5 @@ yarn-error.log*
 
 markdown
 # /public/tinymce/
+.schema
+*.old.jsx
