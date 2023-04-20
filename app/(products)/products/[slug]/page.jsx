@@ -64,10 +64,10 @@ export default async function SingleProduct({ params }) {
                                     <Link href="/">Home</Link>
                                 </li>
                                 <li>
-                                    <Link href="/category/">Products</Link>
+                                    <Link href="/products/">Products</Link>
                                 </li>
                                 <li>
-                                    <Link href={"/category/" + c.id}>
+                                    <Link href={"/categories/" + c.id}>
                                         {c.title}
                                     </Link>
                                 </li>

@@ -34,12 +34,6 @@ export default function Login() {
             router.refresh();
             router.replace("/");
         }
-        // if (user) router.replace("/");
-
-        // setEmail(user.email);
-
-        // const { data } = await supabase.auth.getSession();
-        // setSession(data);
     }
     return (
         <>
