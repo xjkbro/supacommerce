@@ -57,6 +57,7 @@ export default function ProductTable({ products }) {
                 </div>
                 <div className="flex gap-2">
                     <Link
+                        prefetch={false}
                         className="btn btn-primary"
                         href="/admin/products/add"
                     >
@@ -94,6 +95,7 @@ export default function ProductTable({ products }) {
                             <tr key={item.slug} className="">
                                 <td>
                                     <Link
+                                        prefetch={false}
                                         className="w-full font-bold whitespace-normal"
                                         href={"/admin/products/" + item.id}
                                     >

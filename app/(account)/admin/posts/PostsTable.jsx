@@ -28,6 +28,7 @@ export default function PostsTable({ posts }) {
                             <tr className="text-sm" key={item.id}>
                                 <td>
                                     <Link
+                                        prefetch={false}
                                         className="font-bold"
                                         href={"/admin/posts/" + item.id}
                                     >

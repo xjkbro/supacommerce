@@ -12,10 +12,15 @@ export default function AdminMenu() {
             {adminRoutes.map((item, i) => (
                 <li className={path == item.path ? "bordered" : ""} key={i}>
                     <div className="flex justify-between">
-                        <Link className="w-full" href={item.path}>
+                        <Link
+                            prefetch={false}
+                            className="w-full"
+                            href={item.path}
+                        >
                             {item.name}
                         </Link>
                         <Link
+                            prefetch={false}
                             href={item.path + "/add"}
                             className={
                                 (item.path == "/admin" && "hidden") +

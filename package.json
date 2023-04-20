@@ -12,7 +12,6 @@
         "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
     },
     "dependencies": {
-        "@stripe/stripe-js": "^1.52.0",
         "@supabase/auth-helpers-nextjs": "^0.5.6",
         "@supabase/supabase-js": "^2.13.1",
         "chart.js": "^4.2.1",
