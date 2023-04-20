@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 
 const QuillNoSSRWrapper = dynamic(() => import("react-quill"), {
-    // ssr: false,
+    ssr: false,
     loading: () => <p>Loading ...</p>,
 });
 export default function Editor({ value, onChange }) {
