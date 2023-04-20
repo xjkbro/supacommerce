@@ -20,16 +20,16 @@ export default function CategoryHeader({ category = null }) {
                 .single();
             setParent(data?.slug);
         }
-        if (category != null) {
+        if (category?.parent != null) {
             getParent();
         }
     });
     return (
         <div className="hero min-h-[24rem] max-h-[24rem] bg-secondary text-white">
             <div className="hero-content flex-col lg:flex-row">
-                {!hideImage ? (
+                {/* {!hideImage ? (
                     <Image
-                        className="w-fit rounded-lg"
+                        className="w-96 object-contain rounded-lg"
                         width={300}
                         height={300}
                         alt="cat"
@@ -42,7 +42,7 @@ export default function CategoryHeader({ category = null }) {
                     />
                 ) : (
                     <div className="w-96"></div>
-                )}
+                )} */}
                 <div className="md:w-2/3">
                     <h1 className="text-5xl font-bold">
                         {category?.title ?? "Products"}

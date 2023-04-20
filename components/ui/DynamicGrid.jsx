@@ -9,7 +9,7 @@ export default function DynamicGrid({ items }) {
 
     const grid = ["", "col-span-2", "row-span-2"];
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 grid-flow-row-dense">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2  grid-flow-row-dense">
             {items.map((item) => {
                 const rand = Math.floor(Math.random() * 3);
                 return (
@@ -21,19 +21,19 @@ export default function DynamicGrid({ items }) {
                             grid[rand]
                         }
                     >
-                        <figure>
+                        {/* <figure>
                             <Image
                                 className="w-full object-contain rounded-lg shadow-2xl"
                                 width={200}
                                 height={200}
-                                alt="item"
+                                priority
+                                alt={item.title}
                                 src={supabaseCDN(
                                     "categories",
                                     item.slug + ".png"
                                 )}
-                                // src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
                             />
-                        </figure>
+                        </figure> */}
                         <div className="card-body">
                             <h2 className="card-title">
                                 {item.title ?? "Lorem Ipsum"}

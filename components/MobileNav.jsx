@@ -50,28 +50,40 @@ export default function MobileNav({ children, user }) {
                         <span>Products</span>
                     </li>
                     <li>
-                        <Link href="/products">All Products</Link>
+                        <Link prefetch={false} href="/products">
+                            All Products
+                        </Link>
                     </li>
                     <li>
-                        <Link href="/products">New Products</Link>
+                        <Link prefetch={false} href="/products">
+                            New Products
+                        </Link>
                     </li>
                     <li>
-                        <Link href="/products">Phased Out Products</Link>
+                        <Link prefetch={false} href="/products">
+                            Phased Out Products
+                        </Link>
                     </li>
                     <li className="menu-title">
                         <span>Categories</span>
                     </li>
                     <li>
-                        <Link href="/products">New Products</Link>
+                        <Link prefetch={false} href="/products">
+                            New Products
+                        </Link>
                     </li>
                     <li className="menu-title">
                         <span>Resources</span>
                     </li>
                     <li>
-                        <Link href="/articles">Articles</Link>
+                        <Link prefetch={false} href="/articles">
+                            Articles
+                        </Link>
                     </li>
                     <li>
-                        <Link href="/webinars">Webinars</Link>
+                        <Link prefetch={false} href="/webinars">
+                            Webinars
+                        </Link>
                     </li>
                 </ul>
             </div>

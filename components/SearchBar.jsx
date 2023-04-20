@@ -17,7 +17,7 @@ export default function SearchBar() {
     const { supabase } = useSupabase();
     // const [products, setProducts] = useState([]);
 
-    const { data: products, error } = useSWR("api/products", fetcher);
+    const { data: products, error } = useSWR("/api/products", fetcher);
 
     useEffect(() => {
         // async function getProducts() {
@@ -49,7 +49,6 @@ export default function SearchBar() {
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
-                    // console.log(e.target[0].value);
                     router.push("/search?search=" + e.target[0].value);
                 }}
                 className="form-control menu relative md:w-[30vw]"
@@ -65,7 +64,10 @@ export default function SearchBar() {
                             setTimeout(() => setShowResults(false), 300);
                         }}
                     />
-                    <button className="btn btn-square btn-accent text-white">
+                    <button
+                        name="search"
+                        className="btn btn-square btn-accent text-white"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -81,47 +83,47 @@ export default function SearchBar() {
                             />
                         </svg>
                     </button>
-                </div>
-                {showResults ? (
-                    <ul className="menu fixed top-[4rem] bg-base-100 md:w-[30vw] p-2 shadow-sm rounded-box flex-nowrap h-fit max-h-[50vh] overflow-y-scroll">
-                        {liveSearch.length > 0 ? (
-                            <>
-                                {liveSearch.slice(0, 10).map((item, i) => (
-                                    <li key={i}>
-                                        <Link
-                                            href={"/products/" + item.slug}
-                                            className="flex gap-2"
-                                        >
-                                            <div className="">
-                                                {/* <Image
+                    {showResults ? (
+                        <ul className="menu fixed top-[4rem] bg-base-100 md:w-[30vw] p-2 shadow-sm rounded-box flex-nowrap h-fit max-h-[50vh] overflow-y-scroll">
+                            {liveSearch.length > 0 ? (
+                                <>
+                                    {liveSearch.slice(0, 10).map((item, i) => (
+                                        <li key={i}>
+                                            <Link
+                                                href={"/products/" + item.slug}
+                                                className="flex gap-2"
+                                            >
+                                                <div className="">
+                                                    {/* <Image
                                                     src={item.image}
                                                     width={32}
                                                     height={32}
                                                     alt={item.title}
                                                 /> */}
-                                            </div>
-                                            <div>
-                                                <div>{item.title}</div>
-                                                <div>
-                                                    {item.short_description
-                                                        ? item?.short_description?.replace(
-                                                              /(<([^>]+)>)/gi,
-                                                              ""
-                                                          )
-                                                        : "No Description"}
                                                 </div>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </>
-                        ) : (
-                            <li>No Results</li>
-                        )}
-                    </ul>
-                ) : (
-                    <></>
-                )}
+                                                <div>
+                                                    <div>{item.title}</div>
+                                                    <div>
+                                                        {item.short_description
+                                                            ? item?.short_description?.replace(
+                                                                  /(<([^>]+)>)/gi,
+                                                                  ""
+                                                              )
+                                                            : "No Description"}
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </>
+                            ) : (
+                                <li>No Results</li>
+                            )}
+                        </ul>
+                    ) : (
+                        <></>
+                    )}
+                </div>
             </form>
         </>
     );

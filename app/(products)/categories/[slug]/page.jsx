@@ -36,7 +36,7 @@ export default async function SingleCategory({ params }) {
     return (
         <main>
             <CategoryHeader category={category} />
-            <div className="w-11/12 md:w-3/4 my-12 mx-auto">
+            <div className="w-11/12 md:w-3/4 my-12 mx-auto min-h-[36rem]">
                 <CategoryTabs
                     category={category}
                     subcategories={children}

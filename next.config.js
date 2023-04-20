@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 // const removeImports = require("next-remove-imports")();
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: process.env.ANALYZE === "true",
+});
 const nextConfig = {
     experimental: {
         appDir: true,
@@ -16,6 +19,9 @@ const nextConfig = {
             },
         ],
     },
+    env: {
+        NEXT_PUBLIC_ENV: "PRODUCTION", //your next configs goes here
+    },
     // async redirects() {
     //     return [
     //         {
@@ -28,4 +34,4 @@ const nextConfig = {
 };
 
 // module.exports = removeImports(nextConfig);
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

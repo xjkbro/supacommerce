@@ -28,7 +28,7 @@ export default async function Category() {
                         key={cat.id}
                         className="card w-full bg-base-100 shadow-xl image-full"
                     >
-                        <figure>
+                        {/* <figure>
                             <Image
                                 className="w-full rounded-lg shadow-2xl"
                                 width={500}
@@ -37,7 +37,7 @@ export default async function Category() {
                                 priority
                                 src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"
                             />
-                        </figure>
+                        </figure> */}
                         <div className="card-body">
                             <h2 className="card-title">{cat.title}</h2>
                             <p>

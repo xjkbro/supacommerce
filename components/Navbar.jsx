@@ -80,28 +80,44 @@ export default function NavBar({ user }) {
                             >
                                 <CategoryMenu />
                                 <li>
-                                    <Link href="/products">New Products</Link>
+                                    <Link prefetch={false} href="/products">
+                                        New Products
+                                    </Link>
                                 </li>
                                 <li>
-                                    <Link href="/products/sale">On Sale</Link>
+                                    <Link
+                                        prefetch={false}
+                                        href="/products/sale"
+                                    >
+                                        On Sale
+                                    </Link>
                                 </li>
                                 <li>
-                                    <Link href="/products/phased-out">
+                                    <Link
+                                        prefetch={false}
+                                        href="/products/phased-out"
+                                    >
                                         Phased Out Items
                                     </Link>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <Link href="/categories/software">Software</Link>
+                            <Link prefetch={false} href="/categories/software">
+                                Software
+                            </Link>
                             <SoftwareMenu />
                         </li>
                         <li>
-                            <Link href="/solutions">Solutions</Link>
+                            <Link prefetch={false} href="/solutions">
+                                Solutions
+                            </Link>
                             <SolutionsMenu />
                         </li>
                         <li>
-                            <Link href="/resources">Resources</Link>
+                            <Link prefetch={false} href="/resources">
+                                Resources
+                            </Link>
                             <ResourcesMenu />
                         </li>
                     </ul>
@@ -219,7 +235,9 @@ export default function NavBar({ user }) {
                                 </li>
                                 {userRole == "admin" ? (
                                     <li>
-                                        <Link href="/admin">Dashboard</Link>
+                                        <Link prefetch={false} href="/admin">
+                                            Dashboard
+                                        </Link>
                                     </li>
                                 ) : (
                                     <></>
