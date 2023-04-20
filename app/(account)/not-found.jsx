@@ -7,7 +7,7 @@ export default function NotFound() {
             <h1 class="text-9xl font-extrabold text-white tracking-widest">
                 401
             </h1>
-            <div class="bg-accent px-2 text-sm rounded rotate-12 sticky text-base-100">
+            <div class="bg-accent px-2 text-sm rounded rotate-12  text-base-100 -translate-y-8">
                 Unauthorized
             </div>
             <Link href="/" class="mt-5 btn btn-accent text-base-100">

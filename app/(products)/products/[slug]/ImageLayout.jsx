@@ -79,7 +79,7 @@ export default function ImageLayout({ product, images }) {
                         ✕
                     </button>
                     <Image
-                        className="w-[50vh] h-[50vh] object-contain"
+                        className="w-96 h-96 object-contain"
                         width={1000}
                         height={1000}
                         alt="cat"

@@ -52,13 +52,18 @@ export default function Cart() {
                     {Object.values(cartDetails).length > 0 ? (
                         <>
                             <div className="overflow-x-auto w-full pb-8">
-                                <table className="hidden md:block table w-full ">
+                                <table className="hidden md:table w-full ">
                                     <thead className="text-center">
                                         <tr>
-                                            <th>Product</th>
-                                            <th>Quantity</th>
-                                            <th>Total</th>
-                                            <th></th>
+                                            <th className="!bg-primary text-white uppercase !rounded-none text-left">
+                                                Product
+                                            </th>
+                                            <th className="!bg-primary text-white uppercase !rounded-none">
+                                                Quantity
+                                            </th>
+                                            <th className="!bg-primary text-white uppercase !rounded-none">
+                                                Total
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -142,23 +147,10 @@ export default function Cart() {
                                                     <td>
                                                         {item.formattedValue}
                                                     </td>
-                                                    <th>
-                                                        {/* <button className="btn btn-ghost btn-xs">
-                                            details
-                                        </button> */}
-                                                    </th>
                                                 </tr>
                                             )
                                         )}
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Quantity</th>
-                                            <th>Total</th>
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                                 <div className="flex md:hidden flex-col gap-8 w-full">
                                     {Object.values(cartDetails).map((item) => (

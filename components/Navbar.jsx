@@ -115,7 +115,7 @@ export default function NavBar({ user }) {
                             <SolutionsMenu />
                         </li>
                         <li>
-                            <Link prefetch={false} href="/resources">
+                            <Link prefetch={false} href="/posts">
                                 Resources
                             </Link>
                             <ResourcesMenu />

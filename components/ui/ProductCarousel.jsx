@@ -10,7 +10,7 @@ export default function ProductCarousel({ items }) {
             cols={4}
             rows={1}
             gap={10}
-            loop
+            loop={true}
             autoplay={3000}
             responsiveLayout={[
                 {

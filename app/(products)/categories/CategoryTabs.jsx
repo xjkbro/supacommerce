@@ -8,9 +8,9 @@ const tabs = ["Subcategories", "Products", "More Details"];
 
 export default function CategoryTabs({ category, subcategories, products }) {
     const tabs = [];
-    if (subcategories.length > 0) tabs.push("Subcategories");
+    if (subcategories.length > 0) tabs.push("Categories");
     if (products.length > 0) tabs.push("Products");
-    tabs.push("More Details");
+    tabs.push("Details");
 
     const [active, setActive] = useState(0);
 
@@ -21,7 +21,7 @@ export default function CategoryTabs({ category, subcategories, products }) {
                     <a
                         key={i}
                         className={
-                            "tab tab-bordered text-3xl h-12 font-bold  " +
+                            "tab tab-bordered md:text-3xl text-lg h-8 md:h-12 font-bold  " +
                             (i == active && "tab-active")
                         }
                         onClick={() => setActive(i)}
@@ -30,7 +30,7 @@ export default function CategoryTabs({ category, subcategories, products }) {
                     </a>
                 ))}
             </div>
-            {tabs[active] == "Subcategories" && (
+            {tabs[active] == "Categories" && (
                 <DynamicGrid items={subcategories} />
             )}
             {tabs[active] == "Products" && (
@@ -141,7 +141,7 @@ export default function CategoryTabs({ category, subcategories, products }) {
                     )}
                 </>
             )}
-            {tabs[active] == "More Details" && (
+            {tabs[active] == "Details" && (
                 <div
                     className="prose max-w-full"
                     dangerouslySetInnerHTML={{ __html: category.description }}

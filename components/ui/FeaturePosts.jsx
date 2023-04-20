@@ -25,17 +25,17 @@ export default async function FeaturePosts() {
                 </Link>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
-                {[...posts, ...posts].map((item, i) => (
+                {[...posts].map((item, i) => (
                     <div
                         key={item.title + i}
-                        className="card w-full h-full bg-base-100 shadow-xl image-full"
+                        className="card w-full h-full bg-base-100 shadow-xl image-full aspect-square"
                     >
                         <figure>
                             <Image
                                 src={`https://anyzlthrxmlnduuesdhk.supabase.co/storage/v1/object/public/posts/${item.slug}.png`}
                                 alt={item.title}
                                 width={300}
-                                height={300}
+                                height={200}
                                 className="object-cover w-full h-full"
                             />
                         </figure>

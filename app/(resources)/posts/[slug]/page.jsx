@@ -4,6 +4,7 @@ import React from "react";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
 import { supabaseCDN } from "@/lib/supabase-cdn";
+import { notFound } from "next/navigation";
 
 export const revalidate = 3600;
 
@@ -17,12 +18,13 @@ export default async function SingleArticle({ params }) {
         .select("*")
         .eq("slug", params.slug)
         .single();
+    if (!post.id) notFound();
     return (
         <div className="md:grid grid-cols-3 mx-auto w-11/12 md:w-3/4 my-12">
             <div className=" col-span-1 justify-center">
                 <Link
                     className="flex gap-2 mb-4 md:justify-center"
-                    href="/article"
+                    href="/posts"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

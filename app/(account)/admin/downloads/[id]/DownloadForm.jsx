@@ -27,6 +27,7 @@ export default function DownloadForm({
     const [selectedProducts, setSelectedProducts] = useState(prodSelected);
     const [filteredSearch, setFilteredSearch] = useState([]);
 
+    console.log(selectedProducts);
     const formik = useFormik({
         initialValues: {
             name: download.name,

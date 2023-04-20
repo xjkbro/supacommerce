@@ -47,17 +47,18 @@ export default function PostForm({ post, categories, category }) {
                     slug: values.slug,
                     short_description: values.short_description,
                     content: values.content,
+                    category: values.category,
                 })
                 .select("*")
                 .single();
             // Upserts item to post_to_category table
-            const { data: postCategory } = await supabase
-                .from("post_to_category")
-                .upsert({
-                    id: category.id,
-                    post_id: data.id,
-                    category_id: values.category,
-                });
+            // const { data: postCategory } = await supabase
+            //     .from("post_to_category")
+            //     .upsert({
+            //         id: category.id,
+            //         post_id: data.id,
+            //         category_id: values.category,
+            //     });
             // router.push("/admin/posts/" + data.id);
             router.refresh();
         } else {
@@ -68,17 +69,18 @@ export default function PostForm({ post, categories, category }) {
                     slug: values.slug,
                     short_description: values.short_description,
                     content: values.content,
+                    category: values.category,
                 })
                 .select("*")
                 .single();
             // Upserts item to post_to_category table
-            const { data: postCategory } = await supabase
-                .from("post_to_category")
-                .insert({
-                    // id: category.id,
-                    post_id: data.id,
-                    category_id: values.category,
-                });
+            // const { data: postCategory } = await supabase
+            //     .from("post_to_category")
+            //     .insert({
+            //         // id: category.id,
+            //         post_id: data.id,
+            //         category_id: values.category,
+            //     });
             router.push("/admin/posts/" + data.id);
         }
 

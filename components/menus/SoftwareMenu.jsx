@@ -11,7 +11,7 @@ export default function SoftwareMenu() {
                 <span>Data Logging</span>
             </li>
             <li tabIndex={0}>
-                <Link href="/elogger">eLogger</Link>
+                <Link href="/feature/elogger">eLogger</Link>
                 <ul className="w-96 bg-base-100 whitespace-normal p-4">
                     <div className="font-bold">eLogger</div>
                     <div>
@@ -24,16 +24,16 @@ export default function SoftwareMenu() {
                 </ul>
             </li>
             <li>
-                <a>EZ Data Logger</a>
+                <Link href="/feature/ez-data-logger">EZ Data Logger</Link>
             </li>
             <li className="menu-title">
                 <span>HMI & SCADA Solutions</span>
             </li>
             <li>
-                <Link href="/indusoft">Indusoft</Link>
+                <a>Indusoft</a>
             </li>
             <li>
-                <Link href="/aveva">AVEVA</Link>
+                <a>AVEVA</a>
             </li>
         </ul>
     );
