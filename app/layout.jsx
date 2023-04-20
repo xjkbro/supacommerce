@@ -7,13 +7,13 @@ import SupabaseProvider from "@/components/providers/supabase-provider";
 // import NavBar from "@/components/Navbar";
 // import MobileNav from "@/components/MobileNav";
 import dynamic from "next/dynamic";
-const MobileNav = dynamic(() => import("@/components/MobileNav"), {
+const MobileNav = dynamic(() => import("../components/MobileNav"), {
     loading: () => <p>Loading...</p>,
 });
-const NavBar = dynamic(() => import("@/components/NavBar"), {
+const NavBar = dynamic(() => import("../components/NavBar"), {
     loading: () => <p>Loading...</p>,
 });
-const Footer = dynamic(() => import("@/components/Footer"), {
+const Footer = dynamic(() => import("../components/Footer"), {
     loading: () => <p>Loading...</p>,
 });
 
