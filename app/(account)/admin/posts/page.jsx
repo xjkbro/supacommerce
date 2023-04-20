@@ -13,27 +13,28 @@ export default async function Categories() {
 
     let { data: posts } = await supabase
         .from("posts")
-        .select("id,title,created_at");
-    let { data: categories } = await supabase
-        .from("post_category")
-        .select("title,id");
-    let { data: postCategories } = await supabase
-        .from("post_to_category")
-        .select("*");
+        .select("id,title,created_at, category (id, title, slug) ");
+    // let { data: categories } = await supabase
+    //     .from("post_category")
+    //     .select("title,id");
+    // let { data: postCategories } = await supabase
+    //     .from("post_to_category")
+    //     .select("*");
 
-    const arr = posts.map((item) => {
-        const postCategory = postCategories.filter(
-            (x) => item.id == x.post_id
-        )[0];
-        const cat = categories.filter(
-            (x) => x.id == postCategory.category_id
-        )[0];
-        return { ...item, category: cat.title };
-    });
-    console.log(arr);
+    // const arr = posts.map((item) => {
+    //     const postCategory = postCategories.filter(
+    //         (x) => item.id == x.post_id
+    //     )[0];
+    //     console.log(item, postCategory, postCategories);
+    //     const cat = categories.filter(
+    //         (x) => x.id == postCategory?.category_id
+    //     )[0];
+    //     return { ...item, category: cat?.title };
+    // });
+    // console.log(arr);
     return (
         <div>
-            <PostsTable posts={arr} />
+            <PostsTable posts={posts} />
         </div>
     );
 }

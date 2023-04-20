@@ -35,7 +35,7 @@ export default function PostsTable({ posts }) {
                                         {item.title}
                                     </Link>
                                 </td>
-                                <td>{item.category}</td>
+                                <td>{item.category.title}</td>
                                 <td>
                                     {new Date(item.created_at).toDateString()}
                                 </td>
