@@ -9,7 +9,7 @@ export default function DynamicGrid({ items }) {
 
     const grid = ["", "col-span-2", "row-span-2"];
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2  grid-flow-row-dense">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2  grid-flow-row-dense auto-rows-fr">
             {items.map((item) => {
                 const rand = Math.floor(Math.random() * 3);
                 return (

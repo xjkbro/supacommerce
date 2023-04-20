@@ -25,7 +25,7 @@ export default function CategoryHeader({ category = null }) {
         }
     });
     return (
-        <div className="text-white bg-secondary py-12">
+        <div className="text-white bg-gradient-to-r from-secondary to-primary py-12">
             <div className="grid grid-cols-1 md:grid-cols-3 w-3/4 mx-auto items-center min-h-[20rem] md:max-h-[20rem] gap-4">
                 <div className="col-span-1 md:col-span-2 order-2 md:order-1">
                     <h1 className="text-5xl font-bold">

@@ -7,6 +7,8 @@ import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-next
 import { headers, cookies } from "next/headers";
 import { supabaseCDN } from "@/lib/supabase-cdn";
 
+export const revalidate = 3600;
+
 export default async function Article() {
     // const arr = arbritraryArray(10);
     const supabase = createServerComponentSupabaseClient({
@@ -20,6 +22,9 @@ export default async function Article() {
         id, title, slug
         )
     `);
+    const { data: allCategories } = await supabase
+        .from("post_category")
+        .select("*");
     return (
         <div className=" mx-auto w-11/12 md:w-3/4 my-12">
             <div>
@@ -39,18 +44,13 @@ export default async function Article() {
                         </div>
                         <div className="collapse-content bg-white">
                             <ul className="menu w-full pt-4">
-                                <li>
-                                    <a>Item 1</a>
-                                </li>
-                                <li>
-                                    <a>Item 2</a>
-                                </li>
-                                <li>
-                                    <a>Item 1</a>
-                                </li>
-                                <li>
-                                    <a>Item 2</a>
-                                </li>
+                                {allCategories.map((item) => (
+                                    <li key={item.id}>
+                                        <Link href={"/" + item.slug}>
+                                            {item.title}
+                                        </Link>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
