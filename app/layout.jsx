@@ -25,6 +25,9 @@ export const metadata = {
     },
 };
 import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
+import Image from "next/image";
+import Link from "next/link";
 
 export default async function RootLayout({ children }) {
     const supabase = createServerComponentSupabaseClient({
@@ -49,6 +52,33 @@ export default async function RootLayout({ children }) {
                     </StripeProvider>
                 </SupabaseProvider>
                 <Analytics />
+                <Link
+                    title="Privacy-friendly Web Analytics"
+                    href="https://clicky.com/101407041"
+                >
+                    <Image
+                        alt="Clicky"
+                        width="1"
+                        height="1"
+                        src="https://static.getclicky.com/media/links/badge.gif"
+                        border="0"
+                    />
+                </Link>
+                <Script
+                    async
+                    data-id="101407041"
+                    src="//static.getclicky.com/js"
+                ></Script>
+                <noscript>
+                    <p>
+                        <Image
+                            alt="Clicky"
+                            width="1"
+                            height="1"
+                            src="https://in.getclicky.com/101407041ns.gif"
+                        />
+                    </p>
+                </noscript>
             </body>
         </html>
     );
