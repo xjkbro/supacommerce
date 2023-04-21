@@ -39,17 +39,16 @@ export default async function RootLayout({ children }) {
     return (
         <html lang="en" data-theme="icp">
             <body className="antialiased">
-                <Analytics>
-                    <SupabaseProvider>
-                        <StripeProvider>
-                            <MobileNav user={user}>
-                                <NavBar user={user} />
-                                {children}
-                                <Footer user={user} />
-                            </MobileNav>
-                        </StripeProvider>
-                    </SupabaseProvider>
-                </Analytics>
+                <SupabaseProvider>
+                    <StripeProvider>
+                        <MobileNav user={user}>
+                            <NavBar user={user} />
+                            {children}
+                            <Footer user={user} />
+                        </MobileNav>
+                    </StripeProvider>
+                </SupabaseProvider>
+                <Analytics />
             </body>
         </html>
     );
