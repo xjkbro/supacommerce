@@ -24,6 +24,7 @@ export const metadata = {
         icon: "/supacommerce-short.svg",
     },
 };
+import { Analytics } from "@vercel/analytics/react";
 
 export default async function RootLayout({ children }) {
     const supabase = createServerComponentSupabaseClient({
@@ -38,15 +39,17 @@ export default async function RootLayout({ children }) {
     return (
         <html lang="en" data-theme="icp">
             <body className="antialiased">
-                <SupabaseProvider>
-                    <StripeProvider>
-                        <MobileNav user={user}>
-                            <NavBar user={user} />
-                            {children}
-                            <Footer user={user} />
-                        </MobileNav>
-                    </StripeProvider>
-                </SupabaseProvider>
+                <Analytics>
+                    <SupabaseProvider>
+                        <StripeProvider>
+                            <MobileNav user={user}>
+                                <NavBar user={user} />
+                                {children}
+                                <Footer user={user} />
+                            </MobileNav>
+                        </StripeProvider>
+                    </SupabaseProvider>
+                </Analytics>
             </body>
         </html>
     );
