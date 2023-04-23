@@ -22,15 +22,15 @@ const nextConfig = {
     env: {
         NEXT_PUBLIC_ENV: "PRODUCTION", //your next configs goes here
     },
-    // async redirects() {
-    //     return [
-    //         {
-    //             source: "/:slug",
-    //             destination: "/api/redirect?slug=:slug",
-    //             permanent: false,
-    //         },
-    //     ];
-    // },
+    async redirects() {
+        return [
+            {
+                source: "/:slug([a-zA-Z0-9_.+-]*)(.html|.php)",
+                destination: "/posts/:slug(\\1)",
+                permanent: false,
+            },
+        ];
+    },
 };
 
 // module.exports = removeImports(nextConfig);

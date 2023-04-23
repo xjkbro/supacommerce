@@ -10,6 +10,8 @@ export async function GET() {
         headers,
         cookies,
     });
+    // console.log(cookies().getAll());
     const { data } = await supabase.from("posts").select("*");
+    console.log(data);
     return NextResponse.json(data);
 }
