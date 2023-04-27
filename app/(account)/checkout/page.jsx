@@ -238,12 +238,13 @@ export default function Cart() {
                                 >
                                     Checkout
                                 </button>
-                                <button
-                                    onClick={handleCartCheckout}
+                                <Link
+                                    href="/quotations"
+                                    // onClick={handleCartCheckout}
                                     className="btn btn-secondary btn-outline w-full md:w-fit"
                                 >
                                     Request A Quote
-                                </button>
+                                </Link>
                             </div>
                         </>
                     ) : (

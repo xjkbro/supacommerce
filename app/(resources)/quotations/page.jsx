@@ -77,19 +77,18 @@ export default function Cart() {
                     {Object.values(cartDetails).length > 0 ? (
                         <>
                             <div className=" w-full pb-8">
-                                <table className="hidden md:block table w-full border border-base-200 ">
+                                <table className="hidden md:table w-full ">
                                     <thead className="text-center">
                                         <tr>
-                                            <th className="bg-primary text-white rounded-none">
+                                            <th className="!bg-primary text-white uppercase !rounded-none text-left">
                                                 Product
                                             </th>
-                                            <th className="bg-primary text-white">
+                                            <th className="!bg-primary text-white uppercase !rounded-none">
                                                 Quantity
                                             </th>
-                                            <th className="bg-primary text-white">
+                                            <th className="!bg-primary text-white uppercase !rounded-none">
                                                 Total
                                             </th>
-                                            <th className="bg-primary text-white rounded-none"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -130,7 +129,7 @@ export default function Cart() {
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td className="form-control w-56">
+                                                    <td className="form-control w-56 mx-auto">
                                                         <div className="input-group">
                                                             <button
                                                                 onClick={() =>
@@ -174,23 +173,10 @@ export default function Cart() {
                                                     <td>
                                                         {item.formattedValue}
                                                     </td>
-                                                    <th>
-                                                        {/* <button className="btn btn-ghost btn-xs">
-                                            details
-                                        </button> */}
-                                                    </th>
                                                 </tr>
                                             )
                                         )}
                                     </tbody>
-                                    {/* <tfoot>
-                                        <tr>
-                                            <th className="bg-primary text-white">Product</th>
-                                            <th className="bg-primary text-white">Quantity</th>
-                                            <th className="bg-primary text-white">Total</th>
-                                            <th className="bg-primary text-white"></th>
-                                        </tr>
-                                    </tfoot> */}
                                 </table>
                                 <div className="flex md:hidden flex-col gap-8 w-full">
                                     {Object.values(cartDetails).map((item) => (

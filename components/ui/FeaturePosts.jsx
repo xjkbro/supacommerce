@@ -19,7 +19,7 @@ export default async function FeaturePosts() {
                 <h2 className="text-3xl font-black my-4">Articles</h2>
                 <Link
                     className="hover:underline uppercase text-sm font-semibold"
-                    href="/articles"
+                    href="/posts"
                 >
                     View All
                 </Link>
@@ -48,7 +48,7 @@ export default async function FeaturePosts() {
                             </p>
                             <div className="card-actions justify-end">
                                 <Link
-                                    href={`/article/${item.slug}`}
+                                    href={`/posts/${item.slug}`}
                                     className="btn btn-primary"
                                 >
                                     Read Now
