@@ -65,7 +65,7 @@ export default function SearchBar() {
                         }}
                     />
                     <button
-                        name="search"
+                        aria-label="search button"
                         className="btn btn-square btn-accent text-white"
                     >
                         <svg

@@ -67,7 +67,7 @@ export default function NavBar({ user }) {
         <>
             <div className="hidden md:navbar  bg-[#ffffff45] hover:bg-white transition-all backdrop-blur-lg backdrop-brightness-125 backdrop-contrast-51 backdrop-saturate-150 shadow-xl z-[29] sticky top-0">
                 <div className="flex-1">
-                    <Link name="Logo" href="/">
+                    <Link aria-label="Hompage Link to our Logo" href="/">
                         <LongLogo className="w-48 h-12" />
                         {/* <SquareLogo className="w-12 h-12" /> */}
                     </Link>
