@@ -36,7 +36,7 @@ export default function Top3Products() {
 
                 <div className="tabs mb-4 md:mb-0 ">
                     {top3.map((item, i) => (
-                        <a
+                        <span
                             key={i}
                             onClick={() => setActive(top3[i])}
                             className={
@@ -46,7 +46,7 @@ export default function Top3Products() {
                             }
                         >
                             {item.name}
-                        </a>
+                        </span>
                     ))}
                 </div>
             </div>
