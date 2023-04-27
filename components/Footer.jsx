@@ -94,44 +94,90 @@ export default function Footer({ user }) {
                     </div>
                     <div>
                         <span className="footer-title">Services</span>
-                        <a className="link link-hover">Branding</a>
-                        <a className="link link-hover">Design</a>
-                        <a className="link link-hover">Marketing</a>
-                        <a className="link link-hover">Advertisement</a>
+                        <Link href="/" className="link link-hover">
+                            Branding
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Design
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Marketing
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Advertisement
+                        </Link>
                     </div>
                     <div>
                         <span className="footer-title">Company</span>
-                        <a className="link link-hover">About us</a>
-                        <a className="link link-hover">Contact</a>
-                        <a className="link link-hover">Jobs</a>
-                        <a className="link link-hover">Press kit</a>
+                        <Link href="/" className="link link-hover">
+                            About us
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Contact
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Jobs
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Press kit
+                        </Link>
                     </div>
                     <div>
                         <span className="footer-title">Legal</span>
-                        <a className="link link-hover">Terms of use</a>
-                        <a className="link link-hover">Privacy policy</a>
-                        <a className="link link-hover">Cookie policy</a>
+                        <Link href="/" className="link link-hover">
+                            Terms of use
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Privacy policy
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Cookie policy
+                        </Link>
                     </div>
                     <div>
                         <span className="footer-title">Social</span>
-                        <a className="link link-hover">Twitter</a>
-                        <a className="link link-hover">Instagram</a>
-                        <a className="link link-hover">Facebook</a>
-                        <a className="link link-hover">Github</a>
+                        <Link href="/" className="link link-hover">
+                            Twitter
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Instagram
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Facebook
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Github
+                        </Link>
                     </div>
                     <div>
                         <span className="footer-title">Explore</span>
-                        <a className="link link-hover">Features</a>
-                        <a className="link link-hover">Enterprise</a>
-                        <a className="link link-hover">Security</a>
-                        <a className="link link-hover">Pricing</a>
+                        <Link href="/" className="link link-hover">
+                            Features
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Enterprise
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Security
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Pricing
+                        </Link>
                     </div>
                     <div>
                         <span className="footer-title">Apps</span>
-                        <a className="link link-hover">Mac</a>
-                        <a className="link link-hover">Windows</a>
-                        <a className="link link-hover">iPhone</a>
-                        <a className="link link-hover">Android</a>
+                        <Link href="/" className="link link-hover">
+                            Mac
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Windows
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            iPhone
+                        </Link>
+                        <Link href="/" className="link link-hover">
+                            Android
+                        </Link>
                     </div>
                 </div>
             </div>

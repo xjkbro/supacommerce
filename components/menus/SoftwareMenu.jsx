@@ -27,13 +27,13 @@ export default function SoftwareMenu() {
                 <Link href="/feature/ez-data-logger">EZ Data Logger</Link>
             </li>
             <li className="menu-title">
-                <span>HMI & SCADA Solutions</span>
+                <Link href="/">HMI & SCADA Solutions</Link>
             </li>
             <li>
-                <a>Indusoft</a>
+                <Link href="/">Indusoft</Link>
             </li>
             <li>
-                <a>AVEVA</a>
+                <Link href="/">AVEVA</Link>
             </li>
         </ul>
     );
