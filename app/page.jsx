@@ -30,7 +30,7 @@ const DynamicFeaturePosts = dynamic(
 );
 
 // do not cache this page
-export const revalidate = 0;
+// export const revalidate = 0;
 
 export default async function Home() {
     const supabase = createServerComponentSupabaseClient({
